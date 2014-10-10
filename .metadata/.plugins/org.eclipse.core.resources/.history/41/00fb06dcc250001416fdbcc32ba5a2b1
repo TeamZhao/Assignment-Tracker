@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Assignment Tracker</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+	<string name="semesterDetails">Enter your semester details</string>
+    <string name="semesterNo">Enter your semester number</string>
+    <string name="semesterName">Enter the semester name and other info</string>
+    <string name="addSemester">Add</string>
+    <string name="cancelSemester">Cancel</string>
+    <string name="nameOfSemester">Name</string>
+</resources>
