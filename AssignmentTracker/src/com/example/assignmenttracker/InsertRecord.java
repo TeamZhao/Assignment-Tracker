@@ -26,7 +26,7 @@ public class InsertRecord extends Activity
     public void onCreate(Bundle savedInstanceState)
     { 
         super.onCreate(savedInstanceState); 
-        setContentView(R.layout.activity_main); 
+        setContentView(R.layout.activity_add_semester); 
         
         final DatabaseManager db = new DatabaseManager(this); 
         //db.createDatabase(getApplicationContext());
