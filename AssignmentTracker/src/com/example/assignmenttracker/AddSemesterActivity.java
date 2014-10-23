@@ -3,21 +3,44 @@ package com.example.assignmenttracker;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-  
-import android.app.Activity; 
+import android.R.string;
+import android.support.v7.app.ActionBarActivity;
 import android.content.ContentValues;
-import android.content.Intent;
-import android.os.Bundle; 
-import android.util.Log; 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView; 
-  
-public class InsertRecord extends Activity 
-{ 
-	//
+import android.widget.TextView;
+
+
+public class AddSemesterActivity extends ActionBarActivity {
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    
     private static final String tables[]={"tbl_Semester"}; 
     //
     private static final String tableCreatorString[] ={"CREATE TABLE tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);"};
@@ -31,8 +54,8 @@ public class InsertRecord extends Activity
         final DatabaseManager db = new DatabaseManager(this); 
         //db.createDatabase(getApplicationContext());
         db.dbInitialize( tables,tableCreatorString);
-        final String fields[] = {"semesterNo","semesterDetails"};
-        final String record[] = new String[3];
+        final String fields[] = {"semesterDetails"};
+        final String record[] = new String[1];
         // Handle Save button
  		final Button btnSaveStudent = (Button) findViewById(R.id.button1);
  		final EditText studentName = (EditText) findViewById(R.id.semesterDetails);
@@ -42,12 +65,12 @@ public class InsertRecord extends Activity
 		btnSaveStudent.setOnClickListener(new View.OnClickListener() {
  			public void onClick(View v) {
 
- 				record[1]= studentName.getText().toString();
+ 				record[0]= studentName.getText().toString();
  		
- 		        Log.d("Name: ", record[1]);	       
+ 		        //Log.d("Name: ", record[1]);	       
  		        //populate the row with some values
  		        ContentValues values = new ContentValues();
- 		        for (int i=1;i<record.length;i++)
+ 		        for (int i=0;i<record.length;i++)
  		        	values.put(fields[i],record[i]);  
  		        //add the row to the database
  		        db.addRecord(values, "tbl_Semester", fields,record);
@@ -77,4 +100,5 @@ public class InsertRecord extends Activity
  		});
         
     } 
-} 
+
+}
