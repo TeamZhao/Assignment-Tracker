@@ -3,7 +3,9 @@ package com.example.assignmenttracker;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -49,27 +51,47 @@ public class AddSemesterActivity extends ActionBarActivity {
 		final String fields[] = { "semesterDetails" };
 		final String record[] = new String[1];
 		// Handle Save button
-		final Button btnSaveStudent = (Button) findViewById(R.id.button1);
-		final EditText studentName = (EditText) findViewById(R.id.semesterDetails);
+		final Button btnSaveStudent = (Button) findViewById(R.id.btn_addSemester);
+		final EditText semesterName = (EditText) findViewById(R.id.semesterDetails);
 		final TextView display = (TextView) findViewById(R.id.TextViewDisplay);
-
+        //Code for popup
+        final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this); 
+				   //new AlertDialog.Builder(this);
+		helpBuilder.setTitle("ERROR!");
+		helpBuilder.setMessage("Field cannot be empty, Try again");
+		helpBuilder.setNegativeButton("Ok",
+		  new DialogInterface.OnClickListener() {
+		
+		   public void onClick(DialogInterface dialog, int which) {
+		    // Do nothing but close the dialog
+		   }
+		  });
+		//Code for pop up end
 		//
 		btnSaveStudent.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				if (semesterName.getText().toString().matches("")) {
+		 		      // Show the popup
+		 		      AlertDialog helpDialog = helpBuilder.create();
+		 		      helpDialog.show();
+				    return;
+				}else{
+					record[0] = semesterName.getText().toString();
 
-				record[0] = studentName.getText().toString();
+					// Log.d("Name: ", record[1]);
+					// populate the row with some values
+					ContentValues values = new ContentValues();
+					for (int i = 0; i < record.length; i++)
+						values.put(fields[i], record[i]);
+					// add the row to the database
+					db.addRecord(values, "tbl_Semester", fields, record);
+				}
 
-				// Log.d("Name: ", record[1]);
-				// populate the row with some values
-				ContentValues values = new ContentValues();
-				for (int i = 0; i < record.length; i++)
-					values.put(fields[i], record[i]);
-				// add the row to the database
-				db.addRecord(values, "tbl_Semester", fields, record);
+		
 
 			}
 		});
-		final Button btnShowStudent = (Button) findViewById(R.id.button2);
+		final Button btnShowStudent = (Button) findViewById(R.id.btn_cancelSemester);
 		btnShowStudent.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 
