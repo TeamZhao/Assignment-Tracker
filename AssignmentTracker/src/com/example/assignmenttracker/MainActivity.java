@@ -22,13 +22,17 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent adds;
 		switch (item.getItemId()) {
 		case R.id.add_assignment:
+			adds = new Intent(this, AddAssignmentActivity.class);
+			startActivity(adds);
 			return true;
 		case R.id.add_course:
+
 			return true;
 		case R.id.add_semester:
-			Intent adds = new Intent(this, AddSemesterActivity.class);
+			adds = new Intent(this, AddSemesterActivity.class);
 			startActivity(adds);
 		default:
 			return super.onOptionsItemSelected(item);
