@@ -16,6 +16,12 @@
     <string name="add_semester">Add Semester</string>
     <string name="add_course">Add Course/Project</string>
     <string name="add_assignment">Add Assignment</string>
-    <string name="title_activity_add_assignment">AddAssignmentActivity</string>
+    <string name="title_activity_add_assignment">Add New Assignment</string>
+    <string name="title">Title</string>
+    <string name="course">Course</string>
+    <string name="due_date">Due Date</string>
+    <string name="progress">Progress</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
