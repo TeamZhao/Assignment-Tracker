@@ -5,8 +5,9 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
+        android:id="@+id/instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/instuction_add" />
+        android:text="@string/instsuction_add" />
 
 </RelativeLayout>
