@@ -1,0 +1,57 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+Conflicts:
+	AssignmentTracker/bin/AssignmentTracker.apk
+	AssignmentTracker/bin/classes.dex
+	AssignmentTracker/bin/classes/com/example/assignmenttracker/AddAssignmentActivity.class
+	AssignmentTracker/bin/resources.ap_
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 1 different commit each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.projects/.org.eclipse.jdt.core.external.folders/.markers.snap
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.projects/.org.eclipse.jdt.core.external.folders/.syncinfo.snap
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.projects/AssignmentTracker/.indexes/properties.index
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.projects/AssignmentTracker/.markers.snap
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.projects/AssignmentTracker/.syncinfo.snap
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.projects/appcompat_v7/.markers.snap
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.projects/appcompat_v7/.syncinfo.snap
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.root/.markers.snap
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+#	modified:   .metadata/.plugins/org.eclipse.core.resources/.snap
+#	modified:   .metadata/.plugins/org.eclipse.jdt.core/2857143765.index
+#	modified:   .metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt
+#	modified:   AssignmentTracker/bin/R.txt
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/AddAssignmentActivity.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/AddSemesterActivity.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/MainActivity.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$id.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$integer.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$layout.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$menu.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$string.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$style.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$styleable.class
+#	new file:   AssignmentTracker/bin/dexedLibs/android-support-v4-c36ed5c584424db5cd1723bda516e2ae.jar
+#	new file:   AssignmentTracker/bin/dexedLibs/android-support-v7-appcompat-15f3ae703df3cc51b7dca243b54c1a16.jar
+#	new file:   AssignmentTracker/bin/dexedLibs/android-support-v7-appcompat-4eda59726000511a56e3c43ae9456fb5.jar
+#	new file:   AssignmentTracker/bin/dexedLibs/annotations-9141a9548aad35649f53ed82851f7989.jar
+#	modified:   AssignmentTracker/gen/com/example/assignmenttracker/R.java
+#	modified:   AssignmentTracker/res/layout/activity_main.xml
+#	modified:   AssignmentTracker/res/values/strings.xml
+#	modified:   AssignmentTracker/src/com/example/assignmenttracker/MainActivity.java
+#
+

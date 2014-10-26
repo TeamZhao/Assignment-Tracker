@@ -1,19 +1,25 @@
 package com.example.assignmenttracker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.DateTimeKeyListener;
 import android.view.Menu;
@@ -27,6 +33,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class AddAssignmentActivity extends ActionBarActivity {
 
 	@Override
@@ -99,7 +106,29 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		    // Do nothing but close the dialog
 		   }
 		  });
-		//Code for pop up end	
+		//Code for pop up end	 for calender
+		
+        //Code for popup
+        final AlertDialog.Builder helpBuilder1 = new AlertDialog.Builder(this); 
+				   //new AlertDialog.Builder(this);
+        helpBuilder1.setTitle("Add to Calender?");
+        helpBuilder1.setMessage("Do you want to add this assignment to your google calender?");
+        helpBuilder1.setPositiveButton("Yes",
+		  new DialogInterface.OnClickListener() {
+		
+		   public void onClick(DialogInterface dialog, int which) {
+		    // Code for calender
+			   insertNewEventIntoCalendar(assTitle);
+		   }
+		  });
+        helpBuilder1.setNegativeButton("No",
+      		  new DialogInterface.OnClickListener() {
+      		
+      		   public void onClick(DialogInterface dialog, int which) {
+      		    // Do nothing but close the dialog
+      		   }
+      		  });
+		//Code for pop up end
 		
 		
 		//code to keep track of selected DatePicker date
@@ -141,6 +170,8 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					// add the row to the database
 					MainActivity.db.addRecord(values, "tbl_Assignment", fields, record);
 //					MainActivity.db.close();
+					AlertDialog helpDialog1 = helpBuilder1.create();
+					helpDialog1.show();
 				}
 				
 				
@@ -176,5 +207,29 @@ public class AddAssignmentActivity extends ActionBarActivity {
 //	    	MainActivity.db.close();
 //	    }
 //	}
+
+	private void insertNewEventIntoCalendar(EditText assTitle) {
+		    /**
+		     *  Inserting a new calendar event using an Intent
+		     */
+		    // Create a new insertion Intent.
+		    Intent intent = new Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI);
+		  
+		    // Add the calendar event details
+		    intent.putExtra(CalendarContract.Events.TITLE, assTitle.getText());
+		    intent.putExtra(CalendarContract.Events.DESCRIPTION, 
+		                    "Professional Android 4 " +
+		                    "Application Development release!");
+		    intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
+		  
+		    Calendar startTime = Calendar.getInstance();
+		    startTime.set(2012, 2, 13, 0, 30);
+		    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.getTimeInMillis());
+		   
+		    intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);    
+		  
+		     // Use the Calendar app to add the new event.
+		    startActivity(intent);
+		  }
 	
 }
