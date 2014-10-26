@@ -23,4 +23,5 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="android.text.method.DateTimeKeyListener"/>
+<fullyQualifiedTypeName name="com.example.assignmenttracker.MainActivity"/>
 </qualifiedTypeNameHistroy>
