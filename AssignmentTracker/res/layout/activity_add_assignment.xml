@@ -95,4 +95,10 @@
             android:text="@string/cancel" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/textView_Test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20" />
+
 </LinearLayout>

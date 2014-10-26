@@ -35,19 +35,25 @@ public class AddSemesterActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
+	// Moved database and table creation to MainActivity, as creating from individual activities was causing issues for me -- Julian
+	/**
 	private static final String tables[] = { "tbl_Semester" };
 	//
 	private static final String tableCreatorString[] = { "CREATE TABLE tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);" };
-
+	**/
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_semester);
 
+		// Moved database and table creation to MainActivity, as creating from individual activities was causing issues for me -- Julian
+		/** 
 		final DatabaseManager db = new DatabaseManager(this);
 		// db.createDatabase(getApplicationContext());
-		db.dbInitialize(tables, tableCreatorString);
+		MainActivity.db.dbInitialize(tables, tableCreatorString);
+		**/
 		final String fields[] = { "semesterDetails" };
 		final String record[] = new String[1];
 		// Handle Save button
@@ -84,7 +90,7 @@ public class AddSemesterActivity extends ActionBarActivity {
 					for (int i = 0; i < record.length; i++)
 						values.put(fields[i], record[i]);
 					// add the row to the database
-					db.addRecord(values, "tbl_Semester", fields, record);
+					MainActivity.db.addRecord(values, "tbl_Semester", fields, record);
 				}
 
 		
@@ -96,7 +102,7 @@ public class AddSemesterActivity extends ActionBarActivity {
 			public void onClick(View v) {
 
 				// Reading all records
-				List table = db.getTable("tbl_Semester");
+				List table = MainActivity.db.getTable("tbl_Semester");
 
 				for (Object o : table) {
 					ArrayList row = (ArrayList) o;

@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<list key="installedFeatures">
 		<item value="com.android.ide.eclipse.adt.package.feature:23.0.2.1259578"/>
+		<item value="net.sf.eclipsecs:5.8.0.201410171130"/>
 		<item value="org.eclipse.cdt.gdb:7.0.0.201202111925"/>
 		<item value="org.eclipse.cdt:8.0.2.201202111925"/>
 		<item value="org.eclipse.egit.import:2.2.0.201212191850-r"/>
@@ -15,9 +16,9 @@
 	</list>
 	<section name="CleanDialogSettings">
 		<item value="500" key="DIALOG_WIDTH"/>
-		<item value="125" key="DIALOG_Y_ORIGIN"/>
-		<item value="378" key="DIALOG_HEIGHT"/>
-		<item value="611" key="DIALOG_X_ORIGIN"/>
 		<item value="false" key="TOGGLE_SELECTED"/>
+		<item value="378" key="DIALOG_HEIGHT"/>
+		<item value="125" key="DIALOG_Y_ORIGIN"/>
+		<item value="611" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>
