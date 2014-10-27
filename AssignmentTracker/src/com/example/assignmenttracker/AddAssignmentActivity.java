@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -63,6 +62,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	**/
 	
 	Date selectedDueDate;
+	String formatedDate;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -132,9 +132,12 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		
 		
 		//code to keep track of selected DatePicker date
-		assDate.init(assDate.getYear(), assDate.getMonth(), assDate.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
+        final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        formatedDate = format.format(new Date(assDate.getYear()-1900, assDate.getMonth(), assDate.getDayOfMonth())); // initialize value to default value in datepicker
+        assDate.init(assDate.getYear(), assDate.getMonth(), assDate.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
 		public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				selectedDueDate = new Date(year-1900, monthOfYear, dayOfMonth);		
+				formatedDate = format.format(selectedDueDate);
 			}
 		});
 		
@@ -159,7 +162,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 				}else{
 					record[0] = assTitle.getText().toString();
 					record[1] = assCourse.getSelectedItem().toString();
-					record[2] = String.valueOf(selectedDueDate);
+					record[2] = String.valueOf(formatedDate);
 					record[3] = String.valueOf(assProgress.getProgress());
 					
 					// Log.d("Name: ", record[1]);

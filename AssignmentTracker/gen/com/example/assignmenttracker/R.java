@@ -1094,7 +1094,7 @@ containing a value of this type.
         public static final int action_mode_close_button=0x7f050024;
         public static final int action_settings=0x7f050049;
         public static final int activity_chooser_view_content=0x7f050025;
-        public static final int addAss=0x7f050040;
+        public static final int addAss=0x7f050041;
         public static final int add_assignment=0x7f05004c;
         public static final int add_course=0x7f05004b;
         public static final int add_semester=0x7f05004a;
@@ -1106,7 +1106,7 @@ containing a value of this type.
         public static final int beginning=0x7f050011;
         public static final int btn_addSemester=0x7f050046;
         public static final int btn_cancelSemester=0x7f050045;
-        public static final int cancelAss=0x7f050041;
+        public static final int cancelAss=0x7f050040;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int default_activity_button=0x7f050028;
