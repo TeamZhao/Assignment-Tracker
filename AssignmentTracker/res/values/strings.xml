@@ -23,5 +23,12 @@
     <string name="progress">Progress</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_add_course">Add Course</string>
+    <string name="courseCode">Course Code</string>
+    <string name="courseName">Course Name</string>
+    <string name="professor">Professor</string>
+    <string name="description">Description</string>
+    <string name="addCourse">Add Course</string>
+    <string name="cancelCourse">Cancel Course</string>
 
 </resources>
