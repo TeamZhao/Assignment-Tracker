@@ -113,7 +113,6 @@ public class AddSemesterActivity extends ActionBarActivity {
 						output += "\n";
 					}
 					display.setText(output);
-					onBackPressed();
 
 				}
 			}
