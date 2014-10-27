@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.assignmenttracker.AddCourseActivity" >
+
+    <EditText
+        android:id="@+id/courseCodeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/courseCodeLabel"
+        android:layout_alignBottom="@+id/courseCodeLabel"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/courseNameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/courseNameLabel"
+        android:layout_alignBottom="@+id/courseNameLabel"
+        android:layout_alignLeft="@+id/courseCodeInput"
+        android:ems="10"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/courseProfessorInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/courseProfessorLabel"
+        android:layout_alignBottom="@+id/courseProfessorLabel"
+        android:layout_alignLeft="@+id/courseNameInput"
+        android:ems="10"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/courseDescriptionInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/courseProfessorInput"
+        android:layout_below="@+id/courseProfessorInput"
+        android:ems="10"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btn_addCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/courseProfessorLabel"
+        android:layout_below="@+id/courseDescriptionInput"
+        android:layout_marginTop="68dp"
+        android:text="@string/btnAddCourse" />
+
+    <Button
+        android:id="@+id/btn_cancelCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_addCourse"
+        android:layout_alignBottom="@+id/btn_addCourse"
+        android:layout_alignRight="@+id/courseDescriptionInput"
+        android:text="@string/btnCancelCourse" />
+
+    <TextView
+        android:id="@+id/courseDescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/courseDescriptionInput"
+        android:layout_toLeftOf="@+id/courseDescriptionInput"
+        android:text="@string/add_courseDesc" />
+
+    <TextView
+        android:id="@+id/courseProfessorLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/courseDescriptionLabel"
+        android:layout_below="@+id/courseNameInput"
+        android:layout_marginTop="16dp"
+        android:text="@string/add_courseProfessor" />
+
+    <TextView
+        android:id="@+id/courseNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/courseProfessorLabel"
+        android:layout_below="@+id/courseCodeInput"
+        android:layout_marginTop="19dp"
+        android:text="@string/add_courseName" />
+
+    <TextView
+        android:id="@+id/courseCodeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/courseDescriptionLabel"
+        android:layout_marginTop="50dp"
+        android:text="@string/add_courseCode" />
+
+</RelativeLayout>

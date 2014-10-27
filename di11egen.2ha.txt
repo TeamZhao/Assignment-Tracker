@@ -1,0 +1,37 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is behind 'origin/master' by 6 commits, and can be fast-forwarded.
+#   (use "git pull" to update your local branch)
+#
+# Changes to be committed:
+#	modified:   AssignmentTracker/AndroidManifest.xml
+#	modified:   AssignmentTracker/bin/AndroidManifest.xml
+#	modified:   AssignmentTracker/bin/R.txt
+#	modified:   AssignmentTracker/bin/classes/android/support/v7/appcompat/R$layout.class
+#	modified:   AssignmentTracker/bin/classes/android/support/v7/appcompat/R$styleable.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/AddAssignmentActivity.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/AddSemesterActivity.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/MainActivity.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$id.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$integer.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$layout.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$menu.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$string.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$style.class
+#	modified:   AssignmentTracker/bin/classes/com/example/assignmenttracker/R$styleable.class
+#	modified:   AssignmentTracker/bin/jarlist.cache
+#	modified:   AssignmentTracker/gen/android/support/v7/appcompat/R.java
+#	modified:   AssignmentTracker/gen/com/example/assignmenttracker/R.java
+#	modified:   AssignmentTracker/project.properties
+#	modified:   AssignmentTracker/res/values/strings.xml
+#
+# Untracked files:
+#	AssignmentTracker/bin/classes/com/example/assignmenttracker/AddCourseActivity.class
+#	AssignmentTracker/lint.xml
+#	AssignmentTracker/res/layout/activity_add_course.xml
+#	AssignmentTracker/res/menu/add_course.xml
+#	AssignmentTracker/src/com/example/assignmenttracker/AddCourseActivity.java
+#
+
