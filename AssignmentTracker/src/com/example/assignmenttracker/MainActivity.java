@@ -13,20 +13,11 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	public static DatabaseManager db;
-<<<<<<< HEAD
-	private static final String tables[] = { "tbl_Semester", "tbl_Course","tbl_Assignment"};
-	private static final String tableCreatorString[] = { "CREATE TABLE tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);"
-		, "CREATE TABLE tbl_Course (courseNo INTEGER PRIMARY KEY AUTOINCREMENT , courseCode TEXT, courseName TEXT, Professor TEXT, Description TEXT, semesterNo INTEGER, FOREIGN KEY(semesterNo) REFERENCES tbl_Semester(semesterNo));"
-		, "CREATE TABLE tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT , assignmentDueDate TEXT , assignmentProgress TEXT);" };
-	
-	
-=======
 	private static final String tables[] = { "tbl_Semester", "tbl_Assignment" };
 	private static final String tableCreatorString[] = {
 			"CREATE TABLE IF NOT EXISTS tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);",
 			"CREATE TABLE IF NOT EXISTS tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT);" };
 
->>>>>>> origin/master
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,8 +57,7 @@ public class MainActivity extends Activity {
 			startActivity(adds);
 			return true;
 		case R.id.add_course:
-			adds = new Intent(this, AddCourseActivity.class);
-			startActivity(adds);
+
 			return true;
 		case R.id.add_semester:
 			adds = new Intent(this, AddSemesterActivity.class);
