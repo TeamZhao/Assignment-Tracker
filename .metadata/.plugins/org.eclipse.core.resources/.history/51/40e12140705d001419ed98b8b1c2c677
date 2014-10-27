@@ -1,18 +1,27 @@
 package com.example.assignmenttracker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
+import android.text.method.DateTimeKeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +33,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class AddAssignmentActivity extends ActionBarActivity {
 
 	@Override
@@ -45,25 +55,28 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	// Moved database and table creation to MainActivity, as creating from individual activities was causing issues for me --Julian
+	/**
 	private static final String tablesAssignment[] = { "tbl_Assignment" };
 	//
 	private static final String tableCreatorStringAss[] = { "CREATE TABLE tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT , assignmentDueDate TEXT , assignmentProgress TEXT);" };
-	//private static final String tableCreatorStringAss[] = { "CREATE TABLE tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT);" };
-		
+	**/
+	
 	Date selectedDueDate;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_assignment);
-
+		
+		// Moved database and table creation to MainActivity, as creating from individual activities was causing issues for me --Julian
+		/**
 		final DatabaseManager db = new DatabaseManager(this);
 		// db.createDatabase(getApplicationContext());
-		db.dbInitialize(tablesAssignment, tableCreatorStringAss);
-		//final String fields[] = { "assignmentTitle", "assignmentCourse", "assignmentDueDate", "assignmentProgress" };
-		//final String record[] = new String[4];
-		final String fields[] = { "assignmentTitle" };
-		final String record[] = new String[1];
-		// Handle Save button
+		MainActivity.db.dbInitialize(tablesAssignment, tableCreatorStringAss);
+		**/
+		final String fields[] = { "assignmentTitle", "assignmentCourse", "assignmentDueDate", "assignmentProgress" };
+		final String record[] = new String[4];
+		// Handle all elements on page
 		final Button btnAddAss = (Button) findViewById(R.id.addAss);
 		final EditText assTitle = (EditText) findViewById(R.id.assTitle);
 		final Spinner assCourse = (Spinner) findViewById(R.id.assCourseSpinner);
@@ -93,7 +106,29 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		    // Do nothing but close the dialog
 		   }
 		  });
-		//Code for pop up end	
+		//Code for pop up end	 for calender
+		
+        //Code for popup
+        final AlertDialog.Builder helpBuilder1 = new AlertDialog.Builder(this); 
+				   //new AlertDialog.Builder(this);
+        helpBuilder1.setTitle("Add to Calender?");
+        helpBuilder1.setMessage("Do you want to add this assignment to your google calender?");
+        helpBuilder1.setPositiveButton("Yes",
+		  new DialogInterface.OnClickListener() {
+		
+		   public void onClick(DialogInterface dialog, int which) {
+		    // Code for calender
+			   insertNewEventIntoCalendar(assTitle);
+		   }
+		  });
+        helpBuilder1.setNegativeButton("No",
+      		  new DialogInterface.OnClickListener() {
+      		
+      		   public void onClick(DialogInterface dialog, int which) {
+      		    // Do nothing but close the dialog
+      		   }
+      		  });
+		//Code for pop up end
 		
 		
 		//code to keep track of selected DatePicker date
@@ -124,7 +159,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 				}else{
 					record[0] = assTitle.getText().toString();
 					record[1] = assCourse.getSelectedItem().toString();
-					record[2] = selectedDueDate.toString();
+					record[2] = String.valueOf(selectedDueDate);
 					record[3] = String.valueOf(assProgress.getProgress());
 					
 					// Log.d("Name: ", record[1]);
@@ -133,7 +168,10 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					for (int i = 0; i < record.length; i++)
 						values.put(fields[i], record[i]);
 					// add the row to the database
-					db.addRecord(values, "tbl_Assignment", fields, record);
+					MainActivity.db.addRecord(values, "tbl_Assignment", fields, record);
+//					MainActivity.db.close();
+					AlertDialog helpDialog1 = helpBuilder1.create();
+					helpDialog1.show();
 				}
 				
 				
@@ -145,7 +183,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 			public void onClick(View v) {
 
 				// Reading all records
-				List table = db.getTable("tbl_Assignment");
+				List table = MainActivity.db.getTable("tbl_Assignment");
 
 				for (Object o : table) {
 					ArrayList row = (ArrayList) o;
@@ -156,11 +194,42 @@ public class AddAssignmentActivity extends ActionBarActivity {
 						output += "\n";
 					}
 					display.setText(output);
+//					MainActivity.db.close();
 
 				}
 			}
 		});
 		
 	}
+//	protected void onDestroy() {
+//	    super.onDestroy();
+//	    if (MainActivity.db != null) {
+//	    	MainActivity.db.close();
+//	    }
+//	}
+
+	private void insertNewEventIntoCalendar(EditText assTitle) {
+		    /**
+		     *  Inserting a new calendar event using an Intent
+		     */
+		    // Create a new insertion Intent.
+		    Intent intent = new Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI);
+		  
+		    // Add the calendar event details
+		    intent.putExtra(CalendarContract.Events.TITLE, assTitle.getText());
+		    intent.putExtra(CalendarContract.Events.DESCRIPTION, 
+		                    "Professional Android 4 " +
+		                    "Application Development release!");
+		    intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
+		  
+		    Calendar startTime = Calendar.getInstance();
+		    startTime.set(2012, 2, 13, 0, 30);
+		    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.getTimeInMillis());
+		   
+		    intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);    
+		  
+		     // Use the Calendar app to add the new event.
+		    startActivity(intent);
+		  }
 	
 }
