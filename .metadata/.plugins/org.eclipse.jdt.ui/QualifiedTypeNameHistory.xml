@@ -14,7 +14,6 @@
 <fullyQualifiedTypeName name="android.widget.Spinner"/>
 <fullyQualifiedTypeName name="android.text.format.DateFormat"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="com.example.assignmenttracker.R.id"/>
 <fullyQualifiedTypeName name="android.app.TimePickerDialog"/>
 <fullyQualifiedTypeName name="android.app.DatePickerDialog"/>
 <fullyQualifiedTypeName name="android.app.Dialog"/>
@@ -24,4 +23,7 @@
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="android.text.method.DateTimeKeyListener"/>
 <fullyQualifiedTypeName name="com.example.assignmenttracker.MainActivity"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="com.example.assignmenttracker.R.id"/>
+<fullyQualifiedTypeName name="android.widget.SeekBar.OnSeekBarChangeListener"/>
 </qualifiedTypeNameHistroy>
