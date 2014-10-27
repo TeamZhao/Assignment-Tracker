@@ -23,7 +23,11 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="android.text.method.DateTimeKeyListener"/>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="android.provider.CalendarContract"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
+=======
+<fullyQualifiedTypeName name="com.example.assignmenttracker.MainActivity"/>
+>>>>>>> origin/master
 </qualifiedTypeNameHistroy>
