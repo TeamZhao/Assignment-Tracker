@@ -1,3 +1,4 @@
+breadcrumb.org.eclipse.debug.ui.DebugPerspective=true
 content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="android.content.DialogInterface$OnClickListener"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.widget.DatePicker$OnDateChangedListener"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.app.AlertDialog"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.content.DialogInterface"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.app.Dialog"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.view.Window$Callback"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.view.KeyEvent$Callback"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.view.View$OnCreateContextMenuListener"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.app.DatePickerDialog"><rhs name\="android.app.DatePickerDialog"/></lhs><lhs name\="android.content.Context"><rhs name\="com.example.assignmenttracker.AddAssignmentActivity"/></lhs></history>
 content_assist_number_of_computers=12
 content_assist_proposals_background=255,255,255
@@ -11,7 +12,7 @@ org.eclipse.jdt.ui.text.code_templates_migrated=true
 org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 org.eclipse.jdt.ui.text.templates_migrated=true
-org.eclipse.jface.textfont=1|Consolas|10.0|0|WINDOWS|1|0|0|0|0|0|0|0|0|1|0|0|0|0|Consolas;
+org.eclipse.jface.textfont=1|Courier New|10.0|0|WINDOWS|1|0|0|0|0|0|0|0|0|1|0|0|0|0|Courier New;
 proposalOrderMigrated=true
 spelling_locale_initialized=true
 tabWidthPropagated=true
