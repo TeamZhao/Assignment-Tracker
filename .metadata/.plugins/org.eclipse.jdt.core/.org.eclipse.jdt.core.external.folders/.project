@@ -12,12 +12,20 @@
 		<link>
 			<name>.link0</name>
 			<type>2</type>
-			<location>E:/adt-bundle-windows-x86_64-20140702/sdk/sources/android-20</location>
+			<location>C:/Eclipse+AndroidSDK/sdk/sources/android-14</location>
 		</link>
+<<<<<<< HEAD
+=======
 		<link>
-			<name>.link1</name>
+			<name>.link3</name>
 			<type>2</type>
 			<location>E:/adt-bundle-windows-x86_64-20140702/sdk/sources/android-14</location>
 		</link>
+		<link>
+			<name>.link4</name>
+			<type>2</type>
+			<location>E:/adt-bundle-windows-x86_64-20140702/sdk/sources/android-20</location>
+		</link>
+>>>>>>> origin/master
 	</linkedResources>
 </projectDescription>

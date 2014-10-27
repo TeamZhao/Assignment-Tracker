@@ -23,23 +23,5 @@
     <string name="progress">Progress</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
-<<<<<<< HEAD
-    <string name="title_activity_add_course">Add Course</string>
-    <string name="courseCode">Course Code</string>
-    <string name="courseName">Course Name</string>
-    <string name="professor">Professor</string>
-    <string name="description">Description</string>
-    <string name="addCourse">Add Course</string>
-    <string name="cancelCourse">Cancel Course</string>
 
-=======
-    <string name="title_activity_add_course">AddCourseActivity</string>
-    <string name="add_courseName">Course Name</string>
-    <string name="add_courseCode">Course Code</string>
-    <string name="add_courseProfessor">Course Prof.</string>
-    <string name="add_courseDesc">Course Desc.</string>
-    <string name="btnAddCourse">Add Course</string>
-    <string name="btnCancelCourse">Cancel Course</string>
-    
->>>>>>> origin/master
 </resources>
