@@ -1,14 +1,10 @@
 package com.example.assignmenttracker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -21,25 +17,10 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
 		db = new DatabaseManager(this);
 		db.dbInitialize(tables, tableCreatorString);
+		setContentView(R.layout.activity_main);
 
-		List table = db.getTable("tbl_Assignment");
-		if (table != null) {
-			String output = "";
-			for (Object o : table) {
-				ArrayList row = (ArrayList) o;
-				// Writing table to screen
-				for (int i = 0; i < row.size(); i++) {
-					output += row.get(i).toString() + " ";
-					output += "\n";
-				}
-			}
-			TextView txt = (TextView) findViewById(R.id.instruction);
-			txt.setText(output);
-		}
 	}
 
 	@Override
