@@ -27,8 +27,10 @@ public class AssignmentFragment extends ListFragment {
 		Cursor c = db
 				.query("tbl_Assignment",
 						new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
-						null, null, null, null, null);
+						"assignmentDueDate > datetime('now','localtime')",
+						null, null, null, null);
 		while (c.moveToNext()) {
+
 			map = new HashMap<String, Object>();
 			map.put("title", c.getString(1));
 			map.put("progress", c.getString(2));
