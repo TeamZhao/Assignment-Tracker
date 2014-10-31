@@ -11,6 +11,7 @@
     <string name="addSemester">Add</string>
     <string name="cancelSemester">Cancel</string>
     <string name="nameOfSemester">Name</string>
+    <string name="semester">Semester</string>
     <string name="title_activity_main">Assignment Tracker</string>
     <string name="instsuction_add">Please press menu button on the upper right corner to add new record.</string>
     <string name="add_semester">Add Semester</string>
@@ -25,6 +26,11 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="update">Update</string>
-    <string name="title_activity_update_assignment">UpdateAssignmentActivity</string>
+    <string name="title_activity_update_assignment">Update Assignment</string>
+    <string name="title_activity_add_course">Add New Course</string>
+    <string name="course_code">Course Code</string>
+    <string name="professor">Professor</string>
+    <string name="course_name">Course Name</string>
+    <string name="course_description">Course Description</string>
 
 </resources>

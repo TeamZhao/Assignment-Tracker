@@ -38,7 +38,8 @@ public class MainActivity extends Activity {
 			startActivity(adds);
 			return true;
 		case R.id.add_course:
-
+			adds = new Intent(this, AddCourseActivity.class);
+			startActivity(adds);
 			return true;
 		case R.id.add_semester:
 			adds = new Intent(this, AddSemesterActivity.class);

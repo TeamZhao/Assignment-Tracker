@@ -34,6 +34,10 @@
             android:name=".UpdateAssignmentActivity"
             android:label="@string/title_activity_update_assignment" >
         </activity>
+        <activity
+            android:name=".AddCourseActivity"
+            android:label="@string/title_activity_add_course" >
+        </activity>
     </application>
 
 </manifest>
