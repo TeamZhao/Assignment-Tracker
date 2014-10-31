@@ -61,8 +61,9 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	private static final String tableCreatorStringAss[] = { "CREATE TABLE tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT , assignmentDueDate TEXT , assignmentProgress TEXT);" };
 	**/
 	
-	Date selectedDueDate;
+	//Date selectedDueDate = new Date();
 	String formatedDate;
+	Calendar selectedDueDate = Calendar.getInstance();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -133,11 +134,12 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		
 		//code to keep track of selected DatePicker date
         final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        formatedDate = format.format(new Date(assDate.getYear()-1900, assDate.getMonth(), assDate.getDayOfMonth())); // initialize value to default value in datepicker
+        formatedDate = format.format(selectedDueDate.getTime()); // initialize value to default value in datepicker
         assDate.init(assDate.getYear(), assDate.getMonth(), assDate.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
 		public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				selectedDueDate = new Date(year-1900, monthOfYear, dayOfMonth);		
-				formatedDate = format.format(selectedDueDate);
+				selectedDueDate.set(year, monthOfYear, dayOfMonth);		
+				formatedDate = format.format(selectedDueDate.getTime());
+				//insertCalTime.set(year, monthOfYear, dayOfMonth);		
 			}
 		});
 		
@@ -210,7 +212,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 //	    	MainActivity.db.close();
 //	    }
 //	}
-
+	
 	private void insertNewEventIntoCalendar(EditText assTitle) {
 		    /**
 		     *  Inserting a new calendar event using an Intent
@@ -219,15 +221,15 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		    Intent intent = new Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI);
 		  
 		    // Add the calendar event details
-		    intent.putExtra(CalendarContract.Events.TITLE, assTitle.getText());
+		    intent.putExtra(CalendarContract.Events.TITLE, assTitle.getText().toString());
 		    intent.putExtra(CalendarContract.Events.DESCRIPTION, 
 		                    "Professional Android 4 " +
 		                    "Application Development release!");
 		    intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
 		  
-		    Calendar startTime = Calendar.getInstance();
-		    startTime.set(2012, 2, 13, 0, 30);
-		    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.getTimeInMillis());
+		    //Calendar startTime = Calendar.getInstance();
+		    //startTime.set(2012, 2, 13, 0, 30);
+		    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, selectedDueDate.getTimeInMillis());
 		   
 		    intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);    
 		  

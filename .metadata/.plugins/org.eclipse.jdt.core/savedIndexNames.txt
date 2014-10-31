@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-INDEX VERSION 1.126+E:\assignmentTracker\Assignment-Tracker\.metadata\.plugins\org.eclipse.jdt.core
-3784359027.index
-782624173.index
+INDEX VERSION 1.126+C:\Users\Julz\Documents\GitHub\Assignment-Tracker\Assignment-Tracker\.metadata\.plugins\org.eclipse.jdt.core
+1284074322.index
+1032422948.index
+1891155229.index
 2857143765.index
-=======
-INDEX VERSION 1.126+C:\Users\Julz\Desktop\myAssignTrackerWork\oct26\partial\workingCommit\Assignment-Tracker\.metadata\.plugins\org.eclipse.jdt.core
->>>>>>> origin/master
