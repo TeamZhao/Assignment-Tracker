@@ -133,11 +133,12 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		
 		
 		//code to keep track of selected DatePicker date
-        final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        selectedDueDate.set(assDate.getYear(), assDate.getMonth(), assDate.getDayOfMonth(), 23, 59, 59); //set to end of day
         formatedDate = format.format(selectedDueDate.getTime()); // initialize value to default value in datepicker
         assDate.init(assDate.getYear(), assDate.getMonth(), assDate.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
 		public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				selectedDueDate.set(year, monthOfYear, dayOfMonth);		
+				selectedDueDate.set(year, monthOfYear, dayOfMonth, 23,59,59);  //set to end of the selected day
 				formatedDate = format.format(selectedDueDate.getTime());
 				//insertCalTime.set(year, monthOfYear, dayOfMonth);		
 			}
@@ -186,8 +187,10 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		final Button btnCancelAss = (Button) findViewById(R.id.cancelAss);
 		btnCancelAss.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-
-				// Reading all records
+				onBackPressed(); //go back to previous page on Cancel
+/*
+//test code to display database records
+ 				// Reading all records
 				List table = MainActivity.db.getTable("tbl_Assignment");
 
 				for (Object o : table) {
@@ -202,6 +205,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 //					MainActivity.db.close();
 
 				}
+*/
 			}
 		});
 		
@@ -229,7 +233,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		  
 		    //Calendar startTime = Calendar.getInstance();
 		    //startTime.set(2012, 2, 13, 0, 30);
-		    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, selectedDueDate.getTimeInMillis());
+		    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, selectedDueDate.getTimeInMillis()-86400000);
 		   
 		    intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);    
 		  
