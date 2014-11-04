@@ -60,6 +60,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	//
 	private static final String tableCreatorStringAss[] = { "CREATE TABLE tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT , assignmentDueDate TEXT , assignmentProgress TEXT);" };
 	**/
+	private static final int DAY_IN_MILLISECS = 86400000;
 	
 	//Date selectedDueDate = new Date();
 	String formatedDate;
@@ -233,7 +234,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		  
 		    //Calendar startTime = Calendar.getInstance();
 		    //startTime.set(2012, 2, 13, 0, 30);
-		    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, selectedDueDate.getTimeInMillis()-86400000);
+		    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, selectedDueDate.getTimeInMillis()-DAY_IN_MILLISECS );
 		   
 		    intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);    
 		  
