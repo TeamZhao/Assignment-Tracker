@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.assignmenttracker.MainActivity" >
+
+    <item
+        android:id="@+id/add_semester"
+        android:orderInCategory="100"
+        android:title="@string/add_semester"
+        app:showAsAction="never"/>
+    
+        <item
+        android:id="@+id/add_course"
+        android:orderInCategory="100"
+        android:title="@string/add_course"
+        app:showAsAction="never"/>
+        
+        <item
+        android:id="@+id/add_assignment"
+        android:orderInCategory="100"
+        android:title="@string/add_assignment"
+        app:showAsAction="never"/><item
+        android:id="@+id/show_semesters"
+        android:orderInCategory="100"
+        android:title="@string/show_semesters"
+        app:showAsAction="never"/>
+    
+
+</menu>
