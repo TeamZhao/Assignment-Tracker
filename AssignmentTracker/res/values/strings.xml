@@ -32,5 +32,7 @@
     <string name="professor">Professor</string>
     <string name="course_name">Course Name</string>
     <string name="course_description">Course Description</string>
+    <string name="title_activity_show_semesters">Semesters</string>
+    <string name="show_semesters">Show All Semesters</string>
 
 </resources>

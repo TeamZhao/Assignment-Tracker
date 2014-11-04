@@ -44,6 +44,11 @@ public class MainActivity extends Activity {
 		case R.id.add_semester:
 			adds = new Intent(this, AddSemesterActivity.class);
 			startActivity(adds);
+			return true;
+		case R.id.show_semesters:
+			adds = new Intent(this, ShowSemestersActivity.class);
+			startActivity(adds);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
