@@ -9,11 +9,12 @@ import android.view.MenuItem;
 public class MainActivity extends Activity {
 
 	public static DatabaseManager db;
-	private static final String tables[] = { "tbl_Semester", "tbl_Assignment" };
+	private static final String tables[] = { "tbl_Semester", "tbl_Assignment", "tbl_Course" };
 	private static final String tableCreatorString[] = {
 			"CREATE TABLE IF NOT EXISTS tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);",
-			"CREATE TABLE IF NOT EXISTS tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT);" };
-
+			"CREATE TABLE IF NOT EXISTS tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT);",
+			"CREATE TABLE IF NOT EXISTS tbl_Course (CourseCode TEXT , CourseName TEXT, Professor TEXT , Description TEXT);" };
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +48,10 @@ public class MainActivity extends Activity {
 			return true;
 		case R.id.show_semesters:
 			adds = new Intent(this, ShowSemestersActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_courses:
+			adds = new Intent(this, ShowCoursesActivity.class);
 			startActivity(adds);
 			return true;
 		default:

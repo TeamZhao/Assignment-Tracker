@@ -34,5 +34,7 @@
     <string name="course_description">Course Description</string>
     <string name="title_activity_show_semesters">Semesters</string>
     <string name="show_semesters">Show All Semesters</string>
+    <string name="title_activity_show_courses">Courses</string>
+    <string name="show_courses">Show All Courses</string>
 
 </resources>
