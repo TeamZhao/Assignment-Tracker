@@ -17,15 +17,13 @@ public class UpdateSemesterActivity extends ActionBarActivity {
 
 		// gets list item content passed in from ShowSemesterActivity -- in this
 		// case, the courseCode
+		// use passedFromShowSemesterListSelection as the search string to search for the database record
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			passedFromShowSemesterListSelection = extras
 					.getString("semesterDetails");
 		}
 
-		// textview for debugging purposes -- can delete
-		TextView displayBox = (TextView) findViewById(R.id.textView_listSelectionSem);
-		displayBox.setText(passedFromShowSemesterListSelection);
 	}
 
 	@Override

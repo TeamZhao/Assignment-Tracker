@@ -16,14 +16,13 @@ public class UpdateCourseActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_update_course);
 		
 		//gets list item content passed in from ShowCoursesActivity -- in this case, the courseCode
+		// use passedFromShowCourseListSelection as the search string for the database record
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			passedFromShowCourseListSelection = extras.getString("courseCode");
 		}
 		
-		//textview for debugging purposes -- can delete
-		TextView displayBox = (TextView) findViewById(R.id.textView_listSelectionCourse);
-		displayBox.setText(passedFromShowCourseListSelection);
+		
 	}
 
 	@Override
