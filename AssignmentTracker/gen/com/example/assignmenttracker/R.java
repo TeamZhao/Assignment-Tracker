@@ -1093,12 +1093,12 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05005c;
+        public static final int action_settings=0x7f05005e;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int addAss=0x7f050041;
-        public static final int add_assignment=0x7f05005f;
-        public static final int add_course=0x7f05005e;
-        public static final int add_semester=0x7f05005d;
+        public static final int add_assignment=0x7f050061;
+        public static final int add_course=0x7f050060;
+        public static final int add_semester=0x7f05005f;
         public static final int always=0x7f05000b;
         public static final int assCourseSpinner=0x7f05003d;
         public static final int assCourseSpinner_update=0x7f050053;
@@ -1116,8 +1116,8 @@ containing a value of this type.
         public static final int cancelAss_update=0x7f050056;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
-        public static final int context_menu_delete=0x7f050063;
-        public static final int context_menu_update=0x7f050062;
+        public static final int context_menu_delete=0x7f050065;
+        public static final int context_menu_update=0x7f050064;
         public static final int courseSemesterSpinner=0x7f050045;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
@@ -1131,10 +1131,10 @@ containing a value of this type.
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
-        public static final int id_ass=0x7f05005b;
+        public static final int id_ass=0x7f05005d;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int img_ass=0x7f050058;
+        public static final int img_ass=0x7f05005a;
         public static final int listMode=0x7f050001;
         public static final int listView_show_courses=0x7f050050;
         public static final int listView_show_semesters=0x7f050051;
@@ -1143,7 +1143,7 @@ containing a value of this type.
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
-        public static final int progress_ass=0x7f05005a;
+        public static final int progress_ass=0x7f05005c;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
@@ -1162,16 +1162,18 @@ containing a value of this type.
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
-        public static final int show_courses=0x7f050061;
-        public static final int show_semesters=0x7f050060;
+        public static final int show_courses=0x7f050063;
+        public static final int show_semesters=0x7f050062;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
         public static final int textView3=0x7f05004a;
         public static final int textView_Test=0x7f050042;
         public static final int textView_Testupdate=0x7f050057;
+        public static final int textView_listSelectionCourse=0x7f050058;
+        public static final int textView_listSelectionSem=0x7f050059;
         public static final int title=0x7f05002b;
-        public static final int title_ass=0x7f050059;
+        public static final int title_ass=0x7f05005b;
         public static final int top_action_bar=0x7f050020;
         public static final int txt_courseCode=0x7f050043;
         public static final int txt_courseName=0x7f050044;
@@ -1239,9 +1241,11 @@ containing a value of this type.
         public static final int activity_show_courses=0x7f03001c;
         public static final int activity_show_semesters=0x7f03001d;
         public static final int activity_update_assignment=0x7f03001e;
-        public static final int fragment_show_assignment=0x7f03001f;
-        public static final int list_item_ass=0x7f030020;
-        public static final int support_simple_spinner_dropdown_item=0x7f030021;
+        public static final int activity_update_course=0x7f03001f;
+        public static final int activity_update_semester=0x7f030020;
+        public static final int fragment_show_assignment=0x7f030021;
+        public static final int list_item_ass=0x7f030022;
+        public static final int support_simple_spinner_dropdown_item=0x7f030023;
     }
     public static final class menu {
         public static final int add_assignment=0x7f0c0000;
@@ -1252,6 +1256,8 @@ containing a value of this type.
         public static final int show_courses=0x7f0c0005;
         public static final int show_semesters=0x7f0c0006;
         public static final int update_assignment=0x7f0c0007;
+        public static final int update_course=0x7f0c0008;
+        public static final int update_semester=0x7f0c0009;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1328,6 +1334,8 @@ containing a value of this type.
         public static final int title_activity_show_courses=0x7f0a002e;
         public static final int title_activity_show_semesters=0x7f0a002c;
         public static final int title_activity_update_assignment=0x7f0a0026;
+        public static final int title_activity_update_course=0x7f0a0030;
+        public static final int title_activity_update_semester=0x7f0a0031;
         public static final int update=0x7f0a0025;
     }
     public static final class style {

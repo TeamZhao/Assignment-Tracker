@@ -1,8 +1,5 @@
-INDEX VERSION 1.126+C:\Users\Julz\Documents\GitHub\Assignment-Tracker\Assignment-Tracker\.metadata\.plugins\org.eclipse.jdt.core
-702375004.index
-1032422948.index
-1042947779.index
-3575839603.index
-1891155229.index
-3330124055.index
+INDEX VERSION 1.126+C:\Users\Julz\Documents\GitHub\Assignment-Tracker\.metadata\.plugins\org.eclipse.jdt.core
 1284074322.index
+1392859675.index
+3621616070.index
+3019272760.index

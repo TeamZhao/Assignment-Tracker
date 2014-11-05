@@ -120,7 +120,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
   
     // Delete a record with a given id
     public void deleteRecord(String tableName, String idName, String id) { 
-        SQLiteDatabase db = this.getWritableDatabase(); 
+        SQLiteDatabase db = this.getWritableDatabase();
+        //db.delete(table, whereClause, whereArgs)
         db.delete(tableName, idName + " = ?", 
                 new String[] { id }); 
         db.close(); 
