@@ -38,5 +38,6 @@
     <string name="show_courses">Show All Courses</string>
     <string name="title_activity_update_course">Update Course</string>
     <string name="title_activity_update_semester">Update Semester</string>
+    <string name="Update">Update</string>
 
 </resources>
