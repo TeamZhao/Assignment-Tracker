@@ -1,16 +1,123 @@
 package com.example.assignmenttracker;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.support.v7.app.ActionBarActivity;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 public class UpdateAssignmentActivity extends ActionBarActivity {
 
+	String assignmentNo;
+	String assignmentTitle;
+	String assignmentCourse;
+	String assignmentDueDate;
+	int assignmentProgress;
+	String assTitle;
+	public String record[] = new String[5];
+	final String fields[] = {"assignmentNo", "assignmentTitle", "assignmentCourse", "assignmentDueDate", "assignmentProgress"};
+	String formatedDate = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_update_assignment);
+		Intent intent = getIntent();
+		assTitle = intent.getStringExtra("assTitle");
+
+		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+		Cursor c = db
+				.query("tbl_Assignment",
+						new String[] { "assignmentNo, assignmentTitle, assignmentCourse, assignmentDueDate, assignmentProgress" },
+						"assignmentTitle = \"" + assTitle + "\";",
+						null, null, null, null);
+		while (c.moveToNext()) {			
+			assignmentNo = c.getString(0);
+			assignmentTitle = c.getString(1);
+			assignmentCourse = c.getString(2);
+			assignmentDueDate = c.getString(3);
+			assignmentProgress = c.getInt(4);
+		}
+
+		final EditText txtassignmentTitle = (EditText) findViewById(R.id.assTitle_update);
+		final DatePicker dpassignmentDueDate = (DatePicker) findViewById(R.id.assDatePicker);
+		final SeekBar seekBarassignmentProgress = (SeekBar)findViewById(R.id.assProgressSeekBar_update); 
+
+		txtassignmentTitle.setText(assignmentTitle);
+		seekBarassignmentProgress.setProgress(assignmentProgress);
+		String[] parts = assignmentDueDate.split("-");
+		String[] dayOfMonth = parts[2].split(" ");
+		dpassignmentDueDate.init(Integer.parseInt(parts[0]),Integer.parseInt(parts[1]),Integer.parseInt(dayOfMonth[0]),null);
+		//code to keep track of selected DatePicker date
+		
+		final Calendar selectedDueDate = Calendar.getInstance();
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        selectedDueDate.set(dpassignmentDueDate.getYear(), dpassignmentDueDate.getMonth(), dpassignmentDueDate.getDayOfMonth(), 23, 59, 59); //set to end of day
+        formatedDate = format.format(selectedDueDate.getTime()); // initialize value to default value in datepicker
+        dpassignmentDueDate.init(dpassignmentDueDate.getYear(), dpassignmentDueDate.getMonth(), dpassignmentDueDate.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
+		public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				selectedDueDate.set(year, monthOfYear-1, dayOfMonth, 23,59,59);  //set to end of the selected day
+				formatedDate = format.format(selectedDueDate.getTime());
+				//insertCalTime.set(year, monthOfYear, dayOfMonth);		
+			}
+		});
+		//CODE FOR PUTTING VALUES IN SPINNER ITEM FROM SPINNER TABLE
+		Cursor d = db
+				.query("tbl_Course",
+						new String[] { "CourseName" }, null, null, null, null, null);
+		List<String> spinnerArray =  new ArrayList<String>();
+		while (d.moveToNext()) {
+			spinnerArray.add(d.getString(0));
+
+		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+			    this, android.R.layout.simple_spinner_item, spinnerArray);
+
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			final Spinner sItems = (Spinner) findViewById(R.id.assCourseSpinner_update);
+			sItems.setAdapter(adapter);
+			final DatabaseManager db1 = new DatabaseManager(this);
+			
+		 final Button btnUpdateGame = (Button) findViewById(R.id.updateAss_update);
+	        btnUpdateGame.setOnClickListener(new View.OnClickListener() {
+	 			public void onClick(View v) {
+	 				ContentValues cv = new ContentValues();
+	 				Toast.makeText(UpdateAssignmentActivity.this, "Your Choice : \'" + seekBarassignmentProgress.getProgress() + "\';",
+	 						Toast.LENGTH_SHORT).show();
+	 				
+	 				cv.put("assignmentNo", assignmentNo);
+	 				cv.put("assignmentTitle", txtassignmentTitle.getText().toString());
+	 				cv.put("assignmentCourse", sItems.getSelectedItem().toString());
+	 				cv.put("assignmentDueDate", String.valueOf(formatedDate));
+	 				cv.put("assignmentProgress", String.valueOf(seekBarassignmentProgress.getProgress()));
+	 				
+	 				record[0] = assignmentNo;
+	 				record[1]= txtassignmentTitle.getText().toString();
+	 				record[2]= sItems.getSelectedItem().toString();
+	 				record[3]= String.valueOf(formatedDate);
+	 				record[4]= String.valueOf(seekBarassignmentProgress.getProgress());
+	 				db1.updateRecord(cv, "tbl_Assignment", fields, record);
+
+	 			}
+	 		});
 	}
 
 	@Override

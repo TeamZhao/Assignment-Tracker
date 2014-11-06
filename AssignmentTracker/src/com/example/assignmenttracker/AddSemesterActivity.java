@@ -100,21 +100,7 @@ public class AddSemesterActivity extends ActionBarActivity {
 		final Button btnShowStudent = (Button) findViewById(R.id.btn_cancelSemester);
 		btnShowStudent.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-
-				// Reading all records
-				List table = MainActivity.db.getTable("tbl_Semester");
-
-				for (Object o : table) {
-					ArrayList row = (ArrayList) o;
-					// Writing table to log
-					String output = "";
-					for (int i = 0; i < row.size(); i++) {
-						output += row.get(i).toString() + " ";
-						output += "\n";
-					}
-					display.setText(output);
-
-				}
+				onBackPressed();
 			}
 		});
 

@@ -1,7 +1,9 @@
 package com.example.assignmenttracker;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,10 +20,25 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		db = new DatabaseManager(this);
-		db.dbInitialize(tables, tableCreatorString);
+        db = new DatabaseManager(this);
+        db.dbInitialize( tables,tableCreatorString);
 		setContentView(R.layout.activity_main);
+		
+        SharedPreferences runCheck = getSharedPreferences("hasRunBefore", 0); //load the preferences
+        Boolean hasRun = runCheck.getBoolean("hasRun", false); //see if it's run before, default no
+        if (!hasRun) {
+            SharedPreferences settings = getSharedPreferences("hasRunBefore", 0);
+            SharedPreferences.Editor edit = settings.edit();
+            edit.putBoolean("hasRun", true); //set to has run
+            edit.commit(); //apply
+            populateCourseTable(db);
 
+        }
+        else {
+            //code if the app HAS run before
+
+    		
+        }
 	}
 
 	@Override
@@ -58,5 +75,25 @@ public class MainActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+	//To be removed before final deployment
+    public void populateCourseTable(DatabaseManager db)
+    {
 
+        
+        final String fields[] = {"CourseCode", "CourseName", "Professor", "Description"};
+        final String record[] = new String[4];
+        record[0]= "COMP123";
+        record[1]= "Programming";
+        record[2]= "Illia Nika";
+        record[3]= "Programming coure";
+ 		
+	        //Log.d("Name: ", record[1]);	       
+	        //populate the row with some values
+	        ContentValues values = new ContentValues();
+	        for (int i=0;i<record.length;i++)
+	        	values.put(fields[i],record[i]);  
+	        //add the row to the database
+	        db.addRecord(values, "tbl_Course", fields,record);
+	        
+    }
 }

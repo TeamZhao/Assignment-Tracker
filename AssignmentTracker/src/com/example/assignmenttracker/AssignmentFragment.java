@@ -16,7 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AssignmentFragment extends ListFragment {
@@ -80,19 +82,25 @@ public class AssignmentFragment extends ListFragment {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		// AdapterView.AdapterContextMenuInfo info =
-		// (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-
-		// ListView templist = this.getListView();
-		// View mView = templist.getChildAt(info.position);
-		// TextView mytextview = (TextView) mView.findViewById(R.id.id_ass);
-		// assID = Integer.parseInt(mytextview.getText().toString());
-
+		 AdapterView.AdapterContextMenuInfo info =
+		 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+		 
+		 ListView templist = this.getListView();
+		 View mView = templist.getChildAt(info.position);
+		 //String val =info.getItemAtPosition(info.position);
+         
 		switch (item.getItemId()) {
 		case R.id.context_menu_update:
+			 TextView mytextview = (TextView) mView.findViewById(R.id.id_ass);
+			 assID = Integer.parseInt(mytextview.getText().toString());
+			 String str;
+			 String selectedFromList = (templist.getItemAtPosition((int) info.position).toString());
+			 String lines[] = selectedFromList.split("title=");
+			 str = lines[1].substring(0, lines[1].length()-1);
+	         //Toast.makeText(getActivity().getApplicationContext(), str,Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(getActivity(),
 					UpdateAssignmentActivity.class);
-			// intent.putExtra("assID", assID);
+			intent.putExtra("assTitle",String.valueOf(str));
 			startActivity(intent);
 			return true;
 		case R.id.context_menu_delete:
