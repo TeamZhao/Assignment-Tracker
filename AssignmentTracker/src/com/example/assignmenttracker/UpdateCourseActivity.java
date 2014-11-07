@@ -1,5 +1,7 @@
 package com.example.assignmenttracker;
 
+import java.util.ArrayList;
+
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -10,8 +12,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,14 +31,12 @@ public class UpdateCourseActivity extends ActionBarActivity {
 		//gets list item content passed in from ShowCoursesActivity -- in this case, the courseCode
 		// use passedFromShowCourseListSelection as the search string for the database record
 		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			code = extras.getString("courseCode");
-		}
+		code = extras.getString("courseCode");
 		
 		
-		final String fields[] = { "CourseCode", "CourseName", "Professor",
+		final String fields[] = { "CourseCode", "CourseName", "semesterDetails", "Professor",
 		"Description" };
-		String courseName="" ,professor="" ,description="";
+		String courseName="" ,professor="" ,description="", semester="";
 		
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
 		Cursor c = db
@@ -43,12 +45,13 @@ public class UpdateCourseActivity extends ActionBarActivity {
 						null, null, null, null);
 		while (c.moveToNext()) {		
 			 courseName = c.getString(1);
-			 professor = c.getString(2);
-			 description = c.getString(3);
+			 semester = c.getString(2);
+			 professor = c.getString(3);
+			 description = c.getString(4);
 		}
 		
 		
-		final String record[] = new String[4];
+		final String record[] = new String[5];
 		// Handle all elements on page
 		final Button btnAddCou = (Button) findViewById(R.id.btn_updateCourse);
 		final Button btnCancelCou = (Button) findViewById(R.id.btn_cancelAddCourse);
@@ -56,11 +59,28 @@ public class UpdateCourseActivity extends ActionBarActivity {
 		final EditText couName = (EditText) findViewById(R.id.txt_courseName);
 		final EditText couProfessor = (EditText) findViewById(R.id.txt_professor);
 		final EditText couDescription = (EditText) findViewById(R.id.txt_description);
-
+		final Spinner semesters = (Spinner) findViewById(R.id.courseSemesterSpinner);
+		
 		couCode.setText(code);
 		couName.setText(courseName);
 		couProfessor.setText(professor);
 		couDescription.setText(description);
+		
+		
+		Cursor s = db
+				.query("tbl_Semester", new String[]{"semesterDetails"},
+						null, null, null, null, null);
+		ArrayList<String> values = new ArrayList<String>();
+		
+		while (s.moveToNext()) {		
+			values.add(s.getString(0));
+		}
+		
+		ArrayAdapter adapter = new ArrayAdapter(this,
+		        android.R.layout.simple_spinner_item, values);
+		semesters.setAdapter(adapter);
+        semesters.setSelection(adapter.getPosition(semester));
+		
 
 			// Code for popup
 			final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
@@ -74,15 +94,15 @@ public class UpdateCourseActivity extends ActionBarActivity {
 				// Do nothing but close the dialog
 			}
 		});
- //Code for pop up end
+			//Code for pop up end
 
-// Code for popup
-final AlertDialog.Builder helpBuilder1 = new AlertDialog.Builder(this);
-// new AlertDialog.Builder(this);
-helpBuilder1.setTitle("Success");
-helpBuilder1.setMessage("Course updated successfully.");
-helpBuilder1.setNegativeButton("Ok",
-		new DialogInterface.OnClickListener() {
+		// Code for popup
+		final AlertDialog.Builder helpBuilder1 = new AlertDialog.Builder(this);
+		// new AlertDialog.Builder(this);
+		helpBuilder1.setTitle("Success");
+		helpBuilder1.setMessage("Course updated successfully.");
+		helpBuilder1.setNegativeButton("Ok",
+				new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int which) {
 				// Do nothing but close the dialog
@@ -103,8 +123,9 @@ btnAddCou.setOnClickListener(new View.OnClickListener() {
 		} else {
 			record[0] = couCode.getText().toString();
 			record[1] = couName.getText().toString();
-			record[2] = couProfessor.getText().toString();
-			record[3] = couDescription.getText().toString();
+			record[2] = semesters.getSelectedItem().toString();
+			record[3] = couProfessor.getText().toString();
+			record[4] = couDescription.getText().toString();
 
 			// Log.d("Name: ", record[1]);
 			// populate the row with some values

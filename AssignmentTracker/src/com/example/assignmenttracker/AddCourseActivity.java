@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class AddCourseActivity extends Activity {
 
@@ -43,9 +47,9 @@ public class AddCourseActivity extends Activity {
 		 * MainActivity.db.dbInitialize(tablesAssignment,
 		 * tableCreatorStringAss);
 		 **/
-		final String fields[] = { "CourseCode", "CourseName", "Professor",
+		final String fields[] = { "CourseCode", "CourseName", "semesterDetails" , "Professor",
 				"Description" };
-		final String record[] = new String[4];
+		final String record[] = new String[5];
 		// Handle all elements on page
 		final Button btnAddCou = (Button) findViewById(R.id.btn_updateCourse);
 		final Button btnCancelCou = (Button) findViewById(R.id.btn_cancelAddCourse);
@@ -53,6 +57,26 @@ public class AddCourseActivity extends Activity {
 		final EditText couName = (EditText) findViewById(R.id.txt_courseName);
 		final EditText couProfessor = (EditText) findViewById(R.id.txt_professor);
 		final EditText couDescription = (EditText) findViewById(R.id.txt_description);
+		final Spinner semesters = (Spinner) findViewById(R.id.courseSemesterSpinner);
+		
+		
+
+		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+		Cursor c = db
+				.query("tbl_Semester", new String[]{"semesterDetails"},
+						null, null, null, null, null);
+		String[] array_spinner = new String[c.getCount()];
+		
+		int counter=0;
+		while (c.moveToNext()) {		
+			array_spinner[counter] = c.getString(0);
+			counter++;
+		}
+		
+		ArrayAdapter adapter = new ArrayAdapter(this,
+		        android.R.layout.simple_spinner_item, array_spinner);
+		semesters.setAdapter(adapter);
+		
 
 		// Code for popup
 		final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
@@ -95,8 +119,9 @@ public class AddCourseActivity extends Activity {
 				} else {
 					record[0] = couCode.getText().toString();
 					record[1] = couName.getText().toString();
-					record[2] = couProfessor.getText().toString();
-					record[3] = couDescription.getText().toString();
+					record[2] = semesters.getSelectedItem().toString();
+					record[3] = couProfessor.getText().toString();
+					record[4] = couDescription.getText().toString();
 
 					// Log.d("Name: ", record[1]);
 					// populate the row with some values
