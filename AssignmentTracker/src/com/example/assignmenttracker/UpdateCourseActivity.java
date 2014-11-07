@@ -50,7 +50,7 @@ public class UpdateCourseActivity extends ActionBarActivity {
 		
 		final String record[] = new String[4];
 		// Handle all elements on page
-		final Button btnAddCou = (Button) findViewById(R.id.btn_addCourse);
+		final Button btnAddCou = (Button) findViewById(R.id.btn_updateCourse);
 		final Button btnCancelCou = (Button) findViewById(R.id.btn_cancelAddCourse);
 		final EditText couCode = (EditText) findViewById(R.id.txt_courseCode);
 		final EditText couName = (EditText) findViewById(R.id.txt_courseName);
