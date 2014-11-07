@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -57,7 +58,7 @@ public class AddSemesterActivity extends ActionBarActivity {
 		final String fields[] = { "semesterDetails" };
 		final String record[] = new String[1];
 		// Handle Save button
-		final Button btnSaveStudent = (Button) findViewById(R.id.btn_addSemester);
+		final Button btnSaveStudent = (Button) findViewById(R.id.btn_updateSemester);
 		final EditText semesterName = (EditText) findViewById(R.id.semesterDetails);
 		final TextView display = (TextView) findViewById(R.id.TextViewDisplay);
         //Code for popup
@@ -70,6 +71,23 @@ public class AddSemesterActivity extends ActionBarActivity {
 		
 		   public void onClick(DialogInterface dialog, int which) {
 		    // Do nothing but close the dialog
+			   
+		   }
+		  });
+		//Code for pop up end
+        //Code for popup
+        final AlertDialog.Builder helpBuilder1 = new AlertDialog.Builder(this); 
+				   //new AlertDialog.Builder(this);
+        helpBuilder1.setTitle("SUCCESS");
+        helpBuilder1.setMessage("Semester Added");
+        helpBuilder1.setNegativeButton("Ok",
+		  new DialogInterface.OnClickListener() {
+		
+		   public void onClick(DialogInterface dialog, int which) {
+		    // Do nothing but close the dialog
+					Intent intent = new Intent(AddSemesterActivity.this,
+	 						MainActivity.class);
+	 				startActivity(intent);
 		   }
 		  });
 		//Code for pop up end
@@ -91,6 +109,8 @@ public class AddSemesterActivity extends ActionBarActivity {
 						values.put(fields[i], record[i]);
 					// add the row to the database
 					MainActivity.db.addRecord(values, "tbl_Semester", fields, record);
+	 		      AlertDialog helpDialog = helpBuilder1.create();
+	 		      helpDialog.show();
 				}
 
 		

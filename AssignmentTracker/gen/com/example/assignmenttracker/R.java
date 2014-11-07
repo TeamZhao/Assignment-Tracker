@@ -1108,10 +1108,10 @@ containing a value of this type.
         public static final int assTitle=0x7f05003c;
         public static final int assTitle_update=0x7f050052;
         public static final int beginning=0x7f050011;
-        public static final int btn_addCourse=0x7f050048;
-        public static final int btn_addSemester=0x7f05004d;
         public static final int btn_cancelAddCourse=0x7f050049;
         public static final int btn_cancelSemester=0x7f05004c;
+        public static final int btn_updateCourse=0x7f050048;
+        public static final int btn_updateSemester=0x7f05004d;
         public static final int cancelAss=0x7f050040;
         public static final int cancelAss_update=0x7f050056;
         public static final int checkbox=0x7f05002d;
@@ -1336,6 +1336,7 @@ containing a value of this type.
         public static final int title_activity_update_course=0x7f0a0030;
         public static final int title_activity_update_semester=0x7f0a0031;
         public static final int update=0x7f0a0025;
+        public static final int updateSemester=0x7f0a0033;
     }
     public static final class style {
         /** 

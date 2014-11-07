@@ -263,10 +263,10 @@ int id assProgressSeekBar_update 0x7f050054
 int id assTitle 0x7f05003c
 int id assTitle_update 0x7f050052
 int id beginning 0x7f050011
-int id btn_addCourse 0x7f050048
-int id btn_addSemester 0x7f05004d
 int id btn_cancelAddCourse 0x7f050049
 int id btn_cancelSemester 0x7f05004c
+int id btn_updateCourse 0x7f050048
+int id btn_updateSemester 0x7f05004d
 int id cancelAss 0x7f050040
 int id cancelAss_update 0x7f050056
 int id checkbox 0x7f05002d
@@ -434,6 +434,7 @@ int string title_activity_update_assignment 0x7f0a0026
 int string title_activity_update_course 0x7f0a0030
 int string title_activity_update_semester 0x7f0a0031
 int string update 0x7f0a0025
+int string updateSemester 0x7f0a0033
 int style AppBaseTheme 0x7f0b008b
 int style AppTheme 0x7f0b008c
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f0b0063
