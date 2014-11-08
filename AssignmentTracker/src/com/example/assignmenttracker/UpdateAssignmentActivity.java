@@ -56,6 +56,7 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 			assignmentDueDate = c.getString(3);
 			assignmentProgress = c.getInt(4);
 		}
+	
 
 		final EditText txtassignmentTitle = (EditText) findViewById(R.id.assTitle_update);
 		final DatePicker dpassignmentDueDate = (DatePicker) findViewById(R.id.assDatePicker);
@@ -138,4 +139,5 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 }

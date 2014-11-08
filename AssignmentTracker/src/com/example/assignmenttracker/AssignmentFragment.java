@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,7 +26,8 @@ import android.widget.Toast;
 
 public class AssignmentFragment extends ListFragment {
 	int assID;
-
+	SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,25 +92,36 @@ public class AssignmentFragment extends ListFragment {
 		 ListView templist = this.getListView();
 		 View mView = templist.getChildAt(info.position);
 		 //String val =info.getItemAtPosition(info.position);
-         
+		 Intent intent = new Intent(getActivity(), UpdateAssignmentActivity.class);
+		 TextView mytextview = (TextView) mView.findViewById(R.id.id_ass);
+		 assID = Integer.parseInt(mytextview.getText().toString());
+		 final String str;
+		 String selectedFromList = (templist.getItemAtPosition((int) info.position).toString());
+		 String lines[] = selectedFromList.split("title=");
+		 str = lines[1].substring(0, lines[1].length()-1);
 		switch (item.getItemId()) {
 		case R.id.context_menu_update:
-			 TextView mytextview = (TextView) mView.findViewById(R.id.id_ass);
-			 assID = Integer.parseInt(mytextview.getText().toString());
-			 String str;
-			 String selectedFromList = (templist.getItemAtPosition((int) info.position).toString());
-			 String lines[] = selectedFromList.split("title=");
-			 str = lines[1].substring(0, lines[1].length()-1);
+
 	         //Toast.makeText(getActivity().getApplicationContext(), str,Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(getActivity(),
-					UpdateAssignmentActivity.class);
 			intent.putExtra("assTitle",String.valueOf(str));
 			startActivity(intent);
 			return true;
 		case R.id.context_menu_delete:
-			MainActivity.db.deleteRecord("tbl_Assignment", "assignmentNo",
-					String.valueOf(assID));
-			getActivity().recreate();
+			// Confirm Deletion
+			Toast.makeText(getActivity().getApplicationContext(), str,Toast.LENGTH_LONG).show();
+			new AlertDialog.Builder(getActivity())
+			.setTitle("Confirm Deletion")
+			.setMessage("Do you really want to delete this Assignment?")
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog, int whichButton) {
+			    	// Delete Record
+			    	db.delete("tbl_Assignment","assignmentTitle=\'" + String.valueOf(str)+"\'", null);
+			        Toast.makeText(getActivity(), "Assignment" + String.valueOf(str) + "Deleted", Toast.LENGTH_SHORT).show();
+			        //getListView().invalidateViews();
+			    }})
+			 .setNegativeButton(android.R.string.no, null).show();
+			// Do Nothing 
 			return true;
 		default:
 			return super.onContextItemSelected(item);
