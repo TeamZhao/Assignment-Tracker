@@ -6,7 +6,8 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="20" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -54,6 +55,12 @@
             android:name=".UpdateSemesterActivity"
             android:label="@string/title_activity_update_semester" >
         </activity>
+        
+        <service android:name=".NotificationService"
+                 android:enabled="true" />
+         
+        <receiver android:name=".AlarmReceiver"/>
+	<receiver android:name=".NotificationPublisher" />
     </application>
 
 </manifest>

@@ -9,16 +9,23 @@ import java.text.SimpleDateFormat;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.CalendarContract;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.DateTimeKeyListener;
 import android.view.Menu;
@@ -32,7 +39,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
-@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class AddAssignmentActivity extends ActionBarActivity {
 
 	@Override
@@ -65,12 +72,12 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	//Date selectedDueDate = new Date();
 	String formatedDate;
 	Calendar selectedDueDate = Calendar.getInstance();
-	@Override
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN) @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_assignment);
 		
-		// Moved database and table creation to MainActivity, as creating from individual activities was causing issues for me --Julian
+
 		/**
 		final DatabaseManager db = new DatabaseManager(this);
 		// db.createDatabase(getApplicationContext());
@@ -177,6 +184,29 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					// add the row to the database
 					MainActivity.db.addRecord(values, "tbl_Assignment", fields, record);
 //					MainActivity.db.close();
+					// NOTIFICATIONS CODE
+				    Calendar calendar = selectedDueDate;
+				    //calendar.DAY_OF_MONTH = selectedDueDate.DAY_OF_MONTH - 1;
+				      
+				    //calendar.set(Calendar.MONTH, 11);
+				    //calendar.set(Calendar.YEAR, 2014);
+				    calendar.set(Calendar.DAY_OF_MONTH, selectedDueDate.DAY_OF_MONTH - 1);
+				 
+				    calendar.set(Calendar.HOUR_OF_DAY, 14);
+				    calendar.set(Calendar.MINUTE, 33);
+				    calendar.set(Calendar.SECOND, 0);
+				    String title = assTitle.getText().toString() + " due";
+				    String content = String.valueOf(selectedDueDate.get(Calendar.MONTH)) + "/" + String.valueOf(selectedDueDate.get(Calendar.DAY_OF_MONTH)) + "/" + String.valueOf(selectedDueDate.get(Calendar.YEAR));
+					Notification notification = getNotification(content, title);
+			        Intent notificationIntent = new Intent(AddAssignmentActivity.this, MainActivity.class);
+			        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+			        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+			        PendingIntent pendingIntent = PendingIntent.getBroadcast(AddAssignmentActivity.this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+			 
+			        long futureInMillis = SystemClock.elapsedRealtime() + 10000;
+			        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+			        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+			        //alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 					AlertDialog helpDialog1 = helpBuilder1.create();
 					helpDialog1.show();
 				}
@@ -241,5 +271,13 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		     // Use the Calendar app to add the new event.
 		    startActivity(intent);
 		  }
+	
+    private Notification getNotification(String content, String title) {
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle(title);
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.ic_launcher);
+        return builder.build();
+    }
 	
 }
