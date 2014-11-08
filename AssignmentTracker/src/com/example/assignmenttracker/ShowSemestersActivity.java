@@ -30,6 +30,7 @@ public class ShowSemestersActivity extends ActionBarActivity {
 
 	ListView semListView;
 	String contentOfSelectedSemListItem;
+	public String semesterNo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,10 @@ public class ShowSemestersActivity extends ActionBarActivity {
 						null,
 						null, null, null, null);
 		
+		final ArrayList<String> semesterNoArray = new ArrayList<String>();
 		ArrayList<String> values = new ArrayList<String>();
 		while (c.moveToNext()){
+			semesterNoArray.add(c.getString(0));
 			values.add(c.getString(1));
 		}
 
@@ -58,7 +61,7 @@ public class ShowSemestersActivity extends ActionBarActivity {
 			public void onItemClick(AdapterView<?> parent, View v, int position,
 					long id) {
 				  final String item = (String) parent.getItemAtPosition(position);//value of selected list item as string
-				Toast.makeText(getApplicationContext(), "Your Choice : " + item, Toast.LENGTH_SHORT)
+				Toast.makeText(getApplicationContext(), "Your Choice : " + position, Toast.LENGTH_SHORT)
 				.show();
 				contentOfSelectedSemListItem = item;
 				
@@ -73,6 +76,7 @@ public class ShowSemestersActivity extends ActionBarActivity {
 					int position, long id) {
 				 final String item = (String) parent.getItemAtPosition(position);//value of selected list item as string
 					contentOfSelectedSemListItem = item;
+					semesterNo = semesterNoArray.get(position);
 				return false;
 			}
 		});
@@ -83,9 +87,6 @@ public class ShowSemestersActivity extends ActionBarActivity {
 			public void onItemClick(AdapterView<?> parent, View v, int position,
 					long id) {
 				final String item = (String) parent.getItemAtPosition(position);//value of selected list item as string
-				Toast.makeText(getApplicationContext(), "Your Choice : " + item, Toast.LENGTH_SHORT)
-				.show();				 
-				
 			}
 		  
 		});
@@ -112,6 +113,8 @@ public class ShowSemestersActivity extends ActionBarActivity {
 		switch (item.getItemId()) {
 		case R.id.context_menu_update:
 			Intent intent = new Intent(this, UpdateSemesterActivity.class);
+
+			intent.putExtra("semesterNo", semesterNo); 
 			intent.putExtra("semesterDetails", contentOfSelectedSemListItem); // can you use this extra in
 													// the update activity to
 													// search for db record

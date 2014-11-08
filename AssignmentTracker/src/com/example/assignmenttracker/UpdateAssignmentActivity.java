@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,6 +44,23 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_update_assignment);
 		Intent intent = getIntent();
 		assTitle = intent.getStringExtra("assTitle");
+        //Code for popup
+        final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this); 
+				   //new AlertDialog.Builder(this);
+		helpBuilder.setTitle("SUCCESS!");
+		helpBuilder.setMessage("Assignment updated");
+		helpBuilder.setNegativeButton("Ok",
+		  new DialogInterface.OnClickListener() {
+		
+		   public void onClick(DialogInterface dialog, int which) {
+		    // Do nothing but close the dialog
+				Intent intent = new Intent(UpdateAssignmentActivity.this,
+ 						MainActivity.class);
+ 				startActivity(intent);
+		   }
+		  });
+		//Code for pop up end
+		//
 
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
 		Cursor c = db
@@ -101,8 +120,8 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 	        btnUpdateGame.setOnClickListener(new View.OnClickListener() {
 	 			public void onClick(View v) {
 	 				ContentValues cv = new ContentValues();
-	 				Toast.makeText(UpdateAssignmentActivity.this, "Your Choice : \'" + seekBarassignmentProgress.getProgress() + "\';",
-	 						Toast.LENGTH_SHORT).show();
+	 				//Toast.makeText(UpdateAssignmentActivity.this, "Your Choice : \'" + seekBarassignmentProgress.getProgress() + "\';",
+	 				//		Toast.LENGTH_SHORT).show();
 	 				
 	 				cv.put("assignmentNo", assignmentNo);
 	 				cv.put("assignmentTitle", txtassignmentTitle.getText().toString());
@@ -116,9 +135,19 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 	 				record[3]= String.valueOf(formatedDate);
 	 				record[4]= String.valueOf(seekBarassignmentProgress.getProgress());
 	 				db1.updateRecord(cv, "tbl_Assignment", fields, record);
+		 		      AlertDialog helpDialog = helpBuilder.create();
+		 		      helpDialog.show();
 
 	 			}
 	 		});
+			 final Button btnCancelGame = (Button) findViewById(R.id.cancelAss_update);
+			 btnCancelGame.setOnClickListener(new View.OnClickListener() {
+		 			public void onClick(View v) {
+						Intent intent = new Intent(UpdateAssignmentActivity.this,
+		 						MainActivity.class);
+		 				startActivity(intent);
+		 			}
+		 		});
 	}
 
 	@Override
