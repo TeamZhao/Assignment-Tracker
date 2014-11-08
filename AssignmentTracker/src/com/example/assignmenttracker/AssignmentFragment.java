@@ -118,7 +118,7 @@ public class AssignmentFragment extends ListFragment {
 			    	// Delete Record
 			    	db.delete("tbl_Assignment","assignmentTitle=\'" + String.valueOf(str)+"\'", null);
 			        Toast.makeText(getActivity(), "Assignment" + String.valueOf(str) + "Deleted", Toast.LENGTH_SHORT).show();
-			        //getListView().invalidateViews();
+			        getActivity().recreate();
 			    }})
 			 .setNegativeButton(android.R.string.no, null).show();
 			// Do Nothing 
