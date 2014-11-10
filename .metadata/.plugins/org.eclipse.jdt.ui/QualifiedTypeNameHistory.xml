@@ -10,4 +10,6 @@
 <fullyQualifiedTypeName name="android.widget.ListAdapter"/>
 <fullyQualifiedTypeName name="android.widget.SimpleAdapter"/>
 <fullyQualifiedTypeName name="android.util.SparseArray"/>
+<fullyQualifiedTypeName name="android.R.string"/>
+<fullyQualifiedTypeName name="android.support.v7.appcompat.R"/>
 </qualifiedTypeNameHistroy>

@@ -75,7 +75,6 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 			assignmentDueDate = c.getString(3);
 			assignmentProgress = c.getInt(4);
 		}
-	
 
 		final EditText txtassignmentTitle = (EditText) findViewById(R.id.assTitle_update);
 		final DatePicker dpassignmentDueDate = (DatePicker) findViewById(R.id.assDatePicker);
@@ -100,20 +99,25 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 			}
 		});
 		//CODE FOR PUTTING VALUES IN SPINNER ITEM FROM SPINNER TABLE
-		Cursor d = db
-				.query("tbl_Course",
-						new String[] { "CourseName" }, null, null, null, null, null);
-		List<String> spinnerArray =  new ArrayList<String>();
-		while (d.moveToNext()) {
-			spinnerArray.add(d.getString(0));
-
+        final Spinner courses = (Spinner) findViewById(R.id.assCourseSpinner_update);
+		Cursor course = db
+				.query("tbl_Course", new String[]{"CourseName"},
+						null, null, null, null, null);
+		String[] array_spinner = new String[course.getCount()];
+		
+		int counter=0;
+		while (course.moveToNext()) {		
+			array_spinner[counter] = course.getString(0);
+			counter++;
 		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-			    this, android.R.layout.simple_spinner_item, spinnerArray);
-
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			final Spinner sItems = (Spinner) findViewById(R.id.assCourseSpinner_update);
-			sItems.setAdapter(adapter);
+		
+		ArrayAdapter adapter = new ArrayAdapter(this,
+		        android.R.layout.simple_spinner_item, array_spinner);
+		courses.setAdapter(adapter);
+		courses.setSelection(adapter.getPosition(assignmentCourse));
+			
+			
+			
 			final DatabaseManager db1 = new DatabaseManager(this);
 			
 		 final Button btnUpdateGame = (Button) findViewById(R.id.updateAss_update);
@@ -125,13 +129,13 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 	 				
 	 				cv.put("assignmentNo", assignmentNo);
 	 				cv.put("assignmentTitle", txtassignmentTitle.getText().toString());
-	 				cv.put("assignmentCourse", sItems.getSelectedItem().toString());
+	 				cv.put("assignmentCourse", courses.getSelectedItem().toString());
 	 				cv.put("assignmentDueDate", String.valueOf(formatedDate));
 	 				cv.put("assignmentProgress", String.valueOf(seekBarassignmentProgress.getProgress()));
 	 				
 	 				record[0] = assignmentNo;
 	 				record[1]= txtassignmentTitle.getText().toString();
-	 				record[2]= sItems.getSelectedItem().toString();
+	 				record[2]= courses.getSelectedItem().toString();
 	 				record[3]= String.valueOf(formatedDate);
 	 				record[4]= String.valueOf(seekBarassignmentProgress.getProgress());
 	 				db1.updateRecord(cv, "tbl_Assignment", fields, record);
@@ -168,5 +172,4 @@ public class UpdateAssignmentActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 }
