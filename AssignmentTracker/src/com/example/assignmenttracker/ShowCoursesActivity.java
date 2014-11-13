@@ -29,7 +29,10 @@ public class ShowCoursesActivity extends ActionBarActivity {
 	ListView courseListView;
 	String contentOfSelectedCourseListItem;
 	int courseID;
-
+	int cursorIterator;
+	boolean assignmentsExistForCourse;
+	SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,8 +40,7 @@ public class ShowCoursesActivity extends ActionBarActivity {
 
 		courseListView = (ListView) findViewById(R.id.listView_show_courses);
 		registerForContextMenu(courseListView);
-
-		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+		
 		Cursor c = db.query("tbl_Course",
 				new String[] { "CourseCode, CourseName" }, null, null, null,
 				null, null);
@@ -111,7 +113,7 @@ public class ShowCoursesActivity extends ActionBarActivity {
 		View coursesView = coursesList.getChildAt(info.position);
 		Intent intent = new Intent(this, UpdateCourseActivity.class);
 		courseID = coursesList.getId();
-		Toast.makeText(getApplicationContext(), "COURSEID +" + courseID,Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "COURSEID +" + courseID,Toast.LENGTH_LONG).show();
 		// Add code to fetch realID of selected course
 		// Current behaviour deletes courses with existing assignments successfully, but defaults to another existing course - add logic to fix
 		
@@ -124,10 +126,24 @@ public class ShowCoursesActivity extends ActionBarActivity {
 		case R.id.context_menu_delete:
 			// Add code to pull affiliated assignments
 			// Add code to prompt deletion of all pertaining assignments (if any)
-			// Add confirmation Message Code
-			MainActivity.db.deleteRecord("tbl_Course", "CourseCode",
-					contentOfSelectedCourseListItem);
-			this.recreate();
+			// Add confirmation Message Code				
+
+			Cursor cursorAllAssignments = db.query("tbl_Assignment", new String[] {"assignmentTitle", "assignmentCourse" }, null, null, null, null, null);
+			cursorIterator = 0;
+			// Stores all found associated assignments
+			ArrayList<String> associatedAssignments = new ArrayList<String>();
+			assignmentsExistForCourse = false;
+			while (cursorAllAssignments.moveToNext()) {
+				Toast.makeText(getApplicationContext(),cursorAllAssignments.getString(1),Toast.LENGTH_LONG).show();
+				if (cursorAllAssignments.getString(1).equalsIgnoreCase(this.contentOfSelectedCourseListItem)) {
+					associatedAssignments.add(cursorAllAssignments.getString(1));
+					assignmentsExistForCourse = true;
+				}
+				cursorIterator++;
+			}			
+			//MainActivity.db.deleteRecord("tbl_Course", "CourseCode",
+			//		contentOfSelectedCourseListItem);
+			//this.recreate();
 			return true;
 		default:
 			return super.onContextItemSelected(item);
