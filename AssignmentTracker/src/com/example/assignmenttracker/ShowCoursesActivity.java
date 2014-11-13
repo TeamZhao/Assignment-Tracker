@@ -3,7 +3,9 @@ package com.example.assignmenttracker;
 import java.util.ArrayList;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -32,6 +34,7 @@ public class ShowCoursesActivity extends ActionBarActivity {
 	int cursorIterator;
 	boolean assignmentsExistForCourse;
 	SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+	ArrayList<String> associatedAssignments = new ArrayList<String>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,61 +122,44 @@ public class ShowCoursesActivity extends ActionBarActivity {
 		
 		switch (item.getItemId()) {
 		case R.id.context_menu_update:
+			
 			intent.putExtra("courseCode", contentOfSelectedCourseListItem); 
 				// can you use this extra in the update activity to search for db record containing this value?
 			startActivity(intent);
 			return true;
 		case R.id.context_menu_delete:
-			// Add code to pull affiliated assignments
-			// Add code to prompt deletion of all pertaining assignments (if any)
-			// Add confirmation Message Code		
-			// Testing Branch workflow
-
+			
 			Cursor cursorAllAssignments = db.query("tbl_Assignment", new String[] {"assignmentTitle", "assignmentCourse" }, null, null, null, null, null);
 			cursorIterator = 0;
-			// Stores all found associated assignments
-			ArrayList<String> associatedAssignments = new ArrayList<String>();
 			assignmentsExistForCourse = false;
+
 			while (cursorAllAssignments.moveToNext()) {
-				Toast.makeText(getApplicationContext(),cursorAllAssignments.getString(1),Toast.LENGTH_LONG).show();
 				if (cursorAllAssignments.getString(1).equalsIgnoreCase(this.contentOfSelectedCourseListItem)) {
-					associatedAssignments.add(cursorAllAssignments.getString(1));
+					associatedAssignments.add(cursorAllAssignments.getString(0));
 					assignmentsExistForCourse = true;
+					cursorIterator++;
 				}
-				cursorIterator++;
-			}			
-			//MainActivity.db.deleteRecord("tbl_Course", "CourseCode",
-			//		contentOfSelectedCourseListItem);
-			//this.recreate();
+			}
+			
+			if (assignmentsExistForCourse) {
+								// Delete Assignment Records
+								for (int i = 0; cursorIterator > i; i++) {
+									db.delete("tbl_Assignment","assignmentTitle=\'" + String.valueOf(associatedAssignments.get(i))+"\'", null);
+								}
+								// Delete Course
+								Toast.makeText(getApplicationContext(), "Course " + contentOfSelectedCourseListItem + " Deleted", Toast.LENGTH_SHORT).show();
+							}
+			else {
+								// Delete Course Record
+								// Delete Course
+								Toast.makeText(getApplicationContext(), "Course " + contentOfSelectedCourseListItem + " Deleted", Toast.LENGTH_SHORT).show();	
+				}
+			this.recreate();
 			return true;
 		default:
 			return super.onContextItemSelected(item);
 		}
 	}
-	
-// Temporary Reference integrity logic 	
-/*	 AdapterView.AdapterContextMenuInfo info =
-	 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-	 
-	 ListView templist = this.getListView();
-	 View mView = templist.getChildAt(info.position);
-	 //String val =info.getItemAtPosition(info.position);
-	 Intent intent = new Intent(getActivity(), UpdateAssignmentActivity.class);
-	 TextView mytextview = (TextView) mView.findViewById(R.id.id_ass);
-	 assID = Integer.parseInt(mytextview.getText().toString());
-	 final String str;
-	 String selectedFromList = (templist.getItemAtPosition((int) info.position).toString());
-	 String lines[] = selectedFromList.split("title=");
-	 str = lines[1].substring(0, lines[1].length()-1);
-	switch (item.getItemId()) {
-	case R.id.context_menu_update:
-
-        //Toast.makeText(getActivity().getApplicationContext(), str,Toast.LENGTH_LONG).show();
-		intent.putExtra("assTitle",String.valueOf(str));
-		startActivity(intent);
-		return true;
-	case R.id.context_menu_delete:*/
-	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
