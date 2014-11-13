@@ -15,7 +15,10 @@ public class MainActivity extends Activity {
 	private static final String tableCreatorString[] = {
 			"CREATE TABLE IF NOT EXISTS tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);",
 			"CREATE TABLE IF NOT EXISTS tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT);",
-			"CREATE TABLE IF NOT EXISTS tbl_Course (courseNo INTEGER PRIMARY KEY AUTOINCREMENT, CourseCode TEXT , CourseName TEXT, semesterDetails TEXT, Professor TEXT , Description TEXT);" };
+			"CREATE TABLE IF NOT EXISTS tbl_Course (courseNo INTEGER PRIMARY KEY AUTOINCREMENT, CourseCode TEXT , CourseName TEXT, semesterDetails TEXT, Professor TEXT , Description TEXT);",
+			"CREATE TABLE IF NOT EXISTS tbl_TeacherSemester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);",
+			"CREATE TABLE IF NOT EXISTS tbl_TeacherAssignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT);",
+			"CREATE TABLE IF NOT EXISTS tbl_TeacherCourse (courseNo INTEGER PRIMARY KEY AUTOINCREMENT, CourseCode TEXT , CourseName TEXT, semesterDetails TEXT, Professor TEXT , Description TEXT);"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
