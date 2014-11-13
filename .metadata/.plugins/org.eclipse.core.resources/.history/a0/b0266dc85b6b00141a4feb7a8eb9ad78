@@ -143,8 +143,7 @@ public class ShowSemestersActivity extends ActionBarActivity {
 							// Do nothing but close the dialog
 							DatabaseManager db = new DatabaseManager(ShowSemestersActivity.this);
 							db.deleteRecord("tbl_Semester", "semesterNo" , semesterNo);
-							Intent intent = new Intent(ShowSemestersActivity.this, ShowSemestersActivity.class);
-							startActivity(intent);
+							Intent intent = new Intent(this, UpdateSemesterActivity.class);
 						}
 					});
 			// Code for popup

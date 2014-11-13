@@ -129,27 +129,26 @@ public class ShowSemestersActivity extends ActionBarActivity {
 			// new AlertDialog.Builder(this);
 			helpBuilder.setTitle("Confirm Delete?");
 			helpBuilder.setMessage("Are you sure you want to delete the record?");
-			helpBuilder.setNegativeButton("No",
+			helpBuilder.setNegativeButton("NO",
 					new DialogInterface.OnClickListener() {
 
 						public void onClick(DialogInterface dialog, int which) {
 							// Do nothing but close the dialog
 						}
 					});
-			helpBuilder.setPositiveButton("Yes",
+			helpBuilder.setNegativeButton("NO",
 					new DialogInterface.OnClickListener() {
 
 						public void onClick(DialogInterface dialog, int which) {
 							// Do nothing but close the dialog
-							DatabaseManager db = new DatabaseManager(ShowSemestersActivity.this);
-							db.deleteRecord("tbl_Semester", "semesterNo" , semesterNo);
-							Intent intent = new Intent(ShowSemestersActivity.this, ShowSemestersActivity.class);
-							startActivity(intent);
 						}
 					});
+			// Code for pop up end for calender
+
 			// Code for popup
-			AlertDialog helpDialog = helpBuilder.create();
-			helpDialog.show();
+			DatabaseManager db = new DatabaseManager(this);
+			db.deleteRecord("tbl_Semester", "semesterNo" , semesterNo);
+			
 			this.recreate();
 			return true;
 		default:
