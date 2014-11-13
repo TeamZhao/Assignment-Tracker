@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,12 +21,14 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShowCoursesActivity extends ActionBarActivity {
 
 	ListView courseListView;
 	String contentOfSelectedCourseListItem;
+	int courseID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,24 +106,25 @@ public class ShowCoursesActivity extends ActionBarActivity {
 	}
 
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
-				.getMenuInfo();
-
+		AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+		ListView coursesList = (ListView)findViewById(R.id.listView_show_courses);
+		View coursesView = coursesList.getChildAt(info.position);
+		Intent intent = new Intent(this, UpdateCourseActivity.class);
+		courseID = coursesList.getId();
+		Toast.makeText(getApplicationContext(), "COURSEID +" + courseID,Toast.LENGTH_LONG).show();
+		// Add code to fetch realID of selected course
+		// Current behaviour deletes courses with existing assignments successfully, but defaults to another existing course - add logic to fix
+		
 		switch (item.getItemId()) {
 		case R.id.context_menu_update:
-			Intent intent = new Intent(this, UpdateCourseActivity.class);
-			intent.putExtra("courseCode", contentOfSelectedCourseListItem); // can
-																			// you
-																			// use
-																			// this
-																			// extra
-																			// in
-			// the update activity to
-			// search for db record
-			// containing this value?
+			intent.putExtra("courseCode", contentOfSelectedCourseListItem); 
+				// can you use this extra in the update activity to search for db record containing this value?
 			startActivity(intent);
 			return true;
 		case R.id.context_menu_delete:
+			// Add code to pull affiliated assignments
+			// Add code to prompt deletion of all pertaining assignments (if any)
+			// Add confirmation Message Code
 			MainActivity.db.deleteRecord("tbl_Course", "CourseCode",
 					contentOfSelectedCourseListItem);
 			this.recreate();
@@ -129,6 +133,30 @@ public class ShowCoursesActivity extends ActionBarActivity {
 			return super.onContextItemSelected(item);
 		}
 	}
+	
+// Temporary Reference integrity logic 	
+/*	 AdapterView.AdapterContextMenuInfo info =
+	 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+	 
+	 ListView templist = this.getListView();
+	 View mView = templist.getChildAt(info.position);
+	 //String val =info.getItemAtPosition(info.position);
+	 Intent intent = new Intent(getActivity(), UpdateAssignmentActivity.class);
+	 TextView mytextview = (TextView) mView.findViewById(R.id.id_ass);
+	 assID = Integer.parseInt(mytextview.getText().toString());
+	 final String str;
+	 String selectedFromList = (templist.getItemAtPosition((int) info.position).toString());
+	 String lines[] = selectedFromList.split("title=");
+	 str = lines[1].substring(0, lines[1].length()-1);
+	switch (item.getItemId()) {
+	case R.id.context_menu_update:
+
+        //Toast.makeText(getActivity().getApplicationContext(), str,Toast.LENGTH_LONG).show();
+		intent.putExtra("assTitle",String.valueOf(str));
+		startActivity(intent);
+		return true;
+	case R.id.context_menu_delete:*/
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
