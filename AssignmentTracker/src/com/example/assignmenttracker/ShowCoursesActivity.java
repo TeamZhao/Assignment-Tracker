@@ -126,7 +126,8 @@ public class ShowCoursesActivity extends ActionBarActivity {
 		case R.id.context_menu_delete:
 			// Add code to pull affiliated assignments
 			// Add code to prompt deletion of all pertaining assignments (if any)
-			// Add confirmation Message Code				
+			// Add confirmation Message Code		
+			// Testing Branch workflow
 
 			Cursor cursorAllAssignments = db.query("tbl_Assignment", new String[] {"assignmentTitle", "assignmentCourse" }, null, null, null, null, null);
 			cursorIterator = 0;
