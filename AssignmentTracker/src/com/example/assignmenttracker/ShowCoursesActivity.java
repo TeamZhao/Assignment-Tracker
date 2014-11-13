@@ -142,6 +142,11 @@ public class ShowCoursesActivity extends ActionBarActivity {
 			}
 			
 			if (assignmentsExistForCourse) {
+				AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+				helpBuilder.setTitle("Delete Course?");
+				helpBuilder.setMessage("There are " + cursorIterator + " existing Assignments for this course. Delete the course and its assignments?");
+				helpBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
 								// Delete Assignment Records
 								for (int i = 0; cursorIterator > i; i++) {
 									db.delete("tbl_Assignment","assignmentTitle=\'" + String.valueOf(associatedAssignments.get(i))+"\'", null);
@@ -149,10 +154,35 @@ public class ShowCoursesActivity extends ActionBarActivity {
 								db.delete("tbl_Course","CourseCode=\'" + contentOfSelectedCourseListItem + "\'", null);
 								Toast.makeText(getApplicationContext(), "Course " + contentOfSelectedCourseListItem + " Deleted", Toast.LENGTH_SHORT).show();
 							}
+						})
+				.setNegativeButton("No",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								// Do nothing
+							}
+						});
+				AlertDialog helpDialog = helpBuilder.create();
+				helpDialog.show();
+			}
 			else {
+				AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+				helpBuilder.setTitle("Delete Course?");
+				helpBuilder.setMessage("Are you sure you want to delete this course?");
+				helpBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
 								// Delete Course Record
 								db.delete("tbl_Course","CourseCode=\'" + contentOfSelectedCourseListItem + "\'", null);
-								Toast.makeText(getApplicationContext(), "Course " + contentOfSelectedCourseListItem + " Deleted", Toast.LENGTH_SHORT).show();	
+								Toast.makeText(getApplicationContext(), "Course " + contentOfSelectedCourseListItem + " Deleted", Toast.LENGTH_SHORT).show();
+							}
+						})
+				.setNegativeButton("No",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								// Do nothing
+							}
+						});		
+				AlertDialog helpDialog = helpBuilder.create();
+				helpDialog.show();
 				}
 			this.recreate();
 			return true;
