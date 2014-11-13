@@ -146,12 +146,12 @@ public class ShowCoursesActivity extends ActionBarActivity {
 								for (int i = 0; cursorIterator > i; i++) {
 									db.delete("tbl_Assignment","assignmentTitle=\'" + String.valueOf(associatedAssignments.get(i))+"\'", null);
 								}
-								// Delete Course
+								db.delete("tbl_Course","CourseCode=\'" + contentOfSelectedCourseListItem + "\'", null);
 								Toast.makeText(getApplicationContext(), "Course " + contentOfSelectedCourseListItem + " Deleted", Toast.LENGTH_SHORT).show();
 							}
 			else {
 								// Delete Course Record
-								// Delete Course
+								db.delete("tbl_Course","CourseCode=\'" + contentOfSelectedCourseListItem + "\'", null);
 								Toast.makeText(getApplicationContext(), "Course " + contentOfSelectedCourseListItem + " Deleted", Toast.LENGTH_SHORT).show();	
 				}
 			this.recreate();
