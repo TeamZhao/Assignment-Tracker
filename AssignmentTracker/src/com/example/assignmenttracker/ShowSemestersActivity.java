@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -122,8 +124,32 @@ public class ShowSemestersActivity extends ActionBarActivity {
 			startActivity(intent);
 			return true;
 		case R.id.context_menu_delete:
-			MainActivity.db.deleteRecord("tbl_Semester", "assignmentNo",
-					contentOfSelectedSemListItem);
+			// Code for popup
+			final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+			// new AlertDialog.Builder(this);
+			helpBuilder.setTitle("Confirm Delete?");
+			helpBuilder.setMessage("Are you sure you want to delete the record?");
+			helpBuilder.setNegativeButton("No",
+					new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface dialog, int which) {
+							// Do nothing but close the dialog
+						}
+					});
+			helpBuilder.setPositiveButton("Yes",
+					new DialogInterface.OnClickListener() {
+
+						public void onClick(DialogInterface dialog, int which) {
+							// Do nothing but close the dialog
+							DatabaseManager db = new DatabaseManager(ShowSemestersActivity.this);
+							db.deleteRecord("tbl_Semester", "semesterNo" , semesterNo);
+							Intent intent = new Intent(ShowSemestersActivity.this, ShowSemestersActivity.class);
+							startActivity(intent);
+						}
+					});
+			// Code for popup
+			AlertDialog helpDialog = helpBuilder.create();
+			helpDialog.show();
 			this.recreate();
 			return true;
 		default:

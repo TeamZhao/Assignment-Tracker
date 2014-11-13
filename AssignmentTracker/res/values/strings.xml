@@ -40,5 +40,10 @@
     <string name="title_activity_update_semester">Update Semester</string>
     <string name="Update">Update</string>
     <string name="updateSemester">Update Semester</string>
+    <string name="title_activity_splash_screen">Assignment Tracker</string>
+    <string name="companyLogo">Company Logo</string>
+    <string name="ImA">I am a..</string>
+    <string name="teacher">Teacher</string>
+    <string name="student">Student</string>
 
 </resources>
