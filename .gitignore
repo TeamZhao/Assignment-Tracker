@@ -56,8 +56,6 @@ appcompat_v7/bin/android-support-v7-appcompat.jar
 # Generated files
 bin/
 gen/
-AssignmentTracker/gen/
-
 
 # Gradle files
 .gradle/
