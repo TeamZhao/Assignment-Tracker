@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 INDEX VERSION 1.126+E:\Assignment Tracker\Assignment-Tracker\.metadata\.plugins\org.eclipse.jdt.core
 2857143765.index
 1032422948.index
 1284074322.index
+=======
+INDEX VERSION 1.126+C:\Users\Julz\Documents\GitHub\Nov13Clone\Assignment-Tracker\.metadata\.plugins\org.eclipse.jdt.core
+2857143765.index
+1519187842.index
+1284074322.index
+3349285705.index
+3026735256.index
+3330124055.index
+1032422948.index
+>>>>>>> origin/master
