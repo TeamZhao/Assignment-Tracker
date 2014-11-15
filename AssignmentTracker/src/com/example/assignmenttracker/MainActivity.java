@@ -74,6 +74,10 @@ public class MainActivity extends Activity {
 			adds = new Intent(this, ShowCoursesActivity.class);
 			startActivity(adds);
 			return true;
+		case R.id.show_devtools:
+			adds = new Intent(this, DevTools.class);
+			startActivity(adds);
+			return true;		
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -99,4 +103,12 @@ public class MainActivity extends Activity {
 	        db.addRecord(values, "tbl_Course", fields,record);
 	        
     }
+    
+	public static String[] getTables() {
+		return tables;
+	}
+	
+	public static String[] getTableString() {
+		return tableCreatorString;
+	}
 }

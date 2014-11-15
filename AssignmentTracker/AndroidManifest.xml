@@ -9,7 +9,7 @@
         android:targetSdkVersion="20" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-	
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,8 +24,6 @@
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                
             </intent-filter>
         </activity>
         <activity
@@ -56,7 +54,10 @@
             android:name=".UpdateSemesterActivity"
             android:label="@string/title_activity_update_semester" >
         </activity>
-
+        <activity
+            android:name=".DevTools"
+            android:label="@string/title_activity_dev_tools" >
+        </activity>
         <service
             android:name=".NotificationService"
             android:enabled="true" />
@@ -73,5 +74,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
+
 </manifest>
