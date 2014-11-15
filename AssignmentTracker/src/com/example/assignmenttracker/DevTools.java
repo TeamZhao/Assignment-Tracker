@@ -96,10 +96,6 @@ public class DevTools extends ActionBarActivity implements OnClickListener {
 				}
 				
 				for (int y = 0; y < 4; y++) {
-					if (y == 1 || y == 2)
-					{
-						valuesAssignments.put(asmtFields[y], asmtRecords[y]);
-					}
 					valuesAssignments.put(asmtFields[y], asmtRecords[y]);
 				}
 				db.addRecord(valuesCourses, "tbl_Course", courseFields,courseRecords);
