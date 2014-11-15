@@ -54,7 +54,10 @@
             android:name=".UpdateSemesterActivity"
             android:label="@string/title_activity_update_semester" >
         </activity>
-
+        <activity
+            android:name=".DevTools"
+            android:label="@string/title_activity_dev_tools" >
+        </activity>
         <service
             android:name=".NotificationService"
             android:enabled="true" />
@@ -71,6 +74,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".DeleteSemesterConfirmationActivity"
             android:label="@string/title_activity_delete_semester_confirmation" >
