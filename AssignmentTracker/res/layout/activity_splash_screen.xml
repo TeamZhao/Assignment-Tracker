@@ -18,7 +18,7 @@
         android:src="@drawable/logo" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView_DisplaySemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/companyLogo"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btn_teacher"
         android:layout_alignBottom="@+id/btn_teacher"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/textView_DisplaySemTitle"
         android:layout_marginLeft="49dp"
         android:text="@string/student" />
 
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/companyLogo"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/textView_DisplaySemTitle"
         android:layout_marginLeft="40dp"
         android:text="@string/teacher" />
 
