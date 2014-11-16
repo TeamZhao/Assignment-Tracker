@@ -21,6 +21,7 @@ public class SplashScreen extends ActionBarActivity {
 		
 		btnTeacher.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				MainActivity.role = "Teacher";
 				Intent intent = new Intent(SplashScreen.this,
 						MainActivity.class);
 				startActivity(intent);
@@ -28,6 +29,7 @@ public class SplashScreen extends ActionBarActivity {
 		});
 		btnStudent.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {	
+				MainActivity.role = "Student";
 				Intent intent = new Intent(SplashScreen.this,
 						MainActivity.class);
 				startActivity(intent);

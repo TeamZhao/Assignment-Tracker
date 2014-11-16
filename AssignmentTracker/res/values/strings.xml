@@ -46,15 +46,17 @@
     <string name="ImA">I am a..</string>
     <string name="teacher">Teacher</string>
     <string name="student">Student</string>
-    <string name="title_activity_delete_semester_confirmation">Delete Semester Confirmation</string>    
+    <string name="title_activity_delete_semester_confirmation">Delete Semester Confirmation</string>
     <string name="title_activity_dev_tools">DevTools</string>
     <string name="devCleanDatabaseText">Clean DB</string>
-	<string name="devPopulateDatabase">Populate DB</string>	
-	<string name="DevPH01">DevPH01</string>
-	<string name="DevPH02">DevPH02</string>
-	<string name="DevPH03">DevPH03</string>
-	<string name="DevPH04">DevPH04</string>
-	<string name="DevPH05">DevPH05</string>
-	<string name="DevPH06">DevPH06</string>
+    <string name="devPopulateDatabase">Populate DB</string>
+    <string name="DevPH01">DevPH01</string>
+    <string name="DevPH02">DevPH02</string>
+    <string name="DevPH03">DevPH03</string>
+    <string name="DevPH04">DevPH04</string>
+    <string name="DevPH05">DevPH05</string>
+    <string name="DevPH06">DevPH06</string>
+    <string name="title_activity_add_teacher_course">Add Course</string>
+    <string name="title_activity_update_teacher_course">Update Course</string>
 
 </resources>
