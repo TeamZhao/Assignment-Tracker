@@ -32,6 +32,7 @@ public class ShowCoursesActivity extends ActionBarActivity {
 	String contentOfSelectedCourseListItem;
 	int courseID;
 	int cursorIterator;
+	String pickSemester;
 	boolean assignmentsExistForCourse;
 	SQLiteDatabase db = MainActivity.db.getReadableDatabase();
 	ArrayList<String> associatedAssignments = new ArrayList<String>();
@@ -44,8 +45,14 @@ public class ShowCoursesActivity extends ActionBarActivity {
 		courseListView = (ListView) findViewById(R.id.listView_show_courses);
 		registerForContextMenu(courseListView);
 
+		Intent semIntent = getIntent();
+		pickSemester = semIntent.getStringExtra("semesterDetails");
+		if( pickSemester != null){
+			pickSemester = "semesterDetails = \""+semIntent.getStringExtra("semesterDetails")+ "\"";
+		}
+		
 		Cursor c = db.query("tbl_Course",
-				new String[] { "CourseCode, CourseName" }, null, null, null,
+				new String[] { "CourseCode, CourseName" }, pickSemester , null, null,
 				null, null);
 
 		ArrayList<String> values = new ArrayList<String>();

@@ -33,6 +33,8 @@ public class ShowSemestersActivity extends ActionBarActivity {
 	ListView semListView;
 	String contentOfSelectedSemListItem;
 	public String semesterNo;
+	public String semesterDetails;
+	ArrayList<String> values = new ArrayList<String>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,6 @@ public class ShowSemestersActivity extends ActionBarActivity {
 						null, null, null, null);
 		
 		final ArrayList<String> semesterNoArray = new ArrayList<String>();
-		ArrayList<String> values = new ArrayList<String>();
 		while (c.moveToNext()){
 			semesterNoArray.add(c.getString(0));
 			values.add(c.getString(1));
@@ -62,11 +63,12 @@ public class ShowSemestersActivity extends ActionBarActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position,
 					long id) {
-				  final String item = (String) parent.getItemAtPosition(position);//value of selected list item as string
-				Toast.makeText(getApplicationContext(), "Your Choice : " + position, Toast.LENGTH_SHORT)
-				.show();
-				contentOfSelectedSemListItem = item;
-				
+				 final String item = (String) parent.getItemAtPosition(position);//value of selected list item as string
+					contentOfSelectedSemListItem = item;
+					semesterDetails = values.get(position);
+				Intent intent = new Intent(ShowSemestersActivity.this, ShowCoursesActivity.class);
+				intent.putExtra("semesterDetails", semesterDetails); 
+				startActivity(intent);			
 			}
 		  
 		});
@@ -81,16 +83,6 @@ public class ShowSemestersActivity extends ActionBarActivity {
 					semesterNo = semesterNoArray.get(position);
 				return false;
 			}
-		});
-		
-		semListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position,
-					long id) {
-				final String item = (String) parent.getItemAtPosition(position);//value of selected list item as string
-			}
-		  
 		});
 	}
 
