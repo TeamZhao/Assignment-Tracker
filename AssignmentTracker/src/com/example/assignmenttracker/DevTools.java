@@ -61,6 +61,7 @@ public class DevTools extends ActionBarActivity implements OnClickListener {
 					.getDefaultSharedPreferences(this);
 			// fetch current increment
 			int counter = preferences.getInt("Counter", 0);
+			int counter2 = preferences.getInt("Counter", 0);
 			// Create Semester
 			ContentValues valuesSemester = new ContentValues();
 			valuesSemester.put("semesterDetails", "DummySemester" + counter);
@@ -69,21 +70,32 @@ public class DevTools extends ActionBarActivity implements OnClickListener {
 					new String[] { valuesSemester
 							.getAsString("semesterDetails") });
 
+			// for teacher table
+			ContentValues valuesTeacherSemester = new ContentValues();
+			valuesTeacherSemester.put("semesterDetails", "DummyTeacherSemester"
+					+ counter2);
+			db.addRecord(valuesTeacherSemester, "tbl_TeacherSemester",
+					new String[] { "semesterDetails" },
+					new String[] { valuesTeacherSemester
+							.getAsString("semesterDetails") });
+
 			// Create Courses and Assignments
 			ContentValues valuesCourses = new ContentValues();
 			ContentValues valuesAssignments = new ContentValues();
 			final String courseFields[] = { "CourseCode", "CourseName",
 					"semesterDetails", "Professor", "Description" };
 			final String courseRecords[] = new String[5];
-			final String asmtFields[] = { "assignmentTitle", "assignmentCourse",
-					"assignmentDueDate", "assignmentProgress" };
-			final String asmtRecords[] = new String[4];		
+			final String asmtFields[] = { "assignmentTitle",
+					"assignmentCourse", "assignmentDueDate",
+					"assignmentProgress" };
+			final String asmtRecords[] = new String[4];
 
-			// Adds 4 Courses 
+			// Adds 4 Courses
 			for (int x = 0; x < 4; x++) {
 				courseRecords[0] = "devCOMP10" + counter;
 				courseRecords[1] = "devCOMP10" + counter;
-				courseRecords[2] = valuesSemester.getAsString("semesterDetails");
+				courseRecords[2] = valuesSemester
+						.getAsString("semesterDetails");
 				courseRecords[3] = "devProfessor";
 				courseRecords[4] = "devDesc";
 				asmtRecords[0] = "devAssignment" + counter;
@@ -94,19 +106,65 @@ public class DevTools extends ActionBarActivity implements OnClickListener {
 				for (int i = 0; i < 5; i++) {
 					valuesCourses.put(courseFields[i], courseRecords[i]);
 				}
-				
+
 				for (int y = 0; y < 4; y++) {
 					valuesAssignments.put(asmtFields[y], asmtRecords[y]);
 				}
-				db.addRecord(valuesCourses, "tbl_Course", courseFields,courseRecords);
-				db.addRecord(valuesAssignments, "tbl_Assignment", asmtFields, asmtRecords);
+				db.addRecord(valuesCourses, "tbl_Course", courseFields,
+						courseRecords);
+				db.addRecord(valuesAssignments, "tbl_Assignment", asmtFields,
+						asmtRecords);
 				counter++;
 			}
-			
+
+			// For teacher tables
+			ContentValues valuesTeacherCourses = new ContentValues();
+			ContentValues valuesTeacherAssignments = new ContentValues();
+			final String teacherCourseFields[] = { "CourseCode", "CourseName",
+					"semesterDetails", "Description" };
+			final String teacherCourseRecords[] = new String[4];
+			final String teacherAsmtFields[] = { "assignmentTitle",
+					"assignmentCourse", "assignmentDueDate",
+					"assignmentProgress" };
+			final String teacherAsmtRecords[] = new String[4];
+
+			// Adds 4 Courses
+			for (int a = 0; a < 4; a++) {
+				teacherCourseRecords[0] = "devTeacherCOMP10" + counter2;
+				teacherCourseRecords[1] = "devTeacherCOMP10" + counter2;
+				teacherCourseRecords[2] = valuesTeacherSemester
+						.getAsString("semesterDetails");
+				teacherCourseRecords[3] = "devTeacherDesc";
+				teacherAsmtRecords[0] = "devTeacherAssignment" + counter2;
+				teacherAsmtRecords[1] = teacherCourseRecords[1];
+				teacherAsmtRecords[2] = "2015-05-01 10:00:00";
+				teacherAsmtRecords[3] = String.valueOf(50);
+
+				for (int j = 0; j < 4; j++) {
+					valuesTeacherCourses.put(teacherCourseFields[j],
+							teacherCourseRecords[j]);
+				}
+
+				for (int b = 0; b < 4; b++) {
+					valuesTeacherAssignments.put(teacherAsmtFields[b],
+							teacherAsmtRecords[b]);
+				}
+				db.addRecord(valuesTeacherCourses, "tbl_TeacherCourse",
+						teacherCourseFields, teacherCourseRecords);
+				db.addRecord(valuesTeacherAssignments, "tbl_TeacherAssignment",
+						teacherAsmtFields, teacherAsmtRecords);
+				counter2++;
+			}
+
 			// set current increment
 			SharedPreferences.Editor editor = preferences.edit();
 			editor.putInt("Counter", counter);
 			editor.apply();
+			
+			SharedPreferences.Editor editor2 = preferences.edit();
+			editor2.putInt("Counter", counter2);
+			editor2.apply();
+			
 
 		}
 	}

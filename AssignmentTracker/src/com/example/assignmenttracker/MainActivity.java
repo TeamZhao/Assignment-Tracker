@@ -13,7 +13,9 @@ public class MainActivity extends Activity {
 	public static String role = "Student"; // set default to Student in case
 											// failed to set from splash screen
 	public static DatabaseManager db;
-	private static final String tables[] = { "tbl_Semester", "tbl_Assignment", "tbl_Course", "tbl_TeacherSemester", "tbl_TeacherAssignment", "tbl_TeacherCourse" };
+	private static final String tables[] = { "tbl_Semester", "tbl_Assignment",
+			"tbl_Course", "tbl_TeacherSemester", "tbl_TeacherAssignment",
+			"tbl_TeacherCourse" };
 	private static final String tableCreatorString[] = {
 			"CREATE TABLE IF NOT EXISTS tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);",
 			"CREATE TABLE IF NOT EXISTS tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT);",
@@ -50,83 +52,55 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.add_menu, menu);
-		return true;
+		if (role == "Student") {
+			getMenuInflater().inflate(R.menu.add_menu, menu);
+			return true;
+		} else {
+			getMenuInflater().inflate(R.menu.add_menu_teacher, menu);
+			return true;
+		}
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent adds;
-		if (role == "Student") {
-			switch (item.getItemId()) {
-			case R.id.add_assignment:
-				adds = new Intent(this, AddAssignmentActivity.class);
+		switch (item.getItemId()) {
+		case R.id.add_assignment:
+			adds = new Intent(this, AddAssignmentActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.add_course:
+			if (role == "Student") {
+				adds = new Intent(this, AddCourseActivity.class);
 				startActivity(adds);
-				return true;
-			case R.id.add_course:
-				if (role == "Student") {
-					adds = new Intent(this, AddCourseActivity.class);
-					startActivity(adds);
-				} else if (role == "Teacher") {
-					adds = new Intent(this, AddTeacherCourseActivity.class);
-					startActivity(adds);
-				}
-				return true;
-			case R.id.add_semester:
-				adds = new Intent(this, AddSemesterActivity.class);
+			} else if (role == "Teacher") {
+				adds = new Intent(this, AddTeacherCourseActivity.class);
 				startActivity(adds);
-				return true;
-			case R.id.show_semesters:
-				adds = new Intent(this, ShowSemestersActivity.class);
-				startActivity(adds);
-				return true;
-			case R.id.show_courses:
-				adds = new Intent(this, ShowCoursesActivity.class);
-				startActivity(adds);
-				return true;
-			case R.id.show_devtools:
-				adds = new Intent(this, DevTools.class);
-				startActivity(adds);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
 			}
-		} else {
-			switch (item.getItemId()) {
-			case R.id.add_assignment:
-				adds = new Intent(this, AddAssignmentActivity.class);
-				startActivity(adds);
-				return true;
-			case R.id.add_course:
-				if (role == "Student") {
-					adds = new Intent(this, AddCourseActivity.class);
-					startActivity(adds);
-				} else if (role == "Teacher") {
-					adds = new Intent(this, AddTeacherCourseActivity.class);
-					startActivity(adds);
-				}
-				return true;
-			case R.id.add_semester:
-				adds = new Intent(this, AddSemesterActivity.class);
-				startActivity(adds);
-				return true;
-			case R.id.show_semesters:
-				adds = new Intent(this, ShowSemestersActivity.class);
-				startActivity(adds);
-				return true;
-			case R.id.show_teacher_assignments:
-				adds = new Intent(this, ShowCoursesActivity.class);
-				startActivity(adds);
-				return true;
-			case R.id.show_devtools:
-				adds = new Intent(this, DevTools.class);
-				startActivity(adds);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-			}
+			return true;
+		case R.id.add_semester:
+			adds = new Intent(this, AddSemesterActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_semesters:
+			adds = new Intent(this, ShowSemestersActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_courses:
+			adds = new Intent(this, ShowCoursesActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_teacher_assignments:
+			adds = new Intent(this, ShowTeacherAssignmentsActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_devtools:
+			adds = new Intent(this, DevTools.class);
+			startActivity(adds);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-
 	}
 
 	// To be removed before final deployment

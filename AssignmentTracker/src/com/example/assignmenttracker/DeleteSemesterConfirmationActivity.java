@@ -56,29 +56,60 @@ public class DeleteSemesterConfirmationActivity extends ActionBarActivity {
 			tv_ContinueNotice.setText("Are you sure you want to continue?");
 
 			SQLiteDatabase db = MainActivity.db.getReadableDatabase();
-			Cursor c = db.query("tbl_Course",
-					new String[] { "CourseCode, CourseName" },
-					"semesterDetails ='" + passedFromShowSemesterListSelection
-							+ "'", null, null, null, null);
-			while (c.moveToNext()) {
-				semCourseCodes.add(c.getString(0));
-				semCourseNames.add(c.getString(1));
+			if (MainActivity.role == "Student") {
+				Cursor c = db.query("tbl_Course",
+						new String[] { "CourseCode, CourseName" },
+						"semesterDetails ='"
+								+ passedFromShowSemesterListSelection + "'",
+						null, null, null, null);
+				while (c.moveToNext()) {
+					semCourseCodes.add(c.getString(0));
+					semCourseNames.add(c.getString(1));
 
-				// print courseCode and courseName on one line
-				tv_displaySemContents.append("\t" + c.getString(0) + ": "
-						+ c.getString(1) + "\n");
-				Cursor c2 = db.query("tbl_Assignment",
-						new String[] { "assignmentTitle" },
-						"assignmentCourse ='" + c.getString(1) + "'", null,
-						null, null, null);
-				// print assignments under one course below the courseCode/Name
-				// line
-				while (c2.moveToNext()) {
-					semCourseAssignments.add(c2.getString(0));
-					tv_displaySemContents.append("\t\t" + c2.getString(0)
-							+ "\n");
+					// print courseCode and courseName on one line
+					tv_displaySemContents.append("\t" + c.getString(0) + ": "
+							+ c.getString(1) + "\n");
+					Cursor c2 = db.query("tbl_Assignment",
+							new String[] { "assignmentTitle" },
+							"assignmentCourse ='" + c.getString(1) + "'", null,
+							null, null, null);
+					// print assignments under one course below the
+					// courseCode/Name
+					// line
+					while (c2.moveToNext()) {
+						semCourseAssignments.add(c2.getString(0));
+						tv_displaySemContents.append("\t\t" + c2.getString(0)
+								+ "\n");
+					}
+					tv_displaySemContents.append("\n");
 				}
-				tv_displaySemContents.append("\n");
+			} else { // role == "Teacher"
+				Cursor c = db.query("tbl_TeacherCourse",
+						new String[] { "CourseCode, CourseName" },
+						"semesterDetails ='"
+								+ passedFromShowSemesterListSelection + "'",
+						null, null, null, null);
+				while (c.moveToNext()) {
+					semCourseCodes.add(c.getString(0));
+					semCourseNames.add(c.getString(1));
+
+					// print courseCode and courseName on one line
+					tv_displaySemContents.append("\t" + c.getString(0) + ": "
+							+ c.getString(1) + "\n");
+					Cursor c2 = db.query("tbl_TeacherAssignment",
+							new String[] { "assignmentTitle" },
+							"assignmentCourse ='" + c.getString(1) + "'", null,
+							null, null, null);
+					// print assignments under one course below the
+					// courseCode/Name
+					// line
+					while (c2.moveToNext()) {
+						semCourseAssignments.add(c2.getString(0));
+						tv_displaySemContents.append("\t\t" + c2.getString(0)
+								+ "\n");
+					}
+					tv_displaySemContents.append("\n");
+				}
 			}
 
 			// for (int line = 0; line < semCourseCodes.size(); line++){
@@ -106,7 +137,7 @@ public class DeleteSemesterConfirmationActivity extends ActionBarActivity {
 
 			final Button btnCancelDeleteSemester = (Button) findViewById(R.id.btn_cancelDeleteSem);
 			final Button btnConfirmDeleteSemester = (Button) findViewById(R.id.btn_deleteSem);
-			
+
 			btnCancelDeleteSemester
 					.setOnClickListener(new View.OnClickListener() {
 
@@ -119,31 +150,62 @@ public class DeleteSemesterConfirmationActivity extends ActionBarActivity {
 						}
 
 					});
-			
-			btnConfirmDeleteSemester.setOnClickListener(new View.OnClickListener() {
 
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					//db.deleteRecord("tbl_Semester", "semesterNo" , semesterNo);
-					DatabaseManager db = new DatabaseManager(DeleteSemesterConfirmationActivity.this);
-					
-					// delete all assignments from selected semester
-					for (int recordNum=0; recordNum<semCourseNames.size(); recordNum++){
-						db.deleteRecord("tbl_Assignment", "assignmentCourse" , semCourseNames.get(recordNum));
-					}
-					
-					// delete all courses from selected semester
-					for (int recordNum=0; recordNum<semCourseNames.size(); recordNum++){
-						db.deleteRecord("tbl_Course", "semesterDetails" , passedFromShowSemesterListSelection);
-					}
-					// delete semester
-					db.deleteRecord("tbl_Semester", "semesterNo", semesterNo);
-					
-					AlertDialog helpDialog = helpBuilder.create();
-		 		      helpDialog.show();
-				}
-				
-			});
+			btnConfirmDeleteSemester
+					.setOnClickListener(new View.OnClickListener() {
+
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							// db.deleteRecord("tbl_Semester", "semesterNo" ,
+							// semesterNo);
+							DatabaseManager db = new DatabaseManager(
+									DeleteSemesterConfirmationActivity.this);
+							if (MainActivity.role == "Student") {
+
+								// delete all assignments from selected semester
+								for (int recordNum = 0; recordNum < semCourseNames
+										.size(); recordNum++) {
+									db.deleteRecord("tbl_Assignment",
+											"assignmentCourse",
+											semCourseNames.get(recordNum));
+								}
+
+								// delete all courses from selected semester
+								for (int recordNum = 0; recordNum < semCourseNames
+										.size(); recordNum++) {
+									db.deleteRecord("tbl_Course",
+											"semesterDetails",
+											passedFromShowSemesterListSelection);
+								}
+								// delete semester
+								db.deleteRecord("tbl_Semester", "semesterNo",
+										semesterNo);
+							} else { // role == "Teacher"
+								// delete all assignments from selected semester
+								for (int recordNum = 0; recordNum < semCourseNames
+										.size(); recordNum++) {
+									db.deleteRecord("tbl_TeacherAssignment",
+											"assignmentCourse",
+											semCourseNames.get(recordNum));
+								}
+
+								// delete all courses from selected semester
+								for (int recordNum = 0; recordNum < semCourseNames
+										.size(); recordNum++) {
+									db.deleteRecord("tbl_TeacherCourse",
+											"semesterDetails",
+											passedFromShowSemesterListSelection);
+								}
+								// delete semester
+								db.deleteRecord("tbl_TeacherSemester",
+										"semesterNo", semesterNo);
+							}
+
+							AlertDialog helpDialog = helpBuilder.create();
+							helpDialog.show();
+						}
+
+					});
 			// final Button btnUpdateSemester = (Button)
 			// findViewById(R.id.btn_updateSemester);
 			// btnUpdateSemester.setOnClickListener(new View.OnClickListener() {

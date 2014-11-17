@@ -36,70 +36,73 @@ public class AddSemesterActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	// Moved database and table creation to MainActivity, as creating from individual activities was causing issues for me -- Julian
+
+	// Moved database and table creation to MainActivity, as creating from
+	// individual activities was causing issues for me -- Julian
 	/**
-	private static final String tables[] = { "tbl_Semester" };
-	//
-	private static final String tableCreatorString[] = { "CREATE TABLE tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);" };
-	**/
-	
+	 * private static final String tables[] = { "tbl_Semester" }; // private
+	 * static final String tableCreatorString[] = {
+	 * "CREATE TABLE tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);"
+	 * };
+	 **/
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_semester);
 
-		// Moved database and table creation to MainActivity, as creating from individual activities was causing issues for me -- Julian
-		/** 
-		final DatabaseManager db = new DatabaseManager(this);
-		// db.createDatabase(getApplicationContext());
-		MainActivity.db.dbInitialize(tables, tableCreatorString);
-		**/
+		// Moved database and table creation to MainActivity, as creating from
+		// individual activities was causing issues for me -- Julian
+		/**
+		 * final DatabaseManager db = new DatabaseManager(this); //
+		 * db.createDatabase(getApplicationContext());
+		 * MainActivity.db.dbInitialize(tables, tableCreatorString);
+		 **/
 		final String fields[] = { "semesterDetails" };
 		final String record[] = new String[1];
 		// Handle Save button
 		final Button btnSaveStudent = (Button) findViewById(R.id.btn_updateSemester);
 		final EditText semesterName = (EditText) findViewById(R.id.semesterDetails);
 		final TextView display = (TextView) findViewById(R.id.TextViewDisplay);
-        //Code for popup
-        final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this); 
-				   //new AlertDialog.Builder(this);
+		// Code for popup
+		final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+		// new AlertDialog.Builder(this);
 		helpBuilder.setTitle("ERROR!");
 		helpBuilder.setMessage("Field cannot be empty, Try again");
 		helpBuilder.setNegativeButton("Ok",
-		  new DialogInterface.OnClickListener() {
-		
-		   public void onClick(DialogInterface dialog, int which) {
-		    // Do nothing but close the dialog
-			   
-		   }
-		  });
-		//Code for pop up end
-        //Code for popup
-        final AlertDialog.Builder helpBuilder1 = new AlertDialog.Builder(this); 
-				   //new AlertDialog.Builder(this);
-        helpBuilder1.setTitle("SUCCESS");
-        helpBuilder1.setMessage("Semester Added");
-        helpBuilder1.setNegativeButton("Ok",
-		  new DialogInterface.OnClickListener() {
-		
-		   public void onClick(DialogInterface dialog, int which) {
-		    // Do nothing but close the dialog
-					Intent intent = new Intent(AddSemesterActivity.this,
-	 						MainActivity.class);
-	 				startActivity(intent);
-		   }
-		  });
-		//Code for pop up end
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						// Do nothing but close the dialog
+
+					}
+				});
+		// Code for pop up end
+		// Code for popup
+		final AlertDialog.Builder helpBuilder1 = new AlertDialog.Builder(this);
+		// new AlertDialog.Builder(this);
+		helpBuilder1.setTitle("SUCCESS");
+		helpBuilder1.setMessage("Semester Added");
+		helpBuilder1.setNegativeButton("Ok",
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						// Do nothing but close the dialog
+						Intent intent = new Intent(AddSemesterActivity.this,
+								MainActivity.class);
+						startActivity(intent);
+					}
+				});
+		// Code for pop up end
 		//
 		btnSaveStudent.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (semesterName.getText().toString().matches("")) {
-		 		      // Show the popup
-		 		      AlertDialog helpDialog = helpBuilder.create();
-		 		      helpDialog.show();
-				    return;
-				}else{
+					// Show the popup
+					AlertDialog helpDialog = helpBuilder.create();
+					helpDialog.show();
+					return;
+				} else {
 					record[0] = semesterName.getText().toString();
 
 					// Log.d("Name: ", record[1]);
@@ -108,12 +111,16 @@ public class AddSemesterActivity extends ActionBarActivity {
 					for (int i = 0; i < record.length; i++)
 						values.put(fields[i], record[i]);
 					// add the row to the database
-					MainActivity.db.addRecord(values, "tbl_Semester", fields, record);
-	 		      AlertDialog helpDialog = helpBuilder1.create();
-	 		      helpDialog.show();
+					if (MainActivity.role == "Student") {
+						MainActivity.db.addRecord(values, "tbl_Semester",
+								fields, record);
+					} else { // role == "Teacher"
+						MainActivity.db.addRecord(values,
+								"tbl_TeacherSemester", fields, record);
+					}
+					AlertDialog helpDialog = helpBuilder1.create();
+					helpDialog.show();
 				}
-
-		
 
 			}
 		});

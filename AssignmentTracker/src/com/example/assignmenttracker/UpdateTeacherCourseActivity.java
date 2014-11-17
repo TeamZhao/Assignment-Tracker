@@ -62,8 +62,8 @@ public class UpdateTeacherCourseActivity extends ActionBarActivity {
 		
 		
 		Cursor s = db
-				.query("tbl_Semester", new String[]{"semesterDetails"},
-						null, null, null, null, null); // change this to tbl_TeacherSemester
+				.query("tbl_TeacherSemester", new String[]{"semesterDetails"},
+						null, null, null, null, null); // change this to 
 		ArrayList<String> values = new ArrayList<String>();
 		
 		while (s.moveToNext()) {		

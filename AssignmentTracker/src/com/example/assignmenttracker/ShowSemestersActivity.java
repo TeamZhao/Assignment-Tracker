@@ -35,52 +35,73 @@ public class ShowSemestersActivity extends ActionBarActivity {
 	public String semesterNo;
 	public String semesterDetails;
 	ArrayList<String> values = new ArrayList<String>();
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_semesters);
-		
+
 		semListView = (ListView) findViewById(R.id.listView_show_semesters);
 		registerForContextMenu(semListView);
-		
+
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
-		Cursor c = db.query("tbl_Semester", new String[] { "semesterNo, semesterDetails" },
-						null,
-						null, null, null, null);
-		
+		Cursor c;
+		if (MainActivity.role == "Student") {
+			c = db.query("tbl_Semester",
+					new String[] { "semesterNo, semesterDetails" }, null, null,
+					null, null, null);
+		} else { // role == "Teacher"
+			c = db.query("tbl_TeacherSemester",
+					new String[] { "semesterNo, semesterDetails" }, null, null,
+					null, null, null);
+		}
+
 		final ArrayList<String> semesterNoArray = new ArrayList<String>();
-		while (c.moveToNext()){
+		while (c.moveToNext()) {
 			semesterNoArray.add(c.getString(0));
 			values.add(c.getString(1));
 		}
 
-		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+		ArrayAdapter adapter = new ArrayAdapter(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1, values);
 		semListView.setAdapter(adapter);
-		
+
 		semListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position,
-					long id) {
-				 final String item = (String) parent.getItemAtPosition(position);//value of selected list item as string
-					contentOfSelectedSemListItem = item;
-					semesterDetails = values.get(position);
-				Intent intent = new Intent(ShowSemestersActivity.this, ShowCoursesActivity.class);
-				intent.putExtra("semesterDetails", semesterDetails); 
-				startActivity(intent);			
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				final String item = (String) parent.getItemAtPosition(position);// value
+																				// of
+																				// selected
+																				// list
+																				// item
+																				// as
+																				// string
+				contentOfSelectedSemListItem = item;
+				semesterDetails = values.get(position);
+				Intent intent = new Intent(ShowSemestersActivity.this,
+						ShowCoursesActivity.class);
+				intent.putExtra("semesterDetails", semesterDetails);
+				startActivity(intent);
 			}
-		  
+
 		});
-		
+
 		semListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-			
+
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				 final String item = (String) parent.getItemAtPosition(position);//value of selected list item as string
-					contentOfSelectedSemListItem = item;
-					semesterNo = semesterNoArray.get(position);
+				final String item = (String) parent.getItemAtPosition(position);// value
+																				// of
+																				// selected
+																				// list
+																				// item
+																				// as
+																				// string
+				contentOfSelectedSemListItem = item;
+				semesterNo = semesterNoArray.get(position);
 				return false;
 			}
 		});
@@ -92,7 +113,7 @@ public class ShowSemestersActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.show_semesters, menu);
 		return true;
 	}
-	
+
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -108,19 +129,26 @@ public class ShowSemestersActivity extends ActionBarActivity {
 		case R.id.context_menu_update:
 			Intent intent = new Intent(this, UpdateSemesterActivity.class);
 
-			intent.putExtra("semesterNo", semesterNo); 
-			intent.putExtra("semesterDetails", contentOfSelectedSemListItem); // can you use this extra in
-													// the update activity to
-													// search for db record
-													// containing this value?
+			intent.putExtra("semesterNo", semesterNo);
+			intent.putExtra("semesterDetails", contentOfSelectedSemListItem); // can
+																				// you
+																				// use
+																				// this
+																				// extra
+																				// in
+			// the update activity to
+			// search for db record
+			// containing this value?
 			startActivity(intent);
 			return true;
 		case R.id.context_menu_delete:
 			// Code for popup
-			final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+			final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(
+					this);
 			// new AlertDialog.Builder(this);
 			helpBuilder.setTitle("Confirm Delete?");
-			helpBuilder.setMessage("Are you sure you want to delete the record?");
+			helpBuilder
+					.setMessage("Are you sure you want to delete the record?");
 			helpBuilder.setNegativeButton("No",
 					new DialogInterface.OnClickListener() {
 
@@ -131,21 +159,20 @@ public class ShowSemestersActivity extends ActionBarActivity {
 			helpBuilder.setPositiveButton("Yes",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							Intent intent = new Intent(ShowSemestersActivity.this, DeleteSemesterConfirmationActivity.class);
+							Intent intent = new Intent(
+									ShowSemestersActivity.this,
+									DeleteSemesterConfirmationActivity.class);
 
-							intent.putExtra("semesterNo", semesterNo); 
-							intent.putExtra("semesterDetails", contentOfSelectedSemListItem); // can you use this extra in
-																	// the update activity to
-																	// search for db record
-																	// containing this value?
+							intent.putExtra("semesterNo", semesterNo);
+							intent.putExtra("semesterDetails",
+									contentOfSelectedSemListItem); // can you
+																	// use this
+																	// extra in
+							// the update activity to
+							// search for db record
+							// containing this value?
 							startActivity(intent);
-											
-// code to delete only the semester						
-//							// Do nothing but close the dialog
-//							DatabaseManager db = new DatabaseManager(ShowSemestersActivity.this);
-//							db.deleteRecord("tbl_Semester", "semesterNo" , semesterNo);
-//							Intent intent = new Intent(ShowSemestersActivity.this, ShowSemestersActivity.class);
-//							startActivity(intent);
+
 						}
 					});
 			// Code for popup

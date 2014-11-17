@@ -99,8 +99,15 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		final Spinner courses = (Spinner) findViewById(R.id.assCourseSpinner);
 
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
-		Cursor c = db.query("tbl_Course", new String[] { "CourseName" }, null,
-				null, null, null, null);
+		Cursor c;
+		if (MainActivity.role == "Student") {
+			c = db.query("tbl_Course", new String[] { "CourseName" }, null,
+					null, null, null, null);
+		} else { // role == "Teacher"
+			c = db.query("tbl_TeacherCourse", new String[] { "CourseName" },
+					null, null, null, null, null);
+		}
+
 		String[] array_spinner = new String[c.getCount()];
 
 		int counter = 0;
@@ -198,8 +205,13 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					for (int i = 0; i < record.length; i++)
 						values.put(fields[i], record[i]);
 					// add the row to the database
-					MainActivity.db.addRecord(values, "tbl_Assignment", fields,
-							record);
+					if (MainActivity.role == "Student") {
+						MainActivity.db.addRecord(values, "tbl_Assignment",
+								fields, record);
+					} else { // role == "Teacher"
+						MainActivity.db.addRecord(values,
+								"tbl_TeacherAssignment", fields, record);
+					}
 					// MainActivity.db.close();
 					// NOTIFICATIONS CODE
 					Calendar calendar = selectedDueDate;
@@ -306,7 +318,9 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		startActivity(intent);
 	}
 
-	@SuppressLint("NewApi") //ignore API level 16 (builder.build requires 16) call because min sdk set to 14 
+	@SuppressLint("NewApi")
+	// ignore API level 16 (builder.build requires 16) call because min sdk set
+	// to 14
 	private Notification getNotification(String content, String title) {
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentTitle(title);

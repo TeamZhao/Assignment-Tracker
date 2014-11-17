@@ -55,8 +55,8 @@ public class AddTeacherCourseActivity extends Activity {
 
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
 		Cursor c = db
-				.query("tbl_Semester", new String[]{"semesterDetails"},
-						null, null, null, null, null); // change this to tbl_TeacherSemester
+				.query("tbl_TeacherSemester", new String[]{"semesterDetails"},
+						null, null, null, null, null);
 		String[] array_spinner = new String[c.getCount()];
 		
 		int counter=0;
