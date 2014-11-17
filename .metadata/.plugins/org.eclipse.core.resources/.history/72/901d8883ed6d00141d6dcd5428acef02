@@ -91,7 +91,7 @@ public class MainActivity extends Activity {
 			default:
 				return super.onOptionsItemSelected(item);
 			}
-		} else {
+		} else if (role == "Teacher") {
 			switch (item.getItemId()) {
 			case R.id.add_assignment:
 				adds = new Intent(this, AddAssignmentActivity.class);

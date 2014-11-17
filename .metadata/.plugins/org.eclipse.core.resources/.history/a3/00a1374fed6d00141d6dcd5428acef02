@@ -59,6 +59,5 @@
     <string name="title_activity_add_teacher_course">Add Course</string>
     <string name="title_activity_update_teacher_course">Update Course</string>
     <string name="title_activity_show_teacher_assignments">Assignments</string>
-    <string name="show_teacher_assignments">Show All Assignments</string>
 
 </resources>

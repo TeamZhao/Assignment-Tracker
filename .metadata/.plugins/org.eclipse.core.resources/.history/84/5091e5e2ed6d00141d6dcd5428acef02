@@ -35,41 +35,23 @@ public class AssignmentFragment extends ListFragment {
 		Map<String, Object> map = new HashMap<String, Object>();
 		// List table = MainActivity.db.getTable("tbl_Assignment");
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
-		if (MainActivity.role == "Student") {
-			Cursor c = db
-					.query("tbl_Assignment",
-							new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
-							"assignmentDueDate > datetime('now','localtime')",
-							null, null, null, null);
-			while (c.moveToNext()) {
+		Cursor c = db
+				.query("tbl_Assignment",
+						new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
+						"assignmentDueDate > datetime('now','localtime')",
+						null, null, null, null);
+		while (c.moveToNext()) {
 
-				map = new HashMap<String, Object>();
-				map.put("id", String.valueOf(c.getInt(0)));
-				map.put("title", c.getString(1));
-				map.put("progress", c.getString(2));
-				assMapList.add(map);
-				
-				AssignmentAdapter adapter = new AssignmentAdapter(this.getActivity(),
-						assMapList);
-				this.setListAdapter(adapter);
-			}
-		} else if (MainActivity.role == "Teacher") {
-			Cursor c = db
-					.query("tbl_Course",
-							new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
-							"assignmentDueDate > datetime('now','localtime')",
-							null, null, null, null);
-			while (c.moveToNext()) {
-
-				map = new HashMap<String, Object>();
-				map.put("id", String.valueOf(c.getInt(0)));
-				map.put("title", c.getString(1));
-				map.put("progress", c.getString(2));
-				assMapList.add(map);
-			}
+			map = new HashMap<String, Object>();
+			map.put("id", String.valueOf(c.getInt(0)));
+			map.put("title", c.getString(1));
+			map.put("progress", c.getString(2));
+			assMapList.add(map);
 		}
 
-		
+		AssignmentAdapter adapter = new AssignmentAdapter(this.getActivity(),
+				assMapList);
+		this.setListAdapter(adapter);
 
 	}
 

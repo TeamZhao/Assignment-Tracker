@@ -87,10 +87,6 @@
             android:name=".UpdateTeacherCourseActivity"
             android:label="@string/title_activity_update_teacher_course" >
         </activity>
-        <activity
-            android:name=".ShowTeacherAssignmentsActivity"
-            android:label="@string/title_activity_show_teacher_assignments" >
-        </activity>
     </application>
 
 </manifest>
