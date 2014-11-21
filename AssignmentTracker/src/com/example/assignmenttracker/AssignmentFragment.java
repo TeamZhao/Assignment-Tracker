@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,10 @@ public class AssignmentFragment extends ListFragment {
 	int cursorIterator;
 	boolean assignmentsExistForCourse;
 	ArrayList<String> associatedAssignments = new ArrayList<String>();
+	
+	HashMap<String, List<String>> assignmentCourses;
+	List<String> coursesList;
+	ExpandableListView assignmentExpView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class AssignmentFragment extends ListFragment {
 		// List table = MainActivity.db.getTable("tbl_Assignment");
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
 		if (MainActivity.role == "Student") {
+			
 			Cursor c = db
 					.query("tbl_Assignment",
 							new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
@@ -56,8 +62,9 @@ public class AssignmentFragment extends ListFragment {
 			}
 
 			// Fetch ArrayList of Courses to later build a Collapsable ListView
+			// Take out and use method getCourseList instead
 			ArrayList<String> courseValues = new ArrayList<String>();
-			Cursor cCourse = db.query("tbl_TeacherCourse",
+			Cursor cCourse = db.query("tbl_Course",
 					new String[] { "courseNo, courseCode, courseName" }, null,
 						null, null, null, null);
 			while (c.moveToNext()) {
@@ -270,4 +277,41 @@ public class AssignmentFragment extends ListFragment {
 		}
 
 	}
+
+	public ArrayList<String> getAllCourseCodes() {
+		ArrayList<String> courseList = new ArrayList<String>();
+		Cursor c = db.query("tbl_Course", new String[] { "courseNo, courseCode, courseName" }, null,
+				null, null, null, null); // change to tbl_TeacherCourse		
+		while (c.moveToNext()) {
+			courseList.add(c.getString(1));
+		}
+		return courseList;
+	}
+	
+	public HashMap<String, List<String>> getAssignmentInfo() {
+
+		HashMap<String, List<String>> courseAssignments = new HashMap<String, List<String>>();
+		// Write code to retrieve list of 
+		ArrayList<String> courseList = getAllCourseCodes();
+		Cursor cAssignments = db.query("tbl_Assignment",
+				new String[] { "assignmentTitle", "assignmentCourse" }, null, null, null, null, null);		
+
+		//Add Assignment pertaining to each course here in HashMap - Prep for ExpView
+		for (String course : courseList)
+		{
+			int j = 0;
+			ArrayList<String> groupedAssignments = new ArrayList<String>();
+			while (cAssignments.moveToNext()) {
+				if(cAssignments.getString(1).equalsIgnoreCase(course))
+				{
+					groupedAssignments.add(cAssignments.getString(0));
+				}
+				j++;
+			}	
+			courseAssignments.put(course, groupedAssignments);
+		}
+		
+		return courseAssignments;
+	}
+		
 }
