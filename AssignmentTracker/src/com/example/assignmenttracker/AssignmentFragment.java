@@ -55,6 +55,15 @@ public class AssignmentFragment extends ListFragment {
 				assMapList.add(map);
 			}
 
+			// Fetch ArrayList of Courses to later build a Collapsable ListView
+			ArrayList<String> courseValues = new ArrayList<String>();
+			Cursor cCourse = db.query("tbl_TeacherCourse",
+					new String[] { "courseNo, courseCode, courseName" }, null,
+						null, null, null, null);
+			while (c.moveToNext()) {
+				courseValues.add(cCourse.getString(1));
+			}
+			
 			AssignmentAdapter adapter = new AssignmentAdapter(
 					this.getActivity(), assMapList);
 			this.setListAdapter(adapter);
