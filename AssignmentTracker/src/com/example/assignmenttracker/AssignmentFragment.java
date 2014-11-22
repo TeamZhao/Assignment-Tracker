@@ -310,10 +310,32 @@ public class AssignmentFragment extends ListFragment  {
 		HashMap<String, List<String>> courseAssignments = new HashMap<String, List<String>>();
 		// Write code to retrieve list of 
 		ArrayList<String> courseList = getAllCourseCodes();
-		Cursor cAssignments = db.query("tbl_Assignment",
-				new String[] { "assignmentTitle", "assignmentCourse" }, null, null, null, null, null);		
+		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+		
+		if(getActivity().getIntent().getExtras()!=null)
+		{
+		
+			String showCourse =(getActivity().getIntent().getExtras().getString("CourseCode"));	
+			Cursor cAssignments = db
+					.query("tbl_Assignment",
+							new String[] { "assignmentTitle, assignmentCourse" },
+							"assignmentDueDate > datetime('now','localtime') and assignmentCourse = \"" + showCourse + "\"",
+							null, null, null, null);
 
-		//Add Assignment pertaining to each course here in HashMap - Prep for ExpView
+				ArrayList<String> groupedAssignments = new ArrayList<String>();
+				while (cAssignments.moveToNext()) {
+					if(cAssignments.getString(1).equalsIgnoreCase(showCourse))
+					{
+						groupedAssignments.add(cAssignments.getString(0));
+					}
+				}	
+				courseAssignments.put(showCourse, groupedAssignments);
+				cAssignments.moveToPosition(-1);
+
+		}
+		else {
+		Cursor cAssignments = db.query("tbl_Assignment",
+				new String[] { "assignmentTitle", "assignmentCourse" },null, null, null, null, null);		
 		for (String course : courseList)
 		{
 			int j = 0;
@@ -328,7 +350,9 @@ public class AssignmentFragment extends ListFragment  {
 			courseAssignments.put(course, groupedAssignments);
 			cAssignments.moveToPosition(-1);
 		}
-		cAssignments.close();
+		}
+		//Add Assignment pertaining to each course here in HashMap - Prep for ExpView
+		//cAssignments.close();
 		return courseAssignments;
 	}
 }

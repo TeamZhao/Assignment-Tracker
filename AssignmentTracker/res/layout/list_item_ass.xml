@@ -15,18 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-
-        <!--   
-	    <ExpandableListView
-		    android:id="@+id/assignmentExpView"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    android:divider="#0000A0"
-		    android:dividerHeight="0.5dp" >
-		</ExpandableListView>
-        -->             
-        
+              
         <TextView
             android:id="@+id/title_ass"
             android:layout_width="wrap_content"

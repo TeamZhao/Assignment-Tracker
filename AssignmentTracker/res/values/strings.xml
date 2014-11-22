@@ -60,5 +60,6 @@
     <string name="title_activity_update_teacher_course">Update Course</string>
     <string name="title_activity_show_teacher_assignments">Assignments</string>
     <string name="show_teacher_assignments">Show All Assignments</string>
+    <string name="title_activity_show_course_assignments">Assignments For Selected Course</string>
 
 </resources>

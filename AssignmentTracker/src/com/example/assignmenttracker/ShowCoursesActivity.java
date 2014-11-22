@@ -90,28 +90,19 @@ public class ShowCoursesActivity extends ActionBarActivity {
 					}
 				});
 
-		courseListView.setOnItemClickListener(new OnItemClickListener() { // shows
-																			// toast
-																			// on
-																			// single
-																			// tap
-
+		courseListView.setOnItemClickListener(new OnItemClickListener() { 
 					@Override
 					public void onItemClick(AdapterView<?> parent, View v,
 							int position, long id) {
 						final String item = (String) parent
-								.getItemAtPosition(position);// value
-																// of
-																// selected
-																// list
-																// item
-																// as
-																// string
+								.getItemAtPosition(position);
 						Toast.makeText(getApplicationContext(),
 								"Your Choice : " + item, Toast.LENGTH_SHORT)
 								.show();
 						contentOfSelectedCourseListItem = item;
-
+						Intent intentShowAssignments = new Intent(getApplicationContext(), MainActivity.class);
+						intentShowAssignments.putExtra("CourseCode", item);
+						startActivity(intentShowAssignments);
 					}
 
 				});

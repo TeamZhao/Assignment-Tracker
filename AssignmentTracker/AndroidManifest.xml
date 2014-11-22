@@ -55,6 +55,10 @@
             android:label="@string/title_activity_update_semester" >
         </activity>
         <activity
+            android:name=".ShowCourseAssignmentsActivity"
+            android:label="@string/title_activity_show_course_assignments" >
+        </activity>              
+        <activity
             android:name=".DevTools"
             android:label="@string/title_activity_dev_tools" >
         </activity>
