@@ -47,13 +47,20 @@ public class ShowCoursesActivity extends ActionBarActivity {
 
 		Intent semIntent = getIntent();
 		pickSemester = semIntent.getStringExtra("semesterDetails");
-		if( pickSemester != null){
-			pickSemester = "semesterDetails = \""+semIntent.getStringExtra("semesterDetails")+ "\"";
+		if (pickSemester != null) {
+			pickSemester = "semesterDetails = \""
+					+ semIntent.getStringExtra("semesterDetails") + "\"";
 		}
-		
-		Cursor c = db.query("tbl_Course",
-				new String[] { "CourseCode, CourseName" }, pickSemester , null, null,
-				null, null);
+		Cursor c;
+		if (MainActivity.role == "Student") {
+			c = db.query("tbl_Course",
+					new String[] { "CourseCode, CourseName" }, pickSemester,
+					null, null, null, null);
+		} else { // role == "Teacher"
+			c = db.query("tbl_TeacherCourse",
+					new String[] { "CourseCode, CourseName" }, pickSemester,
+					null, null, null, null);
+		}
 
 		ArrayList<String> values = new ArrayList<String>();
 		while (c.moveToNext()) {
@@ -90,22 +97,21 @@ public class ShowCoursesActivity extends ActionBarActivity {
 					}
 				});
 
-		courseListView.setOnItemClickListener(new OnItemClickListener() { 
-					@Override
-					public void onItemClick(AdapterView<?> parent, View v,
-							int position, long id) {
-						final String item = (String) parent
-								.getItemAtPosition(position);
-						Toast.makeText(getApplicationContext(),
-								"Your Choice : " + item, Toast.LENGTH_SHORT)
-								.show();
-						contentOfSelectedCourseListItem = item;
-						Intent intentShowAssignments = new Intent(getApplicationContext(), MainActivity.class);
-						intentShowAssignments.putExtra("CourseCode", item);
-						startActivity(intentShowAssignments);
-					}
+		courseListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				final String item = (String) parent.getItemAtPosition(position);
+				Toast.makeText(getApplicationContext(),
+						"Your Choice : " + item, Toast.LENGTH_SHORT).show();
+				contentOfSelectedCourseListItem = item;
+				Intent intentShowAssignments = new Intent(
+						getApplicationContext(), MainActivity.class);
+				intentShowAssignments.putExtra("CourseCode", item);
+				startActivity(intentShowAssignments);
+			}
 
-				});
+		});
 	}
 
 	@Override
@@ -151,90 +157,186 @@ public class ShowCoursesActivity extends ActionBarActivity {
 			return true;
 		case R.id.context_menu_delete:
 
-			Cursor cursorAllAssignments = db.query("tbl_Assignment",
-					new String[] { "assignmentTitle", "assignmentCourse" },
-					null, null, null, null, null);
-			cursorIterator = 0;
-			assignmentsExistForCourse = false;
+			if (MainActivity.role == "Student") {
+				Cursor cursorAllAssignments = db.query("tbl_Assignment",
+						new String[] { "assignmentTitle", "assignmentCourse" },
+						null, null, null, null, null);
+				cursorIterator = 0;
+				assignmentsExistForCourse = false;
 
-			while (cursorAllAssignments.moveToNext()) {
-				if (cursorAllAssignments.getString(1).equalsIgnoreCase(
-						this.contentOfSelectedCourseListItem)) {
-					associatedAssignments
-							.add(cursorAllAssignments.getString(0));
-					assignmentsExistForCourse = true;
-					cursorIterator++;
+				while (cursorAllAssignments.moveToNext()) {
+					if (cursorAllAssignments.getString(1).equalsIgnoreCase(
+							this.contentOfSelectedCourseListItem)) {
+						associatedAssignments.add(cursorAllAssignments
+								.getString(0));
+						assignmentsExistForCourse = true;
+						cursorIterator++;
+					}
 				}
-			}
 
-			if (assignmentsExistForCourse) {
-				AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
-				helpBuilder.setTitle("Delete Course?");
-				helpBuilder
-						.setMessage("There are "
-								+ cursorIterator
-								+ " existing Assignments for this course. Delete the course and its assignments?");
-				helpBuilder.setPositiveButton("Yes",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// Delete Assignment Records
-								for (int i = 0; cursorIterator > i; i++) {
-									db.delete(
-											"tbl_Assignment",
-											"assignmentTitle=\'"
-													+ String.valueOf(associatedAssignments
-															.get(i)) + "\'",
-											null);
+				if (assignmentsExistForCourse) {
+					AlertDialog.Builder helpBuilder = new AlertDialog.Builder(
+							this);
+					helpBuilder.setTitle("Delete Course?");
+					helpBuilder
+							.setMessage("There are "
+									+ cursorIterator
+									+ " existing Assignments for this course. Delete the course and its assignments?");
+					helpBuilder.setPositiveButton("Yes",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Delete Assignment Records
+									for (int i = 0; cursorIterator > i; i++) {
+										db.delete(
+												"tbl_Assignment",
+												"assignmentTitle=\'"
+														+ String.valueOf(associatedAssignments
+																.get(i)) + "\'",
+												null);
+									}
+									db.delete("tbl_Course", "CourseCode=\'"
+											+ contentOfSelectedCourseListItem
+											+ "\'", null);
+									Toast.makeText(
+											getApplicationContext(),
+											"Course "
+													+ contentOfSelectedCourseListItem
+													+ " Deleted",
+											Toast.LENGTH_SHORT).show();
 								}
-								db.delete("tbl_Course", "CourseCode=\'"
-										+ contentOfSelectedCourseListItem
-										+ "\'", null);
-								Toast.makeText(
-										getApplicationContext(),
-										"Course "
-												+ contentOfSelectedCourseListItem
-												+ " Deleted",
-										Toast.LENGTH_SHORT).show();
-							}
-						}).setNegativeButton("No",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// Do nothing
-							}
-						});
-				AlertDialog helpDialog = helpBuilder.create();
-				helpDialog.show();
-			} else {
-				AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
-				helpBuilder.setTitle("Delete Course?");
-				helpBuilder
-						.setMessage("Are you sure you want to delete this course?");
-				helpBuilder.setPositiveButton("Yes",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// Delete Course Record
-								db.delete("tbl_Course", "CourseCode=\'"
-										+ contentOfSelectedCourseListItem
-										+ "\'", null);
-								Toast.makeText(
-										getApplicationContext(),
-										"Course "
-												+ contentOfSelectedCourseListItem
-												+ " Deleted",
-										Toast.LENGTH_SHORT).show();
-							}
-						}).setNegativeButton("No",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// Do nothing
-							}
-						});
-				AlertDialog helpDialog = helpBuilder.create();
-				helpDialog.show();
+							}).setNegativeButton("No",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Do nothing
+								}
+							});
+					AlertDialog helpDialog = helpBuilder.create();
+					helpDialog.show();
+				} else {
+					AlertDialog.Builder helpBuilder = new AlertDialog.Builder(
+							this);
+					helpBuilder.setTitle("Delete Course?");
+					helpBuilder
+							.setMessage("Are you sure you want to delete this course?");
+					helpBuilder.setPositiveButton("Yes",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Delete Course Record
+									db.delete("tbl_Course", "CourseCode=\'"
+											+ contentOfSelectedCourseListItem
+											+ "\'", null);
+									Toast.makeText(
+											getApplicationContext(),
+											"Course "
+													+ contentOfSelectedCourseListItem
+													+ " Deleted",
+											Toast.LENGTH_SHORT).show();
+								}
+							}).setNegativeButton("No",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Do nothing
+								}
+							});
+					AlertDialog helpDialog = helpBuilder.create();
+					helpDialog.show();
+				}
+			} else { // role == "Teacher"
+				Cursor cursorAllAssignments = db.query("tbl_TeacherAssignment",
+						new String[] { "assignmentTitle", "assignmentCourse" },
+						null, null, null, null, null);
+				cursorIterator = 0;
+				assignmentsExistForCourse = false;
+
+				while (cursorAllAssignments.moveToNext()) {
+					if (cursorAllAssignments.getString(1).equalsIgnoreCase(
+							this.contentOfSelectedCourseListItem)) {
+						associatedAssignments.add(cursorAllAssignments
+								.getString(0));
+						assignmentsExistForCourse = true;
+						cursorIterator++;
+					}
+				}
+
+				if (assignmentsExistForCourse) {
+					AlertDialog.Builder helpBuilder = new AlertDialog.Builder(
+							this);
+					helpBuilder.setTitle("Delete Course?");
+					helpBuilder
+							.setMessage("There are "
+									+ cursorIterator
+									+ " existing Assignments for this course. Delete the course and its assignments?");
+					helpBuilder.setPositiveButton("Yes",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Delete Assignment Records
+									for (int i = 0; cursorIterator > i; i++) {
+										db.delete(
+												"tbl_TeacherAssignment",
+												"assignmentTitle=\'"
+														+ String.valueOf(associatedAssignments
+																.get(i)) + "\'",
+												null);
+									}
+									db.delete(
+											"tbl_TeacherCourse",
+											"CourseCode=\'"
+													+ contentOfSelectedCourseListItem
+													+ "\'", null);
+									Toast.makeText(
+											getApplicationContext(),
+											"Course "
+													+ contentOfSelectedCourseListItem
+													+ " Deleted",
+											Toast.LENGTH_SHORT).show();
+								}
+							}).setNegativeButton("No",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Do nothing
+								}
+							});
+					AlertDialog helpDialog = helpBuilder.create();
+					helpDialog.show();
+				} else {
+					AlertDialog.Builder helpBuilder = new AlertDialog.Builder(
+							this);
+					helpBuilder.setTitle("Delete Course?");
+					helpBuilder
+							.setMessage("Are you sure you want to delete this course?");
+					helpBuilder.setPositiveButton("Yes",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Delete Course Record
+									db.delete(
+											"tbl_TeacherCourse",
+											"CourseCode=\'"
+													+ contentOfSelectedCourseListItem
+													+ "\'", null);
+									Toast.makeText(
+											getApplicationContext(),
+											"Course "
+													+ contentOfSelectedCourseListItem
+													+ " Deleted",
+											Toast.LENGTH_SHORT).show();
+								}
+							}).setNegativeButton("No",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// Do nothing
+								}
+							});
+					AlertDialog helpDialog = helpBuilder.create();
+					helpDialog.show();
+				}
 			}
 			this.recreate();
 			return true;
