@@ -41,12 +41,6 @@ public class AddCourseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_course);
 
-		/**
-		 * final DatabaseManager db = new DatabaseManager(this); //
-		 * db.createDatabase(getApplicationContext());
-		 * MainActivity.db.dbInitialize(tablesAssignment,
-		 * tableCreatorStringAss);
-		 **/
 		final String fields[] = { "CourseCode", "CourseName", "semesterDetails" , "Professor",
 				"Description" };
 		final String record[] = new String[5];

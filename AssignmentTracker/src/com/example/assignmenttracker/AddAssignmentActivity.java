@@ -59,14 +59,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	// Moved database and table creation to MainActivity, as creating from
-	// individual activities was causing issues for me --Julian
-	/**
-	 * private static final String tablesAssignment[] = { "tbl_Assignment" }; //
-	 * private static final String tableCreatorStringAss[] = {
-	 * "CREATE TABLE tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT , assignmentDueDate TEXT , assignmentProgress TEXT);"
-	 * };
-	 **/
+	
 	private static final int DAY_IN_MILLISECS = 86400000;
 
 	// Date selectedDueDate = new Date();

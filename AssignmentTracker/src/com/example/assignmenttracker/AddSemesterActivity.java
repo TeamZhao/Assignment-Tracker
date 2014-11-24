@@ -37,14 +37,6 @@ public class AddSemesterActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	// Moved database and table creation to MainActivity, as creating from
-	// individual activities was causing issues for me -- Julian
-	/**
-	 * private static final String tables[] = { "tbl_Semester" }; // private
-	 * static final String tableCreatorString[] = {
-	 * "CREATE TABLE tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);"
-	 * };
-	 **/
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
