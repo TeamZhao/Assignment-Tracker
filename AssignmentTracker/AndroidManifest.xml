@@ -55,8 +55,8 @@
             android:label="@string/title_activity_update_semester" >
         </activity>
         <activity
-            android:name=".ShowCourseAssignmentsActivity"
-            android:label="@string/title_activity_show_course_assignments" >
+            android:name=".AssignmentProgressReportActivity"
+            android:label="@string/show_progress_report" >
         </activity>              
         <activity
             android:name=".DevTools"

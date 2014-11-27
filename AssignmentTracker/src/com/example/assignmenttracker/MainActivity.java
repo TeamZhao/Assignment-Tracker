@@ -94,6 +94,10 @@ public class MainActivity extends Activity {
 			adds = new Intent(this, ShowTeacherAssignmentsActivity.class);
 			startActivity(adds);
 			return true;
+		case R.id.show_progress_report:
+			adds = new Intent(this, AssignmentProgressReportActivity.class);
+			startActivity(adds);
+			return true;		
 		case R.id.show_devtools:
 			adds = new Intent(this, DevTools.class);
 			startActivity(adds);

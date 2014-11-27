@@ -62,5 +62,7 @@
     <string name="title_activity_show_teacher_assignments">Assignments</string>
     <string name="show_teacher_assignments">Show All Assignments</string>
     <string name="title_activity_show_course_assignments">Assignments For Selected Course</string>
+    <string name="show_progress_report">Assignment Progress Report</string>
+    
 
 </resources>
