@@ -57,7 +57,7 @@
         <activity
             android:name=".ShowCourseAssignmentsActivity"
             android:label="@string/title_activity_show_course_assignments" >
-        </activity>              
+        </activity>
         <activity
             android:name=".DevTools"
             android:label="@string/title_activity_dev_tools" >
@@ -94,6 +94,10 @@
         <activity
             android:name=".ShowTeacherAssignmentsActivity"
             android:label="@string/title_activity_show_teacher_assignments" >
+        </activity>
+        <activity
+            android:name=".GetEmailInfoActivity"
+            android:label="@string/title_activity_get_email_info" >
         </activity>
     </application>
 
