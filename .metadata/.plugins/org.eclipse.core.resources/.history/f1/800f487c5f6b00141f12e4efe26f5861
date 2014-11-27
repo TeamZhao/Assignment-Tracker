@@ -1,7 +1,0 @@
-package com.example.assignmenttracker;
-
-import android.app.Application;
-
-public class UserRoleSelection extends Application  {
-
-}

@@ -184,6 +184,8 @@ public class AssignmentFragment extends ListFragment  {
 						.show();
 				// Do Nothing
 				return true;
+			case R.id.context_menu_emailAss:
+				return true;
 			default:
 				return super.onContextItemSelected(item);
 			}

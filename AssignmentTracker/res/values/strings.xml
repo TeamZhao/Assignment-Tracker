@@ -26,6 +26,7 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="update">Update</string>
+    <string name="emailAss">Send As Email</string>
     <string name="confirm">Confirm</string>
     <string name="title_activity_update_assignment">Update Assignment</string>
     <string name="title_activity_add_course">Add New Course</string>
