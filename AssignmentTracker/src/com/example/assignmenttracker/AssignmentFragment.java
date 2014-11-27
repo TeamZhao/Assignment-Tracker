@@ -184,6 +184,9 @@ public class AssignmentFragment extends ListFragment {
 				// Do Nothing
 				return true;
 			case R.id.context_menu_emailAss:
+				Intent emailIntent = new Intent(getActivity().getApplicationContext(), GetEmailInfoActivity.class);
+				emailIntent.putExtra("assTitle",String.valueOf(str));
+				startActivity(emailIntent);
 				return true;
 			default:
 				return super.onContextItemSelected(item);

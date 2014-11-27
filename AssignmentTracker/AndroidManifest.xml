@@ -95,6 +95,10 @@
             android:name=".ShowTeacherAssignmentsActivity"
             android:label="@string/title_activity_show_teacher_assignments" >
         </activity>
+        <activity
+            android:name=".GetEmailInfoActivity"
+            android:label="@string/title_activity_get_email_info" >
+        </activity>
     </application>
 
 </manifest>

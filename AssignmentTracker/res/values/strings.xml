@@ -63,6 +63,10 @@
     <string name="show_teacher_assignments">Show All Assignments</string>
     <string name="title_activity_show_course_assignments">Assignments For Selected Course</string>
     <string name="show_progress_report">Assignment Progress Report</string>
-    
+    <string name="title_activity_get_email_info">Email Assignment</string>
+    <string name="to">To:</string>
+    <string name="subject">Subject:</string>
+    <string name="optionalMessage">Optional Message:</string>
+    <string name="next">Next</string>   
 
 </resources>
