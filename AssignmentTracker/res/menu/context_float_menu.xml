@@ -9,5 +9,9 @@
         android:id="@+id/context_menu_delete"
         android:showAsAction="ifRoom"
         android:title="@string/delete"/>
+    <item
+        android:id="@+id/context_menu_emailAss"
+        android:showAsAction="ifRoom"
+        android:title="@string/emailAss"/>
 
 </menu>
