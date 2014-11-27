@@ -143,6 +143,8 @@ public class ShowTeacherAssignmentsActivity extends ActionBarActivity {
 			 .setNegativeButton(android.R.string.no, null).show();
 			// Do Nothing 
 			return true;
+		case R.id.context_menu_emailAss:
+			return true;
 		default:
 			return super.onContextItemSelected(item);
 		}
