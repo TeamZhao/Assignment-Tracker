@@ -99,7 +99,7 @@ public class ShowTeacherAssignmentsActivity extends ActionBarActivity {
 			ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = this.getMenuInflater();
-		inflater.inflate(R.menu.context_float_menu, menu);
+		inflater.inflate(R.menu.assignment_context_float_menu, menu);
 
 	}
 	

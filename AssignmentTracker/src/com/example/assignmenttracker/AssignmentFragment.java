@@ -121,7 +121,12 @@ public class AssignmentFragment extends ListFragment {
 			ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = getActivity().getMenuInflater();
-		inflater.inflate(R.menu.context_float_menu, menu);
+		if (MainActivity.role == "Student"){
+			inflater.inflate(R.menu.assignment_context_float_menu, menu);
+		} else { //role == "Teacher"
+			inflater.inflate(R.menu.context_float_menu, menu);
+		}
+		
 
 	}
 
