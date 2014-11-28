@@ -57,7 +57,7 @@
         <activity
             android:name=".AssignmentProgressReportActivity"
             android:label="@string/show_progress_report" >
-        </activity>              
+        </activity>
         <activity
             android:name=".DevTools"
             android:label="@string/title_activity_dev_tools" >
@@ -98,6 +98,10 @@
         <activity
             android:name=".GetEmailInfoActivity"
             android:label="@string/title_activity_get_email_info" >
+        </activity>
+        <activity
+            android:name=".EmailContentToSendActivity"
+            android:label="@string/title_activity_email_content_to_send" >
         </activity>
     </application>
 

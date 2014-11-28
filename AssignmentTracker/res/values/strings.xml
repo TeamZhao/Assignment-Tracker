@@ -67,6 +67,9 @@
     <string name="to">To:</string>
     <string name="subject">Subject:</string>
     <string name="optionalMessage">Optional Message:</string>
-    <string name="next">Next</string>   
+    <string name="next">Next</string>
+    <string name="title_activity_email_content_to_send">Email Assignment</string>
+    <string name="progressReportLabel">Progress Report</string>
+    <string name="send">Send</string>
 
 </resources>
