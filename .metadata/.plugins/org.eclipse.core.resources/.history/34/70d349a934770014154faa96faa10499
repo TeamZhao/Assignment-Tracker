@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 			SharedPreferences.Editor edit = settings.edit();
 			edit.putBoolean("hasRun", true); // set to has run
 			edit.commit(); // apply
-			//populateCourseTable(db);
+			populateCourseTable(db);
 
 		} else {
 			// code if the app HAS run before
