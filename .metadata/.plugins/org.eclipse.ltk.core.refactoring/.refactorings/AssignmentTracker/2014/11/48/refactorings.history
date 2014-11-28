@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;context_float_menu.xml&apos; to &apos;context_float_menu.xml&apos;&#x0D;&#x0A;- Original project: &apos;AssignmentTracker&apos;&#x0D;&#x0A;- Destination element: &apos;context_float_menu.xml&apos;&#x0D;&#x0A;- Original element: &apos;context_float_menu.xml&apos;" description="Copy file" element1="res/menu/context_float_menu.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1417120184526" target="/AssignmentTracker/res/menu/context_float_menu.xml" units="0" version="1.0"/>
+</session>
