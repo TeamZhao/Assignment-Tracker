@@ -1,10 +1,11 @@
 package com.example.assignmenttracker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,144 +16,117 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShowCoursesActivity extends ActionBarActivity {
 
+	SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+	
 	ListView courseListView;
 	String contentOfSelectedCourseListItem;
 	int courseID;
 	int cursorIterator;
 	String pickSemester;
 	boolean assignmentsExistForCourse;
-	SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+	
 	ArrayList<String> associatedAssignments = new ArrayList<String>();
-
+	HashMap<String, List<String>> assignmentCourses;
+	List<String> coursesList;
+	ExpandableListView assignmentExpView;
+	AssignmentAdapter2 assignmentAdapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_show_courses);
-
-		courseListView = (ListView) findViewById(R.id.listView_show_courses);
-		registerForContextMenu(courseListView);
-
+		setContentView(R.layout.list_assignments);
+		
+		// Update Semester Intent
 		Intent semIntent = getIntent();
 		pickSemester = semIntent.getStringExtra("semesterDetails");
 		if (pickSemester != null) {
-			pickSemester = "semesterDetails = \""
-					+ semIntent.getStringExtra("semesterDetails") + "\"";
+			pickSemester = "semesterDetails = \'"
+					+ semIntent.getStringExtra("semesterDetails") + "\'";
 		}
-		Cursor c;
-		if (MainActivity.role == "Student") {
-			c = db.query("tbl_Course",
-					new String[] { "CourseCode, CourseName" }, pickSemester,
-					null, null, null, null);
-		} else { // role == "Teacher"
-			c = db.query("tbl_TeacherCourse",
-					new String[] { "CourseCode, CourseName" }, pickSemester,
-					null, null, null, null);
-		}
+		
+		// Populate Hash
+		assignmentCourses = getAssignmentInfo();
+		coursesList = new ArrayList<String> (assignmentCourses.keySet());
+		
+		assignmentExpView = (ExpandableListView) findViewById(R.id.assignments_expView);
+		assignmentAdapter = new AssignmentAdapter2(this, assignmentCourses, coursesList);
+		assignmentExpView.setAdapter(assignmentAdapter);
+		registerForContextMenu(assignmentExpView);	
 
-		ArrayList<String> values = new ArrayList<String>();
-		while (c.moveToNext()) {
-			values.add(c.getString(0));
-		}
-
-		ArrayAdapter adapter = new ArrayAdapter(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, values);
-		courseListView.setAdapter(adapter);
-
-		courseListView
-				.setOnItemLongClickListener(new OnItemLongClickListener() { // set
-																			// value
-																			// of
-																			// selected
-																			// list
-																			// item
-																			// on
-																			// longpress
-
-					@Override
-					public boolean onItemLongClick(AdapterView<?> parent,
-							View v, int position, long id) {
-						final String item = (String) parent
-								.getItemAtPosition(position);// value
-																// of
-																// selected
-																// list
-																// item
-																// as
-																// string
-						contentOfSelectedCourseListItem = item;
-						return false;
-					}
-				});
-
-		courseListView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
-				final String item = (String) parent.getItemAtPosition(position);
-				Toast.makeText(getApplicationContext(),
-						"Your Choice : " + item, Toast.LENGTH_SHORT).show();
-				contentOfSelectedCourseListItem = item;
-				Intent intentShowAssignments = new Intent(
-						getApplicationContext(), MainActivity.class);
-				intentShowAssignments.putExtra("CourseCode", item);
-				startActivity(intentShowAssignments);
-			}
-
-		});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.show_courses, menu);
-		return true;
+		// Listen when Group Item is long clicked to display context menu.
+		assignmentExpView
+			.setOnItemLongClickListener(new OnItemLongClickListener() {
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent,
+						View v, int position, long id) {
+					final String item = (String) parent
+							.getItemAtPosition(position);
+					contentOfSelectedCourseListItem = item;
+					return false;
+				}
+			});
 	}
 
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		MenuInflater inflater = this.getMenuInflater();
-		inflater.inflate(R.menu.context_float_menu, menu);
+		
+			ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
+			int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+			int group = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+			int child = ExpandableListView.getPackedPositionChild(info.packedPosition);
+			// Only create a context menu for child items
+			if (type == ExpandableListView.PACKED_POSITION_TYPE_GROUP) 
+			{
+				MenuInflater inflater = this.getMenuInflater();
+				inflater.inflate(R.menu.context_float_menu, menu);
+			}
 	}
 
-	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-				.getMenuInfo();
-		ListView coursesList = (ListView) findViewById(R.id.listView_show_courses);
-		View coursesView = coursesList.getChildAt(info.position);
+	public boolean onContextItemSelected(MenuItem item) {	
 		Intent intent;
+		
 		if (MainActivity.role == "Student") {
 			intent = new Intent(this, UpdateCourseActivity.class);
+	
+			ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
+			int groupPos = 0, childPos = 0;
+			int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+			if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) 
+			{
+				groupPos = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+				childPos = ExpandableListView.getPackedPositionChild(info.packedPosition);
+			}
+			
 		} else {
 			intent = new Intent(this, UpdateTeacherCourseActivity.class);
+			
+			ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
+			int groupPos = 0, childPos = 0;
+			int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+			if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) 
+			{
+				groupPos = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+				childPos = ExpandableListView.getPackedPositionChild(info.packedPosition);
+			}
 		}
-		courseID = coursesList.getId();
-		// Toast.makeText(getApplicationContext(), "COURSEID +" +
-		// courseID,Toast.LENGTH_LONG).show();
-		// Add code to fetch realID of selected course
-		// Current behaviour deletes courses with existing assignments
-		// successfully, but defaults to another existing course - add logic to
-		// fix
 
 		switch (item.getItemId()) {
 		case R.id.context_menu_update:
 
 			intent.putExtra("courseCode", contentOfSelectedCourseListItem);
-			// can you use this extra in the update activity to search for db
-			// record containing this value?
 			startActivity(intent);
 			return true;
 		case R.id.context_menu_delete:
@@ -194,7 +168,7 @@ public class ShowCoursesActivity extends ActionBarActivity {
 														+ String.valueOf(associatedAssignments
 																.get(i)) + "\'",
 												null);
-									}
+									} 
 									db.delete("tbl_Course", "CourseCode=\'"
 											+ contentOfSelectedCourseListItem
 											+ "\'", null);
@@ -345,7 +319,7 @@ public class ShowCoursesActivity extends ActionBarActivity {
 		}
 	}
 
-	@Override
+/*	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -357,5 +331,142 @@ public class ShowCoursesActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 
+	}*/
+
+/*	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.show_courses, menu);
+		return true;
+	}*/
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		if (MainActivity.role == "Student") {
+			getMenuInflater().inflate(R.menu.add_menu, menu);
+			return true; 
+		} else {
+			getMenuInflater().inflate(R.menu.add_menu_teacher, menu);
+			return true;
+		}
 	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent adds;
+		switch (item.getItemId()) {
+		case R.id.add_assignment:
+			adds = new Intent(this, AddAssignmentActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.add_course:
+			if (MainActivity.role == "Student") {
+				adds = new Intent(this, AddCourseActivity.class);
+				startActivity(adds);
+			} else if (MainActivity.role == "Teacher") {
+				adds = new Intent(this, AddTeacherCourseActivity.class);
+				startActivity(adds);
+			}
+			return true;
+		case R.id.add_semester:
+			adds = new Intent(this, AddSemesterActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_semesters:
+			adds = new Intent(this, ShowSemestersActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_courses:
+			adds = new Intent(this, ShowCoursesActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_teacher_assignments:
+			adds = new Intent(this, ShowTeacherAssignmentsActivity.class);
+			startActivity(adds);
+			return true;
+		case R.id.show_progress_report:
+			adds = new Intent(this, AssignmentProgressReportActivity.class);
+			startActivity(adds);
+			return true;		
+		case R.id.show_devtools:
+			adds = new Intent(this, DevTools.class);
+			startActivity(adds);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	public ArrayList<String> getAllCourseCodes() {
+		ArrayList<String> courseList = new ArrayList<String>();	
+		String semesterPicked;
+		
+		if (pickSemester != null) 
+			semesterPicked = pickSemester;
+		else
+			semesterPicked = null;
+		
+		if (MainActivity.role == "Student") {
+			Cursor c = db.query("tbl_Course", new String[] { "courseNo, courseCode, courseName" }, semesterPicked,
+					null, null, null, null);
+			while (c.moveToNext()) {
+				courseList.add(c.getString(1));
+			}
+		}
+		else if (MainActivity.role == "Teacher") {
+			Cursor c = db.query("tbl_TeacherCourse", new String[] { "courseNo, courseCode, courseName" }, semesterPicked,
+					null, null, null, null);
+			while (c.moveToNext()) {
+				courseList.add(c.getString(1));
+			}
+		}
+		return courseList;
+		
+	}
+	
+	public HashMap<String, List<String>> getAssignmentInfo() {
+
+		
+		HashMap<String, List<String>> courseAssignments = new HashMap<String, List<String>>();
+		// Write code to retrieve list of 
+		ArrayList<String> courseList = getAllCourseCodes();
+		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+		
+		if (MainActivity.role == "Student") {
+			Cursor cAssignments = db.query("tbl_Assignment",
+					new String[] { "assignmentTitle", "assignmentCourse" },null, null, null, null, null);		
+			for (String course : courseList)
+			{
+				ArrayList<String> groupedAssignments = new ArrayList<String>();
+				while (cAssignments.moveToNext()) {
+					if(cAssignments.getString(1).equalsIgnoreCase(course))
+					{
+						groupedAssignments.add(cAssignments.getString(0));
+					}
+				}	
+				courseAssignments.put(course, groupedAssignments);
+				cAssignments.moveToPosition(-1);
+			}
+		}
+		else if (MainActivity.role == "Teacher") {
+			Cursor cAssignments = db.query("tbl_TeacherAssignment",
+					new String[] { "assignmentTitle", "assignmentCourse" },null, null, null, null, null);		
+			for (String course : courseList)
+			{
+				ArrayList<String> groupedAssignments = new ArrayList<String>();
+				while (cAssignments.moveToNext()) {
+					if(cAssignments.getString(1).equalsIgnoreCase(course))
+					{
+						groupedAssignments.add(cAssignments.getString(0));
+					}
+				}	
+				courseAssignments.put(course, groupedAssignments);
+				cAssignments.moveToPosition(-1);
+			}	
+		}
+		//Add Assignment pertaining to each course here in HashMap - Prep for ExpView
+		//cAssignments.close();
+		return courseAssignments;
+	}
+	
 }

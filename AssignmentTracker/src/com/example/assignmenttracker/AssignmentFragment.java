@@ -61,7 +61,7 @@ public class AssignmentFragment extends ListFragment {
 
 		} else if (MainActivity.role == "Teacher") {
 
-			Cursor c = db.query("tbl_TeacherCourse",
+/*			Cursor c = db.query("tbl_TeacherCourse",
 					new String[] { "courseNo, courseCode, courseName" }, null,
 					null, null, null, null); // change to tbl_TeacherCourse
 			ArrayList<String> courseValues = new ArrayList<String>();
@@ -72,6 +72,10 @@ public class AssignmentFragment extends ListFragment {
 					android.R.layout.simple_list_item_1, android.R.id.text1,
 					courseValues);
 			this.setListAdapter(adapter2);
+		}*/
+			getActivity().finish();
+			Intent intent = new Intent(this.getActivity(), ShowCoursesActivity.class);
+			startActivity(intent);
 		}
 
 	}
@@ -114,6 +118,19 @@ public class AssignmentFragment extends ListFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		registerForContextMenu(getListView());
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+
 	}
 
 	@Override

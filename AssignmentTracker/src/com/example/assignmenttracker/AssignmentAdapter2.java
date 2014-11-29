@@ -101,7 +101,7 @@ public class AssignmentAdapter2 extends BaseExpandableListAdapter{
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 
-		return true;
+		return false;
 	}
 	
 }
