@@ -41,7 +41,7 @@ public class ShowCoursesActivity extends ActionBarActivity {
 	HashMap<String, List<String>> assignmentCourses;
 	List<String> coursesList;
 	ExpandableListView assignmentExpView;
-	AssignmentAdapter2 assignmentAdapter;
+	ShowCoursesAdapter showCoursesAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +61,8 @@ public class ShowCoursesActivity extends ActionBarActivity {
 		coursesList = new ArrayList<String> (assignmentCourses.keySet());
 		
 		assignmentExpView = (ExpandableListView) findViewById(R.id.assignments_expView);
-		assignmentAdapter = new AssignmentAdapter2(this, assignmentCourses, coursesList);
-		assignmentExpView.setAdapter(assignmentAdapter);
+		showCoursesAdapter = new ShowCoursesAdapter(this, assignmentCourses, coursesList);
+		assignmentExpView.setAdapter(showCoursesAdapter);
 		registerForContextMenu(assignmentExpView);	
 
 		// Listen when Group Item is long clicked to display context menu.

@@ -1,3 +1,48 @@
 <Project>
   <Name>AssignmentTracker</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Untitled</Name>
+    <Language>Java</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>MainActivity</Name>
+        <Access>Default</Access>
+        <Location left="41" top="123" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static String role</Member>
+        <Member type="Field">private static String[] tables</Member>
+        <Member type="Field">private String[] tableCreatorString</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AssignmentProgressReportActivity</Name>
+        <Access>Public</Access>
+        <Location left="630" top="123" />
+        <Size width="244" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AssignmentFragment</Name>
+        <Access>Public</Access>
+        <Location left="41" top="404" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Activity</Name>
+        <Access>Public</Access>
+        <Location left="339" top="29" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">protected void onCreate()</Member>
+        <Member type="Method">public boolean onCreateOptionsMenu()</Member>
+        <Member type="Method">public boolean onOptionsItemSelected()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
 </Project>

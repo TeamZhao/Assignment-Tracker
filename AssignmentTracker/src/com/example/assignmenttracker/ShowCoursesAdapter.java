@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-public class AssignmentAdapter2 extends BaseExpandableListAdapter{
+public class ShowCoursesAdapter extends BaseExpandableListAdapter{
 
 	private Context context;
 	private HashMap<String, List<String>> assignmentCourses;
 	private List<String> assignmentList;
 	
-	public AssignmentAdapter2 (Context context, HashMap<String, List<String>> assignmentCourses, List<String> assignmentList)
+	public ShowCoursesAdapter (Context context, HashMap<String, List<String>> assignmentCourses, List<String> assignmentList)
 	{
 		this.context = context;
 		this.assignmentCourses = assignmentCourses;
