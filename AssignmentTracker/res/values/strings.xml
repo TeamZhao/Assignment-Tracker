@@ -71,5 +71,10 @@
     <string name="title_activity_email_content_to_send">Email Assignment</string>
     <string name="progressReportLabel">Progress Report</string>
     <string name="send">Send</string>
-
+    <string name="assignment_progress_report_assignment_name_text">Assignment Name</string>
+	<string name="assignment_progress_report_assignment_course_name">Course Name</string>
+	<string name="assignment_progress_report_assignment_progress_bar_title">Assignment Progress</string>
+	<string name="assignment_progress_report_assignment_due_on">Due On</string>	
+	
+	
 </resources>
