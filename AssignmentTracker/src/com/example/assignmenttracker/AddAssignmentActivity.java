@@ -60,7 +60,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	}
 
 	
-	private static final int DAY_IN_MILLISECS = 86400000;
+	public static final int DAY_IN_MILLISECS = 86400000;
 
 	// Date selectedDueDate = new Date();
 	String formatedDate;

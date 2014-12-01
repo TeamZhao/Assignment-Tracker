@@ -18,11 +18,11 @@
             android:text="@string/to" />
 
         <EditText
-            android:id="@+id/txt_EmailAdd"
+            android:id="@+id/txtEmailAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textEmailAddress"/>
+            android:enabled="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,11 +37,10 @@
             android:text="@string/subject" />
 
         <EditText
-            android:id="@+id/txt_Subject"
+            android:id="@+id/txtSubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10" />
-        
     </LinearLayout>
 
     <TextView
@@ -55,12 +54,10 @@
         android:id="@+id/txt_OptionalMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="true"
         android:gravity="center_vertical|top"
         android:inputType="textMultiLine"
-        android:lines="10" >
-
-        <requestFocus />
-    </EditText>
+        android:lines="10"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,14 +66,14 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btnNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="@string/next" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnCancelEmail1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
