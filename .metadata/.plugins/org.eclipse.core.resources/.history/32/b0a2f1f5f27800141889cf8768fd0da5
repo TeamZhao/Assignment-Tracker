@@ -1,0 +1,105 @@
+package com.example.assignmenttracker;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class EmailContentToSendActivity extends Activity {
+
+	private String assTitle, emailTo, emailSubject, emailMsg, courseTitle,
+			assProgress;
+	private Date assDueDate_tmp;
+	private long daysTillDue;
+
+	SQLiteDatabase db = MainActivity.db.getReadableDatabase();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_email_content_to_send);
+		Intent getEmailDestInfoIntent = getIntent();
+		assTitle = getEmailDestInfoIntent.getStringExtra("assTitle");
+		emailTo = getEmailDestInfoIntent.getStringExtra("emailTo");
+		emailSubject = getEmailDestInfoIntent.getStringExtra("emailSubject");
+		emailMsg = getEmailDestInfoIntent.getStringExtra("emailMsg");
+
+		Cursor c;
+		if (MainActivity.role == "Student") {
+			c = db.query(
+					"tbl_Assignment",
+					new String[] { "assignmentNo, assignmentTitle, assignmentCourse, assignmentDueDate, assignmentProgress" },
+					"assignmentTitle = \"" + assTitle + "\";", null, null,
+					null, null);
+		} else { // role == "Teacher"
+			c = db.query(
+					"tbl_TeacherAssignment",
+					new String[] { "assignmentNo, assignmentTitle, assignmentCourse, assignmentDueDate, assignmentProgress" },
+					"assignmentTitle = \"" + assTitle + "\";", null, null,
+					null, null);
+		}
+
+		while (c.moveToNext()) {
+
+			
+			courseTitle = c.getString(2);
+			assProgress = c.getString(4);
+			Calendar assDueDate_tmp = Calendar.getInstance();
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.EN_US);
+		    assDueDate_tmp.setTime(sdf.parse(c.getString(3)));// all done
+		    
+			 = new Date(c.getString(3));
+			Calendar assDueDate = Calendar.getInstance();
+			assDueDate.set(assDueDate_tmp.getYear(), assDueDate_tmp.getMonth(), assDueDate_tmp.getDate());
+			Calendar today = Calendar.getInstance();
+			daysTillDue = (assDueDate.getTimeInMillis() - today.getTimeInMillis())/AddAssignmentActivity.DAY_IN_MILLISECS;
+
+			final TextView tv_assTitle = (TextView) findViewById(R.id.tv_assTitle);
+			final TextView courseCodeEmail = (TextView) findViewById(R.id.courseCodeEmail);
+			final TextView courseProgressEmail = (TextView) findViewById(R.id.courseProgressEmail);
+			final TextView coursedueDateEmail = (TextView) findViewById(R.id.coursedueDateEmail);
+			final TextView courseDaysLeftEmail = (TextView) findViewById(R.id.courseDaysLeftEmail);
+			
+			if (emailMsg.length() > 0){
+				final TextView tv_emailMsg = (TextView) findViewById(R.id.tv_emailMsg);
+				tv_emailMsg.setText(emailMsg);
+			}
+			tv_assTitle.setText(assTitle);
+			courseCodeEmail.setText(courseTitle);
+			courseProgressEmail.setText(assProgress);
+			coursedueDateEmail.setText(assDueDate.toString());
+			courseDaysLeftEmail.setText(String.valueOf(daysTillDue));
+			
+		}
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.email_content_to_send, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+}
