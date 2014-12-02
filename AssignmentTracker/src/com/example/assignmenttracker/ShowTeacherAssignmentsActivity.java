@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,7 +46,7 @@ public class ShowTeacherAssignmentsActivity extends ActionBarActivity {
 				.query("tbl_TeacherAssignment",
 						new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
 						"assignmentDueDate > datetime('now','localtime')",
-						null, null, null, null); 
+						null, null, null, null);
 		while (c.moveToNext()) {
 
 			map = new HashMap<String, Object>();
@@ -93,7 +93,7 @@ public class ShowTeacherAssignmentsActivity extends ActionBarActivity {
 				});
 
 	}
-	
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenu.ContextMenuInfo menuInfo) {
@@ -102,50 +102,68 @@ public class ShowTeacherAssignmentsActivity extends ActionBarActivity {
 		inflater.inflate(R.menu.assignment_context_float_menu, menu);
 
 	}
-	
+
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		 AdapterView.AdapterContextMenuInfo info =
-		 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-		 
-		 ListView templist = assignmentListView;
-		 View mView = templist.getChildAt(info.position);
-		 //String val =info.getItemAtPosition(info.position);
-		 Intent intent = new Intent(getApplicationContext(), UpdateAssignmentActivity.class);
-		 TextView mytextview = (TextView) mView.findViewById(R.id.id_ass);
-		 assID = Integer.parseInt(mytextview.getText().toString());
-		 final String str;
-		 String selectedFromList = (templist.getItemAtPosition((int) info.position).toString());
-		 String lines[] = selectedFromList.split("title=");
-		 str = lines[1].substring(0, lines[1].length()-1);
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+
+		ListView templist = assignmentListView;
+		View mView = templist.getChildAt(info.position);
+		// String val =info.getItemAtPosition(info.position);
+		Intent intent = new Intent(getApplicationContext(),
+				UpdateAssignmentActivity.class);
+		TextView mytextview = (TextView) mView.findViewById(R.id.id_ass);
+		assID = Integer.parseInt(mytextview.getText().toString());
+		final String str;
+		String selectedFromList = (templist
+				.getItemAtPosition((int) info.position).toString());
+		String lines[] = selectedFromList.split("title=");
+		str = lines[1].substring(0, lines[1].length() - 1);
 		switch (item.getItemId()) {
 		case R.id.context_menu_update:
 
-	         //Toast.makeText(getActivity().getApplicationContext(), str,Toast.LENGTH_LONG).show();
-			intent.putExtra("assTitle",String.valueOf(str));
+			// Toast.makeText(getActivity().getApplicationContext(),
+			// str,Toast.LENGTH_LONG).show();
+			intent.putExtra("assTitle", String.valueOf(str));
 			startActivity(intent);
 			return true;
 		case R.id.context_menu_delete:
 			// Confirm Deletion
-			Toast.makeText(getApplicationContext(), str,Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG)
+					.show();
 			new AlertDialog.Builder(this)
-			.setTitle("Confirm Deletion")
-			.setMessage("Do you really want to delete this Assignment?")
-			.setIcon(android.R.drawable.ic_dialog_alert)
-			.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-			    public void onClick(DialogInterface dialog, int whichButton) {
-			    	// Delete Record
-			    	db.delete("tbl_TeacherAssignment","assignmentTitle=\'" + String.valueOf(str)+"\'", null);
-			        Toast.makeText(getApplicationContext(), "Assignment" + String.valueOf(str) + "Deleted", Toast.LENGTH_SHORT).show();
-			        Intent reload = new Intent(getApplicationContext(), ShowTeacherAssignmentsActivity.class);
-			        startActivity(reload);
-			    }})
-			 .setNegativeButton(android.R.string.no, null).show();
-			// Do Nothing 
+					.setTitle("Confirm Deletion")
+					.setMessage("Do you really want to delete this Assignment?")
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setPositiveButton(android.R.string.yes,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+									// Delete Record
+									db.delete(
+											"tbl_TeacherAssignment",
+											"assignmentTitle=\'"
+													+ String.valueOf(str)
+													+ "\'", null);
+									Toast.makeText(
+											getApplicationContext(),
+											"Assignment" + String.valueOf(str)
+													+ "Deleted",
+											Toast.LENGTH_SHORT).show();
+									Intent reload = new Intent(
+											getApplicationContext(),
+											ShowTeacherAssignmentsActivity.class);
+									startActivity(reload);
+								}
+							}).setNegativeButton(android.R.string.no, null)
+					.show();
+			// Do Nothing
 			return true;
 		case R.id.context_menu_emailAss:
-			Intent emailIntent = new Intent(getApplicationContext(), GetEmailInfoActivity.class);
-			emailIntent.putExtra("assTitle",String.valueOf(str));
+			Intent emailIntent = new Intent(getApplicationContext(),
+					GetEmailInfoActivity.class);
+			emailIntent.putExtra("assTitle", String.valueOf(str));
 			startActivity(emailIntent);
 			return true;
 		default:

@@ -75,6 +75,8 @@
 	<string name="assignment_progress_report_assignment_course_name">Course Name</string>
 	<string name="assignment_progress_report_assignment_progress_bar_title">Assignment Progress</string>
 	<string name="assignment_progress_report_assignment_due_on">Due On</string>	
+	<string name="show_completedass">Completed Assignments</string>	
+
 	
 	
 </resources>

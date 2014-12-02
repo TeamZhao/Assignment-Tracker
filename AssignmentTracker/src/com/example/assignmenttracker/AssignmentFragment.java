@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.content.DialogInterface;
@@ -20,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,44 +38,85 @@ public class AssignmentFragment extends ListFragment {
 		Map<String, Object> map = new HashMap<String, Object>();
 		// List table = MainActivity.db.getTable("tbl_Assignment");
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
-		if (MainActivity.role == "Student") {
-			Cursor c = db
-					.query("tbl_Assignment",
-							new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
-							"assignmentDueDate > datetime('now','localtime')",
-							null, null, null, null);
-			while (c.moveToNext()) {
 
-				map = new HashMap<String, Object>();
-				map.put("id", String.valueOf(c.getInt(0)));
-				map.put("title", c.getString(1));
-				map.put("progress", c.getString(2));
-				assMapList.add(map);
+		if (MainActivity.completed == false) {
+
+			if (MainActivity.role == "Student") {
+				Cursor c = db
+						.query("tbl_Assignment",
+								new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
+								"assignmentDueDate > datetime('now','localtime') AND NOT assignmentProgress = 100",
+								null, null, null, null);
+				while (c.moveToNext()) {
+
+					map = new HashMap<String, Object>();
+					map.put("id", String.valueOf(c.getInt(0)));
+					map.put("title", c.getString(1));
+					map.put("progress", c.getString(2));
+					assMapList.add(map);
+				}
+
+				AssignmentAdapter adapter = new AssignmentAdapter(
+						this.getActivity(), assMapList);
+				this.setListAdapter(adapter);
+
+			} else if (MainActivity.role == "Teacher") {
+
+				/*
+				 * Cursor c = db.query("tbl_TeacherCourse", new String[] {
+				 * "courseNo, courseCode, courseName" }, null, null, null, null,
+				 * null); // change to tbl_TeacherCourse ArrayList<String>
+				 * courseValues = new ArrayList<String>(); while
+				 * (c.moveToNext()) { courseValues.add(c.getString(1)); }
+				 * ArrayAdapter adapter2 = new ArrayAdapter(this.getActivity(),
+				 * android.R.layout.simple_list_item_1, android.R.id.text1,
+				 * courseValues); this.setListAdapter(adapter2); }
+				 */
+				getActivity().finish();
+				Intent intent = new Intent(this.getActivity(),
+						ShowCoursesActivity.class);
+				startActivity(intent);
 			}
+		} else {
+			if (MainActivity.role == "Student") {
+				Cursor c = db
+						.query("tbl_Assignment",
+								new String[] { "assignmentNo, assignmentTitle, assignmentProgress" },
+								"assignmentProgress = 100", null, null, null,
+								null);
+				while (c.moveToNext()) {
 
-			AssignmentAdapter adapter = new AssignmentAdapter(
-					this.getActivity(), assMapList);
-			this.setListAdapter(adapter);
+					map = new HashMap<String, Object>();
+					map.put("id", String.valueOf(c.getInt(0)));
+					map.put("title", c.getString(1));
+					map.put("progress", c.getString(2));
+					assMapList.add(map);
+				}
 
-		} else if (MainActivity.role == "Teacher") {
+				AssignmentAdapter adapter = new AssignmentAdapter(
+						this.getActivity(), assMapList);
+				this.setListAdapter(adapter);
 
-/*			Cursor c = db.query("tbl_TeacherCourse",
-					new String[] { "courseNo, courseCode, courseName" }, null,
-					null, null, null, null); // change to tbl_TeacherCourse
-			ArrayList<String> courseValues = new ArrayList<String>();
-			while (c.moveToNext()) {
-				courseValues.add(c.getString(1));
+			} else if (MainActivity.role == "Teacher") {
+
+				/*
+				 * Cursor c = db.query("tbl_TeacherCourse", new String[] {
+				 * "courseNo, courseCode, courseName" }, null, null, null, null,
+				 * null); // change to tbl_TeacherCourse ArrayList<String>
+				 * courseValues = new ArrayList<String>(); while
+				 * (c.moveToNext()) { courseValues.add(c.getString(1)); }
+				 * ArrayAdapter adapter2 = new ArrayAdapter(this.getActivity(),
+				 * android.R.layout.simple_list_item_1, android.R.id.text1,
+				 * courseValues); this.setListAdapter(adapter2); }
+				 */
+				getActivity().finish();
+				Intent intent = new Intent(this.getActivity(),
+						ShowCoursesActivity.class);
+				startActivity(intent);
+				MainActivity.completed = true;
 			}
-			ArrayAdapter adapter2 = new ArrayAdapter(this.getActivity(),
-					android.R.layout.simple_list_item_1, android.R.id.text1,
-					courseValues);
-			this.setListAdapter(adapter2);
-		}*/
-			getActivity().finish();
-			Intent intent = new Intent(this.getActivity(), ShowCoursesActivity.class);
-			startActivity(intent);
+			MainActivity.completed = false;
 		}
-
 	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
@@ -119,7 +158,7 @@ public class AssignmentFragment extends ListFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		registerForContextMenu(getListView());
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -138,12 +177,11 @@ public class AssignmentFragment extends ListFragment {
 			ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = getActivity().getMenuInflater();
-		if (MainActivity.role == "Student"){
+		if (MainActivity.role == "Student") {
 			inflater.inflate(R.menu.assignment_context_float_menu, menu);
-		} else { //role == "Teacher"
+		} else { // role == "Teacher"
 			inflater.inflate(R.menu.context_float_menu, menu);
 		}
-		
 
 	}
 
@@ -206,8 +244,9 @@ public class AssignmentFragment extends ListFragment {
 				// Do Nothing
 				return true;
 			case R.id.context_menu_emailAss:
-				Intent emailIntent = new Intent(getActivity().getApplicationContext(), GetEmailInfoActivity.class);
-				emailIntent.putExtra("assTitle",String.valueOf(str));
+				Intent emailIntent = new Intent(getActivity()
+						.getApplicationContext(), GetEmailInfoActivity.class);
+				emailIntent.putExtra("assTitle", String.valueOf(str));
 				startActivity(emailIntent);
 				return true;
 			default:

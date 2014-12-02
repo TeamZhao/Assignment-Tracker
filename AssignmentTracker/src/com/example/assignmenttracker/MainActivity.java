@@ -12,6 +12,7 @@ public class MainActivity extends Activity {
 
 	public static String role = "Student"; // set default to Student in case
 											// failed to set from splash screen
+	public static boolean completed = false;
 	public static DatabaseManager db;
 	private static final String tables[] = { "tbl_Semester", "tbl_Assignment",
 			"tbl_Course", "tbl_TeacherSemester", "tbl_TeacherAssignment",
@@ -101,6 +102,10 @@ public class MainActivity extends Activity {
 		case R.id.show_devtools:
 			adds = new Intent(this, DevTools.class);
 			startActivity(adds);
+			return true;
+		case R.id.show_completedass:
+			completed = true;
+			this.recreate();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
