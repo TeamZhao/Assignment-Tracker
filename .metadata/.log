@@ -6074,3 +6074,6 @@ com.android.ddmlib.ShellCommandUnresponsiveException
 
 !ENTRY com.android.ide.eclipse.adt 4 0 2014-12-03 03:02:07.072
 !MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-03 03:04:17.047
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace

@@ -101,19 +101,6 @@ public class EmailContentToSendActivity extends Activity {
 			coursedueDateEmail.setText(dueDateString.split(" ")[0]);
 			courseDaysLeftEmail.setText(String.valueOf(daysTillDue));
 
-			final AlertDialog.Builder helpBuilder = new AlertDialog.Builder(
-					this);
-			// new AlertDialog.Builder(this);
-			// helpBuilder.setTitle("ERROR!");
-			helpBuilder.setMessage("The email has been sent");
-			helpBuilder.setNegativeButton("Ok",
-					new DialogInterface.OnClickListener() {
-
-						public void onClick(DialogInterface dialog, int which) {
-							finish();
-						}
-					});
-
 			final Button btnSendEmail = (Button) findViewById(R.id.btnSend);
 			btnSendEmail.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
@@ -139,28 +126,6 @@ public class EmailContentToSendActivity extends Activity {
 							body);
 					startActivity(Intent.createChooser(emailIntent, "Email:"));
 
-					// new thread needed to suppress the confirmation message
-					// for a while with sleep timer
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							try {
-								// suppress the confirmation message for 10s
-								Thread.sleep(10000);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-							runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									AlertDialog helpDialog = helpBuilder
-											.create();
-									helpDialog.show();
-								}
-							});
-						}
-					}).start();
-					// end of thread code
 				}
 			});
 
