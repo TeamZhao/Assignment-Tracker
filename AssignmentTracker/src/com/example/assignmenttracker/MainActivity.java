@@ -19,11 +19,11 @@ public class MainActivity extends Activity {
 			"tbl_TeacherCourse" };
 	private static final String tableCreatorString[] = {
 			"CREATE TABLE IF NOT EXISTS tbl_Semester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);",
-			"CREATE TABLE IF NOT EXISTS tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT);",
-			"CREATE TABLE IF NOT EXISTS tbl_Course (courseNo INTEGER PRIMARY KEY AUTOINCREMENT, CourseCode TEXT , CourseName TEXT, semesterDetails TEXT, Professor TEXT , Description TEXT);",
+			"CREATE TABLE IF NOT EXISTS tbl_Assignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT, FOREIGN KEY(assignmentCourse) REFERENCES tbl_Course(CourseName));",
+			"CREATE TABLE IF NOT EXISTS tbl_Course (courseNo INTEGER PRIMARY KEY AUTOINCREMENT, CourseCode TEXT , CourseName TEXT, semesterDetails TEXT, Professor TEXT , Description TEXT, FOREIGN KEY(semesterDetails) REFERENCES tbl_Semester(semesterDetails));",
 			"CREATE TABLE IF NOT EXISTS tbl_TeacherSemester (semesterNo INTEGER PRIMARY KEY AUTOINCREMENT , semesterDetails TEXT);",
-			"CREATE TABLE IF NOT EXISTS tbl_TeacherAssignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT, assignmentDueDate DATE , assignmentProgress INT);",
-			"CREATE TABLE IF NOT EXISTS tbl_TeacherCourse (courseNo INTEGER PRIMARY KEY AUTOINCREMENT, CourseCode TEXT , CourseName TEXT, semesterDetails TEXT, Description TEXT);" };
+			"CREATE TABLE IF NOT EXISTS tbl_TeacherAssignment (assignmentNo INTEGER PRIMARY KEY AUTOINCREMENT , assignmentTitle TEXT , assignmentCourse TEXT , assignmentDueDate DATE , assignmentProgress INT, FOREIGN KEY(assignmentCourse) REFERENCES tbl_TeacherCourse(CourseName));",
+			"CREATE TABLE IF NOT EXISTS tbl_TeacherCourse (courseNo INTEGER PRIMARY KEY AUTOINCREMENT, CourseCode TEXT , CourseName TEXT, semesterDetails TEXT, Description TEXT,  FOREIGN KEY(semesterDetails) REFERENCES tbl_TeacherSemester(semesterDetails));" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 			SharedPreferences.Editor edit = settings.edit();
 			edit.putBoolean("hasRun", true); // set to has run
 			edit.commit(); // apply
-			//populateCourseTable(db);
+			// populateCourseTable(db);
 
 		} else {
 			// code if the app HAS run before
@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
 		case R.id.show_progress_report:
 			adds = new Intent(this, AssignmentProgressReportActivity.class);
 			startActivity(adds);
-			return true;		
+			return true;
 		case R.id.show_devtools:
 			adds = new Intent(this, DevTools.class);
 			startActivity(adds);
