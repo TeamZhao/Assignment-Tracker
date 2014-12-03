@@ -13,8 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class GetEmailInfoActivity extends Activity {
-	String assTitle = "asdsad", emailDestination = "emailDest",
-			emailSubject = "emailSub", emailMessage = "emailMs";
+	String assTitle, emailDestination, emailMessage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,6 @@ public class GetEmailInfoActivity extends Activity {
 		assTitle = intent.getStringExtra("assTitle");
 
 		final EditText emailDestBox = (EditText) findViewById(R.id.txtEmailAdd);
-		final EditText txtEmailSubject = (EditText) findViewById(R.id.txtSubject);
 		final EditText txtEmailMessage = (EditText) findViewById(R.id.txt_OptionalMessage);
 
 		// Code for popup
@@ -44,7 +42,6 @@ public class GetEmailInfoActivity extends Activity {
 		btnNext.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				emailDestination = emailDestBox.getText().toString();
-				emailSubject = txtEmailSubject.getText().toString();
 				emailMessage = txtEmailMessage.getText().toString();
 				if (emailDestination.matches("")) {
 					// Show the popup
@@ -58,7 +55,6 @@ public class GetEmailInfoActivity extends Activity {
 							EmailContentToSendActivity.class);
 					emailContentIntent.putExtra("assTitle", assTitle);
 					emailContentIntent.putExtra("emailTo", emailDestination);
-					emailContentIntent.putExtra("emailSubject", emailSubject);
 					emailContentIntent.putExtra("emailMsg", emailMessage);
 					startActivity(emailContentIntent);
 

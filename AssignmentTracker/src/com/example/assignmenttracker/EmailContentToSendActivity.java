@@ -5,9 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,8 +40,8 @@ public class EmailContentToSendActivity extends Activity {
 		Intent getEmailDestInfoIntent = getIntent();
 		ass_Title = getEmailDestInfoIntent.getStringExtra("assTitle");
 		email_To = getEmailDestInfoIntent.getStringExtra("emailTo");
-		email_Subject = getEmailDestInfoIntent.getStringExtra("emailSubject");
 		email_Msg = getEmailDestInfoIntent.getStringExtra("emailMsg");
+		email_Subject = "CURRENT PROGRESS: " + ass_Title;
 
 		Cursor c;
 		if (MainActivity.role == "Student") {
@@ -91,30 +96,52 @@ public class EmailContentToSendActivity extends Activity {
 			}
 			tv_assTitle.setText(ass_Title);
 			courseCodeEmail.setText(course_Title);
-			courseProgressEmail.setText(ass_Progress+"%");
+			courseProgressEmail.setText(ass_Progress + "%");
 			pb_courseProgress.setProgress(Integer.parseInt(ass_Progress));
 			coursedueDateEmail.setText(dueDateString.split(" ")[0]);
 			courseDaysLeftEmail.setText(String.valueOf(daysTillDue));
-			
-			
+
 			final Button btnSendEmail = (Button) findViewById(R.id.btnSend);
 			btnSendEmail.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					finish();
+					String body = ass_Title.toUpperCase()+" PROGRESS REPORT\n"
+							 + "===================================\n\n"
+							 + "Course | "+course_Title+"\n"
+							 + "--------------------------------------------------\n"
+							 + "Current Progress | "+ass_Progress+"%\n"
+							 + "--------------------------------------------------\n"
+							 + "Due Date | "+dueDateString.split(" ")[0]+"\n"
+							 + "--------------------------------------------------\n"
+							 + "Days Till Due | "+daysTillDue+"\n"
+							 + "--------------------------------------------------\n";
+					// code to send email with new intent
+					final Intent emailIntent = new Intent(
+							android.content.Intent.ACTION_SEND);
+					emailIntent.setType("text/html");
+					emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+							new String[] { email_To });
+					emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+							email_Subject);
+					emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+							body);
+					startActivity(Intent.createChooser(emailIntent, "Email:"));
+
 				}
 			});
-				
+
 			final Button btnCancelEmail2 = (Button) findViewById(R.id.btnCancelEmail2);
 			btnCancelEmail2.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					if (MainActivity.role == "Student") {
 						// go back to main
-						Intent cancelIntent = new Intent(EmailContentToSendActivity.this,
+						Intent cancelIntent = new Intent(
+								EmailContentToSendActivity.this,
 								MainActivity.class);
 						startActivity(cancelIntent);
 					} else { // role == "Teacher"
 						// go back to show assignments
-						Intent cancelIntent = new Intent(EmailContentToSendActivity.this,
+						Intent cancelIntent = new Intent(
+								EmailContentToSendActivity.this,
 								ShowTeacherAssignmentsActivity.class);
 						startActivity(cancelIntent);
 					}
