@@ -221,15 +221,16 @@ public class AddAssignmentActivity extends ActionBarActivity {
 							+ "/"
 							+ String.valueOf(selectedDueDate.get(Calendar.YEAR));
 					
-					long selectedDueDateInMillis = selectedDueDate.getTimeInMillis();
+					long selectedDueDateInMillis = selectedDueDate
+							.getTimeInMillis();
 					
 					long dayBeforeInMillis = selectedDueDate.getTimeInMillis()-DAY_IN_MILLISECS - TIME_TO_END_OF_DAY;
 					long twoDaysBeforeInMillis = dayBeforeInMillis - DAY_IN_MILLISECS;
 					long threeDaysBeforeInMillis = twoDaysBeforeInMillis - DAY_IN_MILLISECS;
 					
-					createNotificationAlarm(dayBeforeInMillis, title, content, " tomorrow");
-					createNotificationAlarm(twoDaysBeforeInMillis, title, content, " in 2 days");
-					createNotificationAlarm(threeDaysBeforeInMillis, title, content, " in 3 days");
+					createNotificationAlarm(dayBeforeInMillis, title, content);
+					createNotificationAlarm(twoDaysBeforeInMillis, title, content);
+					createNotificationAlarm(threeDaysBeforeInMillis, title, content);
 					// NOTIFICATION CODE END
 
 					AlertDialog helpDialog1 = helpBuilder1.create();
@@ -314,11 +315,11 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	 * }
 	 */
 	
-	private void createNotificationAlarm(long timeInMillis, String title, String content, String daysLeft){
+	private void createNotificationAlarm(long timeInMillis, String title, String content){
 		Intent notificationIntent3days = new Intent(
 				AddAssignmentActivity.this,
 				NotificationPublisher.class);
-		notificationIntent3days.putExtra("Title", title+daysLeft);
+		notificationIntent3days.putExtra("Title", title);
 		notificationIntent3days.putExtra("Content", content);
 		
 		PendingIntent resultPendingIntent3days = PendingIntent

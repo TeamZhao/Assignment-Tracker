@@ -227,9 +227,9 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					long twoDaysBeforeInMillis = dayBeforeInMillis - DAY_IN_MILLISECS;
 					long threeDaysBeforeInMillis = twoDaysBeforeInMillis - DAY_IN_MILLISECS;
 					
-					createNotificationAlarm(dayBeforeInMillis, title, content, " tomorrow");
-					createNotificationAlarm(twoDaysBeforeInMillis, title, content, " in 2 days");
-					createNotificationAlarm(threeDaysBeforeInMillis, title, content, " in 3 days");
+					createNotificationAlarm(dayBeforeInMillis, title, content, "1 day");
+					createNotificationAlarm(twoDaysBeforeInMillis, title, content);
+					createNotificationAlarm(threeDaysBeforeInMillis, title, content);
 					// NOTIFICATION CODE END
 
 					AlertDialog helpDialog1 = helpBuilder1.create();
@@ -318,8 +318,8 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		Intent notificationIntent3days = new Intent(
 				AddAssignmentActivity.this,
 				NotificationPublisher.class);
-		notificationIntent3days.putExtra("Title", title+daysLeft);
-		notificationIntent3days.putExtra("Content", content);
+		notificationIntent3days.putExtra("Title", title);
+		notificationIntent3days.putExtra("Content", content+daysLeft);
 		
 		PendingIntent resultPendingIntent3days = PendingIntent
 				.getBroadcast(AddAssignmentActivity.this, alarmID,
