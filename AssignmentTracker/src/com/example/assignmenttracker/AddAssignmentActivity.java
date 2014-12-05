@@ -226,7 +226,14 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					long dayBeforeInMillis = selectedDueDate.getTimeInMillis()-DAY_IN_MILLISECS - TIME_TO_END_OF_DAY;
 					long twoDaysBeforeInMillis = dayBeforeInMillis - DAY_IN_MILLISECS;
 					long threeDaysBeforeInMillis = twoDaysBeforeInMillis - DAY_IN_MILLISECS;
-					
+					//Generating notifications for teach after the due date
+					if (MainActivity.role == "Teacher")
+					{
+						dayBeforeInMillis = selectedDueDate.getTimeInMillis()+DAY_IN_MILLISECS - TIME_TO_END_OF_DAY;
+						twoDaysBeforeInMillis = dayBeforeInMillis + DAY_IN_MILLISECS;
+						threeDaysBeforeInMillis = twoDaysBeforeInMillis + DAY_IN_MILLISECS;
+					}
+					//createNotificationAlarm(1000, title, content, " tomorrow");
 					createNotificationAlarm(dayBeforeInMillis, title, content, " tomorrow");
 					createNotificationAlarm(twoDaysBeforeInMillis, title, content, " in 2 days");
 					createNotificationAlarm(threeDaysBeforeInMillis, title, content, " in 3 days");
@@ -316,7 +323,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	
 	private void createNotificationAlarm(long timeInMillis, String title, String content, String daysLeft){
 		Intent notificationIntent3days = new Intent(
-				AddAssignmentActivity.this,
+				getBaseContext(),
 				NotificationPublisher.class);
 		notificationIntent3days.putExtra("Title", title+daysLeft);
 		notificationIntent3days.putExtra("Content", content);

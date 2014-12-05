@@ -15,6 +15,7 @@ public class NotificationPublisher extends BroadcastReceiver {
     public static int mNotificationId = 0;
     public void onReceive(Context context, Intent intent) {
  
+
     	NotificationManager notificationManager = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -26,13 +27,14 @@ public class NotificationPublisher extends BroadcastReceiver {
 				context).setSmallIcon(R.drawable.ic_launcher)
 				.setContentTitle(notiTitle)
 				.setContentText(notiContent);
-		
+
 		// Sets an ID for the notification
 		mNotificationId ++;
 		
 		// Builds the notification and issues it.
 		NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(android.content.Context.NOTIFICATION_SERVICE);
 		mNotifyMgr.notify(mNotificationId, mBuilder.build());
+		
  
     }
 }
