@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class AddCourseActivity extends Activity {
 
@@ -60,7 +61,25 @@ public class AddCourseActivity extends Activity {
 				.query("tbl_Semester", new String[]{"semesterDetails"},
 						null, null, null, null, null);
 		String[] array_spinner = new String[c.getCount()];
-		
+		// Code for popup
+		final AlertDialog.Builder helpBuilder2 = new AlertDialog.Builder(this);
+		// new AlertDialog.Builder(this);
+		helpBuilder2.setTitle("ERROR!");
+		helpBuilder2.setMessage("Please create a semester before creating a course");
+		helpBuilder2.setNegativeButton("Ok",
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						// Do nothing but close the dialog
+						onBackPressed();
+					}
+				});
+		// Code for pop up end
+		if(c.getCount()==0)
+		{
+			AlertDialog helpDialog = helpBuilder2.create();
+			helpDialog.show();
+		}
 		int counter=0;
 		while (c.moveToNext()) {		
 			array_spinner[counter] = c.getString(0);
