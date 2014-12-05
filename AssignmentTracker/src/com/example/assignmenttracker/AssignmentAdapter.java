@@ -55,12 +55,15 @@ public class AssignmentAdapter extends BaseAdapter {
 		TextView tv = (TextView) convertView.findViewById(R.id.title_ass);
 		ProgressBar pb = (ProgressBar) convertView
 				.findViewById(R.id.progress_ass);
+		TextView tv_progressText = (TextView) convertView
+				.findViewById(R.id.progress_ass_text);
 		ImageView iv = (ImageView) convertView.findViewById(R.id.img_ass);
 		TextView assID = (TextView) convertView.findViewById(R.id.id_ass);
 
 		tv.setText(list.get(position).get("title").toString());
 		pb.setProgress(Integer.parseInt(list.get(position).get("progress")
 				.toString()));
+		tv_progressText.setText(list.get(position).get("progress").toString()+"%");
 		assID.setText(list.get(position).get("id").toString());
 
 		return convertView;

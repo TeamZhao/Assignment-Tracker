@@ -230,7 +230,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					// MainActivity.db.close();
 
 					// NEW CODE FOR NOTIFICATION
-					String title = assTitle.getText().toString() + " due";
+					String title;
 					String content = String.valueOf(selectedDueDate
 							.get(Calendar.MONTH))
 							+ "/"
@@ -239,22 +239,37 @@ public class AddAssignmentActivity extends ActionBarActivity {
 							+ "/"
 							+ String.valueOf(selectedDueDate.get(Calendar.YEAR));
 					
-					long selectedDueDateInMillis = selectedDueDate.getTimeInMillis();
+					long selectedDueDateInMillis = selectedDueDate.getTimeInMillis() - TIME_TO_END_OF_DAY;
 					
-					long dayBeforeInMillis = selectedDueDate.getTimeInMillis()-DAY_IN_MILLISECS - TIME_TO_END_OF_DAY;
+					long dayBeforeInMillis = selectedDueDateInMillis-DAY_IN_MILLISECS;
 					long twoDaysBeforeInMillis = dayBeforeInMillis - DAY_IN_MILLISECS;
 					long threeDaysBeforeInMillis = twoDaysBeforeInMillis - DAY_IN_MILLISECS;
-					//Generating notifications for teach after the due date
-					if (MainActivity.role == "Teacher")
-					{
-						dayBeforeInMillis = selectedDueDate.getTimeInMillis()+DAY_IN_MILLISECS - TIME_TO_END_OF_DAY;
+					if (MainActivity.role == "Student") {
+						title = assTitle.getText().toString() + " is due";
+										
+					
+						//Generating notifications for teach after the due date
+						
+						//createNotificationAlarm(1000, title, content, " tomorrow");
+						createNotificationAlarm(selectedDueDateInMillis, title, content, " today! Remember to submit!");
+						createNotificationAlarm(dayBeforeInMillis, title, content, " tomorrow");
+						createNotificationAlarm(twoDaysBeforeInMillis, title, content, " in 2 days");
+						createNotificationAlarm(threeDaysBeforeInMillis, title, content, " in 3 days");
+					} else { // (MainActivity.role == "Teacher")
+						dayBeforeInMillis = selectedDueDateInMillis+DAY_IN_MILLISECS;
 						twoDaysBeforeInMillis = dayBeforeInMillis + DAY_IN_MILLISECS;
 						threeDaysBeforeInMillis = twoDaysBeforeInMillis + DAY_IN_MILLISECS;
+						
+						title = assTitle.getText().toString();
+												
+						//Generating notifications for teach after the due date
+						
+						//createNotificationAlarm(1000, title, content, " tomorrow");
+						createNotificationAlarm(selectedDueDateInMillis , title, content, " is due today, please begin grading!");
+						createNotificationAlarm(dayBeforeInMillis, title, content, " was due yesterday, lets get grading!");
+						createNotificationAlarm(twoDaysBeforeInMillis, title, content, " was due 2 days ago, how's the grading coming along?");
+						createNotificationAlarm(threeDaysBeforeInMillis, title, content, " was due 3 days ago, get those grades in!");
 					}
-					//createNotificationAlarm(1000, title, content, " tomorrow");
-					createNotificationAlarm(dayBeforeInMillis, title, content, " tomorrow");
-					createNotificationAlarm(twoDaysBeforeInMillis, title, content, " in 2 days");
-					createNotificationAlarm(threeDaysBeforeInMillis, title, content, " in 3 days");
 					// NOTIFICATION CODE END
 
 					AlertDialog helpDialog1 = helpBuilder1.create();
