@@ -304,8 +304,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		intent.putExtra(CalendarContract.Events.TITLE, assTitle.getText()
 				.toString());
 		intent.putExtra(CalendarContract.Events.DESCRIPTION,
-				"Assignment: "+assTitle.getText()
-				.toString()+" due for course: "+selectedCourse);
+				courses.getSelectedItem().toString());
 		intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
 
 		// Calendar startTime = Calendar.getInstance();

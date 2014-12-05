@@ -63,9 +63,9 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	public static final int TIME_TO_END_OF_DAY = 86340000; // 23 hrs, 59 mins
 
 	// Date selectedDueDate = new Date();
-	String formatedDate, selectedCourse;
+	String formatedDate;
 	Calendar selectedDueDate = Calendar.getInstance();
-
+	Spinner courses;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,7 +89,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		final SeekBar assProgress = (SeekBar) findViewById(R.id.assProgressSeekBar);
 
 		final TextView display = (TextView) findViewById(R.id.textView_Test);
-		final Spinner courses = (Spinner) findViewById(R.id.assCourseSpinner);
+		Spinner courses = (Spinner) findViewById(R.id.assCourseSpinner);
 
 		SQLiteDatabase db = MainActivity.db.getReadableDatabase();
 		Cursor c;
@@ -187,9 +187,8 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					helpDialog.show();
 					return;
 				} else {
-					selectedCourse = courses.getSelectedItem().toString();
 					record[0] = assTitle.getText().toString();
-					record[1] = selectedCourse;
+					record[1] = courses.getSelectedItem().toString();
 					record[2] = String.valueOf(formatedDate);
 					record[3] = String.valueOf(assProgress.getProgress());
 
@@ -304,8 +303,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		intent.putExtra(CalendarContract.Events.TITLE, assTitle.getText()
 				.toString());
 		intent.putExtra(CalendarContract.Events.DESCRIPTION,
-				"Assignment: "+assTitle.getText()
-				.toString()+" due for course: "+selectedCourse);
+				courses.getSelectedItem().toString());
 		intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
 
 		// Calendar startTime = Calendar.getInstance();

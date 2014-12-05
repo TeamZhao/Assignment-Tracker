@@ -60,10 +60,10 @@ public class AddAssignmentActivity extends ActionBarActivity {
 	}
 
 	
-	public static final int TIME_TO_END_OF_DAY = 86340000; // 23 hrs, 59 mins
+	public static final int DAY_IN_MILLISECS = 86400000;
 
 	// Date selectedDueDate = new Date();
-	String formatedDate, selectedCourse;
+	String formatedDate;
 	Calendar selectedDueDate = Calendar.getInstance();
 
 	@Override
@@ -187,9 +187,8 @@ public class AddAssignmentActivity extends ActionBarActivity {
 					helpDialog.show();
 					return;
 				} else {
-					selectedCourse = courses.getSelectedItem().toString();
 					record[0] = assTitle.getText().toString();
-					record[1] = selectedCourse;
+					record[1] = courses.getSelectedItem().toString();
 					record[2] = String.valueOf(formatedDate);
 					record[3] = String.valueOf(assProgress.getProgress());
 
@@ -207,11 +206,6 @@ public class AddAssignmentActivity extends ActionBarActivity {
 								"tbl_TeacherAssignment", fields, record);
 					}
 					// MainActivity.db.close();
-					
-					
-/*
- * Temporarily commented out this code, which is causing the bug in the calendar event selected date
- * code to be fixed for Defect Story #7
 					// NOTIFICATIONS CODE
 					Calendar calendar = selectedDueDate;
 					// calendar.DAY_OF_MONTH = selectedDueDate.DAY_OF_MONTH - 1;
@@ -252,8 +246,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 							futureInMillis, pendingIntent);
 					// alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
 					// calendar.getTimeInMillis(), pendingIntent);
-*/
-					
+
 					AlertDialog helpDialog1 = helpBuilder1.create();
 					helpDialog1.show();
 				}
@@ -304,14 +297,13 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		intent.putExtra(CalendarContract.Events.TITLE, assTitle.getText()
 				.toString());
 		intent.putExtra(CalendarContract.Events.DESCRIPTION,
-				"Assignment: "+assTitle.getText()
-				.toString()+" due for course: "+selectedCourse);
+				"Professional Android 4 " + "Application Development release!");
 		intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
 
 		// Calendar startTime = Calendar.getInstance();
 		// startTime.set(2012, 2, 13, 0, 30);
 		intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-				selectedDueDate.getTimeInMillis() - TIME_TO_END_OF_DAY);
+				selectedDueDate.getTimeInMillis() - DAY_IN_MILLISECS);
 
 		intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
 
