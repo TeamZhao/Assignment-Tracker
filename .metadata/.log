@@ -6159,3 +6159,419 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:43:28.770
 !MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:53:07.926
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:53:45.985
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:53:49.886
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:54:12.882
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:54:39.477
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:55:18.467
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:57:09.903
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 21:57:15.936
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+SHIFT+/:
+Binding(CTRL+SHIFT+/,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.add.block.comment,Add Block Comment,
+		Enclose the selection with a block comment,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@7fd4314b,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+SHIFT+/,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.add.block.comment,Add Block Comment,
+		Add Block Comment,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@439b15f2,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+I:
+Binding(CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.indent,Correct Indentation,
+		Corrects the indentation of the selected lines,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@220fe995,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.format.active.elements,Format Active Elements,
+		Format active elements,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@6edf29c1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+SHIFT+P:
+Binding(CTRL+SHIFT+P,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.goto.matching.bracket,Go to Matching Bracket,
+		Moves the cursor to the matching bracket,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@751bb6ff,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+SHIFT+P,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.goto.matching.bracket,Matching Bracket,
+		Go to Matching Bracket,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@6e4c0d8c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+SHIFT+F:
+Binding(CTRL+SHIFT+F,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.format,Format,
+		Format the selected text,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@573f0b25,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+SHIFT+F,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.format.document,Format,
+		Format selection,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@3b920bdc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+O:
+Binding(CTRL+O,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.show.outline,Quick Outline,
+		Show the quick outline for the editor input,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@93f36e0,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+O,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.quick_outline,Quick Outline,
+		Show the quick outline for the editor input,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@54a13513,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for ALT+SHIFT+ARROW_RIGHT:
+Binding(ALT+SHIFT+ARROW_RIGHT,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.select.next,Select Next Element,
+		Expand selection to include next sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@7c25cd36,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(ALT+SHIFT+ARROW_RIGHT,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.structure.select.next,Select Next Element,
+		Expand selection to include next sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@f1d0004,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+SHIFT+C:
+Binding(CTRL+SHIFT+C,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.toggle.comment,Toggle Comment,
+		Toggle comment the selected lines,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@53ec97b4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+SHIFT+C,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.toggle.comment,Toggle Comment,
+		Toggle Comment,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@77bb48d5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+SHIFT+\:
+Binding(CTRL+SHIFT+\,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.remove.block.comment,Remove Block Comment,
+		Remove the block comment enclosing the selection,
+		Category(org.eclipse.jdt.ui.category.source,Source,Java Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@2394231f,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+SHIFT+\,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.remove.block.comment,Remove Block Comment,
+		Remove Block Comment,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@7a583586,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for ALT+SHIFT+ARROW_DOWN:
+Binding(ALT+SHIFT+ARROW_DOWN,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.select.last,Restore Last Selection,
+		Restore last selection,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@7e4093d3,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(ALT+SHIFT+ARROW_DOWN,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.structure.select.last,Restore Last Selection,
+		Restore last selection,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@51d387d3,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+SHIFT+ARROW_UP:
+Binding(CTRL+SHIFT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.goto.previous.member,Go to Previous Member,
+		Move the caret to the previous member of the compilation unit,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@2cdead50,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+SHIFT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.wst.xml.ui.previousSibling,Previous Sibling,
+		Go to Previous Sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@6d6bbd35,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for ALT+SHIFT+ARROW_LEFT:
+Binding(ALT+SHIFT+ARROW_LEFT,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.select.previous,Select Previous Element,
+		Expand selection to include previous sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1bb8de48,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(ALT+SHIFT+ARROW_LEFT,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.structure.select.previous,Select Previous Element,
+		Expand selection to include previous sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@4996c99,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for CTRL+SHIFT+ARROW_DOWN:
+Binding(CTRL+SHIFT+ARROW_DOWN,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.goto.next.member,Go to Next Member,
+		Move the caret to the next member of the compilation unit,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@19369afb,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(CTRL+SHIFT+ARROW_DOWN,
+	ParameterizedCommand(Command(org.eclipse.wst.xml.ui.nextSibling,Next Sibling,
+		Go to Next Sibling,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@57272109,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-12-04 22:02:12.394
+!MESSAGE A conflict occurred for ALT+SHIFT+ARROW_UP:
+Binding(ALT+SHIFT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.select.enclosing,Select Enclosing Element,
+		Expand selection to include enclosing element,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@63925c05,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.jdt.ui.javaEditorScope,,,system)
+Binding(ALT+SHIFT+ARROW_UP,
+	ParameterizedCommand(Command(org.eclipse.wst.sse.ui.structure.select.enclosing,Select Enclosing Element,
+		Expand selection to include enclosing element,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@2938127d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:02:50.537
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:02:57.602
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:14:14.222
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:15:01.113
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:16:41.671
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:16:52.732
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:20:51.443
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:22:56.410
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:27:47.055
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:28:10.336
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:37:45.090
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:37:51.961
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:38:17.843
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:39:13.678
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:46:32.010
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:49:40.712
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:50:05.595
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:52:15.423
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:55:05.127
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:56:05.494
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 22:56:55.163
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:02:36.982
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:10:05.865
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:10:39.700
+!MESSAGE No command output when running: 'am start -D -n com.example.assignmenttracker/com.example.assignmenttracker.SplashScreen -a android.intent.action.MAIN -c android.intent.category.LAUNCHER' on device d09644c354486810c08
+!STACK 0
+com.android.ddmlib.ShellCommandUnresponsiveException
+	at com.android.ddmlib.AdbHelper.executeRemoteCommand(AdbHelper.java:430)
+	at com.android.ddmlib.AdbHelper.executeRemoteCommand(AdbHelper.java:347)
+	at com.android.ddmlib.Device.executeShellCommand(Device.java:609)
+	at com.android.ide.eclipse.adt.internal.launch.ActivityLaunchAction.doLaunchAction(ActivityLaunchAction.java:67)
+	at com.android.ide.eclipse.adt.internal.launch.ActivityLaunchAction.doLaunchAction(ActivityLaunchAction.java:109)
+	at com.android.ide.eclipse.adt.internal.launch.AndroidLaunchController.doLaunchAction(AndroidLaunchController.java:1293)
+	at com.android.ide.eclipse.adt.internal.launch.AndroidLaunchController.doLaunchAction(AndroidLaunchController.java:1305)
+	at com.android.ide.eclipse.adt.internal.launch.AndroidLaunchController.launchApp(AndroidLaunchController.java:1277)
+	at com.android.ide.eclipse.adt.internal.launch.AndroidLaunchController.simpleLaunch(AndroidLaunchController.java:913)
+	at com.android.ide.eclipse.adt.internal.launch.AndroidLaunchController.continueLaunch(AndroidLaunchController.java:755)
+	at com.android.ide.eclipse.adt.internal.launch.AndroidLaunchController.launch(AndroidLaunchController.java:647)
+	at com.android.ide.eclipse.adt.internal.launch.LaunchConfigDelegate.doLaunch(LaunchConfigDelegate.java:330)
+	at com.android.ide.eclipse.adt.internal.launch.LaunchConfigDelegate.launch(LaunchConfigDelegate.java:246)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:39:41.994
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:40:02.621
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:40:20.980
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:42:16.029
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:42:23.679
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:46:24.756
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:46:26.224
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:46:54.180
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:46:57.769
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:49:09.900
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:49:26.698
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:50:17.249
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:50:42.304
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:51:00.147
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:53:17.031
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:53:43.284
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:53:47.421
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:54:19.612
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:54:40.401
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:54:54.894
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-12-04 23:55:00.860
+!MESSAGE Can't find file C:\Users\Julz\Documents\GitHub\dec3clone\Assignment-Tracker\gridlayout_v7\.classpath in workspace

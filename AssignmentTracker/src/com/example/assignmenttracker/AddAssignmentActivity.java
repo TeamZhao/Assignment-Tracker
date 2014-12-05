@@ -14,6 +14,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
@@ -59,8 +60,10 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
 	public static final int TIME_TO_END_OF_DAY = 86340000; // 23 hrs, 59 mins
+	public static final int DAY_IN_MILLISECS = 86400000;
+	public static int alarmID;
+	//public static NotificationManager mNotifyMgr;
 
 	// Date selectedDueDate = new Date();
 	String formatedDate, selectedCourse;
@@ -207,23 +210,8 @@ public class AddAssignmentActivity extends ActionBarActivity {
 								"tbl_TeacherAssignment", fields, record);
 					}
 					// MainActivity.db.close();
-					
-					
-/*
- * Temporarily commented out this code, which is causing the bug in the calendar event selected date
- * code to be fixed for Defect Story #7
-					// NOTIFICATIONS CODE
-					Calendar calendar = selectedDueDate;
-					// calendar.DAY_OF_MONTH = selectedDueDate.DAY_OF_MONTH - 1;
 
-					// calendar.set(Calendar.MONTH, 11);
-					// calendar.set(Calendar.YEAR, 2014);
-					calendar.set(Calendar.DAY_OF_MONTH,
-							selectedDueDate.DAY_OF_MONTH - 1);
-
-					calendar.set(Calendar.HOUR_OF_DAY, 14);
-					calendar.set(Calendar.MINUTE, 33);
-					calendar.set(Calendar.SECOND, 0);
+					// NEW CODE FOR NOTIFICATION
 					String title = assTitle.getText().toString() + " due";
 					String content = String.valueOf(selectedDueDate
 							.get(Calendar.MONTH))
@@ -232,28 +220,108 @@ public class AddAssignmentActivity extends ActionBarActivity {
 									.get(Calendar.DAY_OF_MONTH))
 							+ "/"
 							+ String.valueOf(selectedDueDate.get(Calendar.YEAR));
-
-					Notification notification = getNotification(content, title);
-					Intent notificationIntent = new Intent(
-							AddAssignmentActivity.this, MainActivity.class);
-					notificationIntent.putExtra(
-							NotificationPublisher.NOTIFICATION_ID, 1);
-					notificationIntent.putExtra(
-							NotificationPublisher.NOTIFICATION, notification);
-					PendingIntent pendingIntent = PendingIntent.getBroadcast(
-							AddAssignmentActivity.this, 0, notificationIntent,
-							PendingIntent.FLAG_UPDATE_CURRENT);
-
-					// long futureInMillis = SystemClock.elapsedRealtime() +
-					// 10000;
-					long futureInMillis = selectedDueDate.getTimeInMillis();
-					AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-					alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-							futureInMillis, pendingIntent);
-					// alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-					// calendar.getTimeInMillis(), pendingIntent);
-*/
 					
+					long selectedDueDateInMillis = selectedDueDate
+							.getTimeInMillis();
+					
+					long dayBeforeInMillis = selectedDueDate.getTimeInMillis()-DAY_IN_MILLISECS - TIME_TO_END_OF_DAY;
+					long twoDaysBeforeInMillis = dayBeforeInMillis - DAY_IN_MILLISECS;
+					long threeDaysBeforeInMillis = twoDaysBeforeInMillis - DAY_IN_MILLISECS;
+					
+					createNotificationAlarm(dayBeforeInMillis, title, content);
+					createNotificationAlarm(twoDaysBeforeInMillis, title, content);
+					createNotificationAlarm(threeDaysBeforeInMillis, title, content);
+					
+					
+//					Intent notificationIntent1day = new Intent(
+//							AddAssignmentActivity.this,
+//							NotificationPublisher.class);
+//					notificationIntent1day.putExtra("Title", title);
+//					notificationIntent1day.putExtra("Content", content);
+//
+//					PendingIntent resultPendingIntent1day = PendingIntent
+//							.getBroadcast(AddAssignmentActivity.this, 0,
+//									notificationIntent1day,
+//									PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//					// create notification for 1 day before
+//			
+//					long notiTimeInMillis = selectedDueDateInMillis
+//							- DAY_IN_MILLISECS - TIME_TO_END_OF_DAY; // set
+//																		// notification
+//																		// for
+//																		// the
+//																		// beginning
+//																		// of 1
+//																		// day
+//																		// before
+//																		// due
+//																		// date
+//					AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//					alarmManager.set(AlarmManager.RTC, notiTimeInMillis,
+//							resultPendingIntent1day);
+//					
+//					
+//					
+//					Intent notificationIntent2days = new Intent(
+//							AddAssignmentActivity.this,
+//							NotificationPublisher.class);
+//					notificationIntent2days.putExtra("Title", title);
+//					notificationIntent2days.putExtra("Content", content);
+//					
+//					PendingIntent resultPendingIntent2days = PendingIntent
+//							.getBroadcast(AddAssignmentActivity.this, 1,
+//									notificationIntent2days,
+//									PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//					// create notification for 2 days before
+//					long notiTimeInMillis2Days = selectedDueDateInMillis
+//							- TWO_DAYS_IN_MILLISECS - TIME_TO_END_OF_DAY; // set
+//																			// notification
+//																			// for
+//																			// the
+//																			// beginning
+//																			// of
+//																			// 1
+//																			// day
+//																			// before
+//																			// due
+//																			// date
+//					AlarmManager alarmManager2 = (AlarmManager) getSystemService(ALARM_SERVICE);
+//					alarmManager2.set(AlarmManager.RTC, notiTimeInMillis2Days,
+//							resultPendingIntent2days);
+//					
+//					
+//					
+//					Intent notificationIntent3days = new Intent(
+//							AddAssignmentActivity.this,
+//							NotificationPublisher.class);
+//					notificationIntent3days.putExtra("Title", title);
+//					notificationIntent3days.putExtra("Content", content);
+//					
+//					PendingIntent resultPendingIntent3days = PendingIntent
+//							.getBroadcast(AddAssignmentActivity.this, 2,
+//									notificationIntent3days,
+//									PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//					// create notification for 3 days before
+//					long notiTimeInMillis3Days = selectedDueDateInMillis
+//							- THREE_DAYS_IN_MILLISECS - TIME_TO_END_OF_DAY; // set
+//																			// notification
+//																			// for
+//																			// the
+//																			// beginning
+//																			// of
+//																			// 1
+//																			// day
+//																			// before
+//																			// due
+//																			// date
+//					AlarmManager alarmManager3 = (AlarmManager) getSystemService(ALARM_SERVICE);
+//					alarmManager3.set(AlarmManager.RTC, notiTimeInMillis3Days,
+//							resultPendingIntent3days);
+					// NOTIFICATION CODE END
+
 					AlertDialog helpDialog1 = helpBuilder1.create();
 					helpDialog1.show();
 				}
@@ -303,9 +371,9 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		// Add the calendar event details
 		intent.putExtra(CalendarContract.Events.TITLE, assTitle.getText()
 				.toString());
-		intent.putExtra(CalendarContract.Events.DESCRIPTION,
-				"Assignment: "+assTitle.getText()
-				.toString()+" due for course: "+selectedCourse);
+		intent.putExtra(CalendarContract.Events.DESCRIPTION, "Assignment: "
+				+ assTitle.getText().toString() + " due for course: "
+				+ selectedCourse);
 		intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
 
 		// Calendar startTime = Calendar.getInstance();
@@ -319,24 +387,42 @@ public class AddAssignmentActivity extends ActionBarActivity {
 		startActivity(intent);
 	}
 
-	@SuppressLint("NewApi")
-	// ignore API level 16 (builder.build requires 16) call because min sdk set
-	// to 14
-	private Notification getNotification(String content, String title) {
-		Notification.Builder builder = new Notification.Builder(this);
-		builder.setContentTitle(title);
-		builder.setContentText(content);
-		builder.setSmallIcon(R.drawable.ic_launcher);
-		return builder.build();
+	/*
+	 * Method not used with notification fix
+	 * 
+	 * @SuppressLint("NewApi") // ignore API level 16 (builder.build requires
+	 * 16) call because min sdk set // to 14 private Notification
+	 * getNotification(String content, String title) { Notification.Builder
+	 * builder = new Notification.Builder(this); builder.setContentTitle(title);
+	 * builder.setContentText(content);
+	 * builder.setSmallIcon(R.drawable.ic_launcher); return builder.build();
+	 * 
+	 * // Notification builder = new Notification.Builder(this) //
+	 * .setContentTitle(title) // .setContentText(content) //
+	 * .setSmallIcon(R.drawable.ic_launcher) // .build(); // // return builder;
+	 * 
+	 * }
+	 */
+	
+	private void createNotificationAlarm(long timeInMillis, String title, String content){
+		Intent notificationIntent3days = new Intent(
+				AddAssignmentActivity.this,
+				NotificationPublisher.class);
+		notificationIntent3days.putExtra("Title", title);
+		notificationIntent3days.putExtra("Content", content);
+		
+		PendingIntent resultPendingIntent3days = PendingIntent
+				.getBroadcast(AddAssignmentActivity.this, alarmID,
+						notificationIntent3days,
+						PendingIntent.FLAG_UPDATE_CURRENT);
 
-		// Notification builder = new Notification.Builder(this)
-		// .setContentTitle(title)
-		// .setContentText(content)
-		// .setSmallIcon(R.drawable.ic_launcher)
-		// .build();
-		//
-		// return builder;
-
+		// create notification for 3 days before
+		
+		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+		alarmManager.set(AlarmManager.RTC, timeInMillis,
+				resultPendingIntent3days);
+		
+		alarmID++;
 	}
 
 }

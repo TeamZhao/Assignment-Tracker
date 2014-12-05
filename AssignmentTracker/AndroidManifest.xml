@@ -69,7 +69,13 @@
             android:enabled="true" />
 
         <receiver android:name=".AlarmReceiver" />
-        <receiver android:name=".NotificationPublisher" />
+        <receiver
+            android:name=".NotificationPublisher"
+            android:process=":remote" >
+            <intent-filter>
+                <data android:scheme="timer:" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".SplashScreen"
