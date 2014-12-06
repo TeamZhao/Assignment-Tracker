@@ -1,2 +1,8 @@
 1417400202290	Rename field 'txt_EmailAdd'
 1417400221644	Rename field 'txt_Subject'
+1417819541590	Rename local variable 'btnAddCou'
+1417819779100	Rename local variable 'btnAddCou'
+1417819860367	Rename field 'txt_courseCode'
+1417819876592	Rename field 'txt_courseName'
+1417819996301	Rename field 'txt_professor'
+1417820013443	Rename field 'txt_description'

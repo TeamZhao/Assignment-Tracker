@@ -15,7 +15,7 @@
             android:text="@string/course_code" />
 
         <EditText
-            android:id="@+id/txt_courseCode"
+            android:id="@+id/txt_courseCodeUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
@@ -35,7 +35,7 @@
             android:text="@string/course_name" />
 
         <EditText
-            android:id="@+id/txt_courseName"
+            android:id="@+id/txt_courseNameUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
@@ -54,7 +54,7 @@
             android:text="@string/semester" />
 
         <Spinner
-            android:id="@+id/courseSemesterSpinner"
+            android:id="@+id/courseSemesterSpinnerUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.4" />
@@ -72,7 +72,7 @@
             android:text="@string/professor" />
 
         <EditText
-            android:id="@+id/txt_professor"
+            android:id="@+id/txt_professorUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
@@ -90,7 +90,7 @@
             android:text="@string/course_description" />
 
         <EditText
-            android:id="@+id/txt_description"
+            android:id="@+id/txt_descriptionUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -110,7 +110,7 @@
             android:text="@string/Update" />
 
         <Button
-            android:id="@+id/btn_cancelAddCourse"
+            android:id="@+id/btn_cancelUpdateCourse"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="@string/cancel" />
