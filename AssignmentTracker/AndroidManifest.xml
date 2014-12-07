@@ -110,6 +110,10 @@
             android:name=".EmailContentToSendActivity"
             android:label="@string/title_activity_email_content_to_send" >
         </activity>
+        <activity
+            android:name=".ShowCompletedAssignmentsActivity"
+            android:label="@string/title_activity_show_completed_assignments" >
+        </activity>
     </application>
 
 </manifest>

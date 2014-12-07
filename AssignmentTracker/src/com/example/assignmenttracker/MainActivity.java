@@ -69,6 +69,7 @@ public class MainActivity extends Activity {
 		case R.id.add_assignment:
 			adds = new Intent(this, AddAssignmentActivity.class);
 			startActivity(adds);
+			finish();
 			return true;
 		case R.id.add_course:
 			if (role == "Student") {
@@ -105,7 +106,8 @@ public class MainActivity extends Activity {
 			return true;
 		case R.id.show_completedass:
 			completed = true;
-			this.recreate();
+			adds = new Intent(this, ShowCompletedAssignmentsActivity.class);
+			startActivity(adds);;
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

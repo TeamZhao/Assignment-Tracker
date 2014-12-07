@@ -366,6 +366,7 @@ public class ShowCoursesActivity extends ActionBarActivity {
 			} else if (MainActivity.role == "Teacher") {
 				adds = new Intent(this, AddTeacherCourseActivity.class);
 				startActivity(adds);
+				finish();
 			}
 			return true;
 		case R.id.add_semester:

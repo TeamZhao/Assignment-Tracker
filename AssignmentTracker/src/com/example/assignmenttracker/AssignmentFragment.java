@@ -120,15 +120,15 @@ public class AssignmentFragment extends ListFragment {
 	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		if (MainActivity.role == "Student") {
-			Toast.makeText(getActivity(), "Your Choice : " + position,
-					Toast.LENGTH_SHORT).show();
-		} else {
-
-			Toast.makeText(getActivity(),
-					"Your Choice : " + parent.getItemAtPosition(position),
-					Toast.LENGTH_SHORT).show();
-		}
+//		if (MainActivity.role == "Student") {
+//			Toast.makeText(getActivity(), "Your Choice : " + position,
+//					Toast.LENGTH_SHORT).show();
+//		} else {
+//
+//			Toast.makeText(getActivity(),
+//					"Your Choice : " + parent.getItemAtPosition(position),
+//					Toast.LENGTH_SHORT).show();
+//		}
 	}
 
 	public void onListItemLongClick(ListView parent, View v, int position,

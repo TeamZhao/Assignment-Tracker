@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -79,7 +80,8 @@ public class AddTeacherCourseActivity extends Activity {
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
-						// Do nothing but close the dialog
+						// Close the dialog 
+						dialog.dismiss();
 					}
 				});
 		// Code for pop up end
@@ -93,7 +95,9 @@ public class AddTeacherCourseActivity extends Activity {
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
-						// Do nothing but close the dialog
+						// Close the dialog then go back
+						Intent b = new Intent(AddTeacherCourseActivity.this, ShowCoursesActivity.class);
+						startActivity(b);
 					}
 				});
 		// Code for pop up end
@@ -139,8 +143,8 @@ public class AddTeacherCourseActivity extends Activity {
 			public void onClick(View v) {
 				// Intent myIntent = new Intent(AddCourseActivity.this,
 				// MainActivity.class);
-
-				onBackPressed();
+				Intent b = new Intent(AddTeacherCourseActivity.this, ShowCoursesActivity.class);
+				startActivity(b);
 			}
 		});
 	}

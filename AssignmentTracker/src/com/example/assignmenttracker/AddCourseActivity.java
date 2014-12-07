@@ -114,7 +114,9 @@ public class AddCourseActivity extends Activity {
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
-						// Do nothing but close the dialog
+						// Close the dialog then go back
+						dialog.dismiss();
+						onBackPressed();
 					}
 				});
 		// Code for pop up end

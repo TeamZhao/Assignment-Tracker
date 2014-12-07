@@ -79,10 +79,9 @@ public class AddSemesterActivity extends ActionBarActivity {
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int which) {
-						// Do nothing but close the dialog
-						Intent intent = new Intent(AddSemesterActivity.this,
-								MainActivity.class);
-						startActivity(intent);
+						// Close the dialog then go back
+						dialog.dismiss();
+						onBackPressed();
 					}
 				});
 		// Code for pop up end
@@ -112,6 +111,7 @@ public class AddSemesterActivity extends ActionBarActivity {
 					}
 					AlertDialog helpDialog = helpBuilder1.create();
 					helpDialog.show();
+					
 				}
 
 			}

@@ -144,6 +144,7 @@ public class AddAssignmentActivity extends ActionBarActivity {
 
 					public void onClick(DialogInterface dialog, int which) {
 						// Do nothing but close the dialog
+						dialog.dismiss();
 					}
 				});
 		// Code for pop up end for calender
@@ -167,6 +168,8 @@ public class AddAssignmentActivity extends ActionBarActivity {
 
 					public void onClick(DialogInterface dialog, int which) {
 						// Do nothing but close the dialog
+						Intent b = new Intent(AddAssignmentActivity.this, MainActivity.class);
+						startActivity(b);
 					}
 				});
 		// Code for pop up end
